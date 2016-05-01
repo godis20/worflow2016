@@ -44,7 +44,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	
+	  
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/godis", method = RequestMethod.GET)
 	public ModelAndView home2(Locale locale, Model model) {
