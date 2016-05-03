@@ -93,6 +93,13 @@ public class UtilisateurService {
 	}
 	
 	
+	
+	
+	/**
+	 * methode verifie les parametres de connexion d'un user et retourne l'objet utilisateur
+	 *
+	 */
+	
 	@Transactional
 	public Utilisateur Connect(String email, String password){
 		

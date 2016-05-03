@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.univ.rennes.model.TypeDemande;
@@ -78,15 +79,70 @@ public class HomeController {
 	}
 	
 
-	@RequestMapping(value = "/connect", method = RequestMethod.POST)
-	public String connexion(HttpServletRequest request)
+	
+	
+	
+	/**
+	 * Point d'entree de l'application,
+	 * Contrôleur d'affichage de la page de connexion,
+	 * 
+	 */
+	@RequestMapping(value = "/connexionutilisateur", method = RequestMethod.GET)
+	public ModelAndView from_connexionutilisateur()
+	
 	{
-		Utilisateur user = utilisateurService.Connect("godis","blabla");
-		if( user != null)
-		{
-			request.getSession().setAttribute("user", user);
+		ModelAndView model = new ModelAndView("form_connexionutilisateur");
+		
+		try{
+			
+		
+			return model;
+			
+		} catch (Exception e){
+			
+			model.addObject("error", "erreur lors de la l'afichage de la page");
+			return model;
+			
+			
 		}
-		return null;
+	}
+		
+		
+	
+	/**
+	 * Point d'entree de l'application,
+	 * Contrôleur de traitement des parametres de connexion de l'utilisateur,
+	 * 
+	 */
+	@RequestMapping(value = "/connexionutilisateur", method = RequestMethod.POST)
+	public ModelAndView cont_connexionutilisateur(HttpServletRequest request,
+			@RequestParam("login") String login,
+			@RequestParam("password") String password)
+	
+	{
+		ModelAndView model = new ModelAndView("form_connexionutilisateur");
+		
+		try{
+			
+			Utilisateur user = utilisateurService.Connect(login,password);
+			if( user != null)
+			{
+				request.getSession().setAttribute("user", user);
+				return new ModelAndView ("redirect:/ajoututilisateur");
+			}
+			
+			
+			model.addObject("error", "le login et/ ou de passe sont incorrects");
+			return model;
+			
+		} catch (Exception e){
+			
+			model.addObject("error", "erreur lors de la tentative de connexion");
+			return model;
+			
+			
+		}
+		
 		
 	}
 	
