@@ -28,14 +28,21 @@ public class DemandeController {
 	 */
 	@RequestMapping(value = "/ajoutdemandeclas", method = RequestMethod.GET)
 	public ModelAndView cont_form_demandeclas(HttpServletRequest request)
-	{
+	{	
+		
+		ModelAndView model = new ModelAndView("form_demandeclas");
 		try
 		{
 			
-			return new ModelAndView("form_demandeclas", "utilisateur", request.getSession().getAttribute("user"));
+			Utilisateur user=(Utilisateur) request.getSession().getAttribute("user");
+			Composante composante=user.getComposante();
+			String nomComposante=composante.getLibelle_composante();
+			model.addObject("nomComposante", nomComposante);
+			model.addObject("user", user);
+			return model;
 		}catch(Exception e)
 		{
-			 return new ModelAndView("form_demandeclas", "utilisateur", request.getSession().getAttribute("user")); 
+			return model; 
 		}
 	}
 	
@@ -47,13 +54,19 @@ public class DemandeController {
 	@RequestMapping(value = "/ajoutDemanderech", method = RequestMethod.GET)
 	public ModelAndView cont_form_demanderech(HttpServletRequest request)
 	{
+		
+		ModelAndView model = new ModelAndView("form_demanderech");
 		try
 		{
-			
-			return new ModelAndView("form_demanderech", "utilisateur", request.getSession().getAttribute("user"));
+			Utilisateur user=(Utilisateur) request.getSession().getAttribute("user");
+			Composante composante=user.getComposante();
+			String nomComposante=composante.getLibelle_composante();
+			model.addObject("nomComposante", nomComposante);
+			model.addObject("user", user);
+			return model;
 		}catch(Exception e)
 		{
-			 return new ModelAndView("form_demanderech", "utilisateur", request.getSession().getAttribute("user")); 
+			return model; 
 		}
 	}
 
@@ -63,5 +76,28 @@ public class DemandeController {
 	 * controleur de traitement du formulaire de creation de demande de recrutement
 	 *
 	 */
+	/*@RequestMapping(value = "/ajoutdemandeclas", method = RequestMethod.POST)
+	public ModelAndView cont_ajoutdemandeclas(
+
+						@RequestParam("prenom") String besoinDea,
+						@RequestParam("email") String email,
+						@RequestParam("password") String password,
+						@RequestParam("poste") String poste,
+						@RequestParam("id_composante") int id_composante
+						
+			
+			
+			
+			)
+	{
+		try
+		{
+			
+			return new ModelAndView("form_demandeclas", "utilisateur", request.getSession().getAttribute("user"));
+		}catch(Exception e)
+		{
+			 return new ModelAndView("form_demandeclas", "utilisateur", request.getSession().getAttribute("user")); 
+		}
+	}*/
 	
 }
