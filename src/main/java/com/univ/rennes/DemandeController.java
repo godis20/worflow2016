@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import com.univ.rennes.model.Utilisateur;
 import com.univ.rennes.service.DemandeService;
 import com.univ.rennes.service.UtilisateurService;
 
+@Controller
 public class DemandeController {
 	
 	@Autowired 

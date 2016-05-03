@@ -1,9 +1,12 @@
 package com.univ.rennes.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,7 @@ public class TypeDemande {
 	@Column(name="libelle_type_demande")
 	private String libelle;
 
+	
 	public Integer getId() {
 		return id;
 	}

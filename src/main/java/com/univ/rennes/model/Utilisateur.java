@@ -1,12 +1,10 @@
 package com.univ.rennes.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.*;
+
 
 @Entity
 @Table(name="utilisateur")
@@ -39,6 +37,7 @@ public class Utilisateur {
 	@OneToOne
 	@JoinColumn(name="id_composante")
 	private Composante composante;
+	
 
 	public Integer getId() {
 		return id;

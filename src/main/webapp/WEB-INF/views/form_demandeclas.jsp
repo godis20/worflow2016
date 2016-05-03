@@ -20,7 +20,7 @@
        
 	   <p> 
        <label for="composante">Composante demandeuse :</label>
-       <input type="text" name="composante" id="composante" value="<c:out value="${user. }"/>" size="30" maxlength="30"/>
+       <input type="text" name="composante" id="composante" value="<c:out value="${user.nom }"/>" size="30" maxlength="30"/>
        </p>
        
        <p> 

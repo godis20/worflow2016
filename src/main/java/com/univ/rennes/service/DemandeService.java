@@ -49,8 +49,7 @@ public class DemandeService {
 	 */
 	@Transactional
 	public Demande ajoutDemande(Demande demande){
-		
-		
+			
 		try{
 		
 				Session session=sessionFactory.getCurrentSession();

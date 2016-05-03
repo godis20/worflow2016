@@ -38,7 +38,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -53,33 +53,6 @@ public class HomeController {
 	}
 	
 	  
-	@SuppressWarnings("unused")
-	@RequestMapping(value = "/godis", method = RequestMethod.GET)
-	public ModelAndView home2(Locale locale, Model model) {
-		logger.info("Welcome GODISSS! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		List<TypeDemande> list=demandeService.getTypeListeDemande();
-		
-		if(list != null )
-		{
-			logger.info(list.get(0).getLibelle());
-			logger.info(list.get(1).getLibelle());
-		}
-		
-		String formattedDate = dateFormat.format(date) + "Godis kenmogne";
-		
-		ModelAndView modelAndWiew = new ModelAndView();
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return new ModelAndView("home", "serverTime", formattedDate);
-	}
-	
-
-	
 	
 	
 	/**
@@ -87,7 +60,7 @@ public class HomeController {
 	 * Contrôleur d'affichage de la page de connexion,
 	 * 
 	 */
-	@RequestMapping(value = "/connexionutilisateur", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView from_connexionutilisateur()
 	
 	{
