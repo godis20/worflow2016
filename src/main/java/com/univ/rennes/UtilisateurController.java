@@ -24,6 +24,11 @@ public class UtilisateurController {
 	@Autowired 
 	UtilisateurService utilisateurService;
 	
+	
+	/**
+	 * controleur de la recuperation du formulaire de creation d'un utilisateur,
+	 * et du stockage dans la BD
+	 */
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/ajoututilisateur", method = RequestMethod.POST)
 	public ModelAndView cont_ajoutUtilisateur(
@@ -39,10 +44,13 @@ public class UtilisateurController {
 		Utilisateur newUser= new Utilisateur();
 		
 		newUser.setNom(nom);
-		newUser.setNom(prenom);
+		newUser.setPrenom(prenom);
 		newUser.setEmail(email);
 		newUser.setPassword(password);
 		newUser.setPoste(poste);
+		
+		ModelAndView model = new ModelAndView("form_utilisateur");
+		
 		try{
 		newUser.setComposante(utilisateurService.getComposantebyId(id_composante));//recuperer la composante co
 		
@@ -51,18 +59,27 @@ public class UtilisateurController {
 		if (newUser!= null){
 	        return  new ModelAndView("redirect:/listutilisateurs");	    
 		}
-		
-		return new ModelAndView("form_utilisateur", "erreur", "erreur lors de la creation de l'utilisateur");
-		
+
+		model.addObject("composantes", utilisateurService.getAllComposante());
+		model.addObject("error", "Erreur lors de l'ajout de l'utilisateur");
+		return model;
 		} catch (Exception e){
-			return new ModelAndView("form_utilisateur", "erreur", "erreur lors de la creation de l'utilisateur");
+	
+			model.addObject("composantes", utilisateurService.getAllComposante());
+			model.addObject("error", "Erreur lors de l'ajout de l'utilisateur");
+			return model;
 		}
 		
 	}
 	
 	
-	@RequestMapping(value = "/form_utilisateur", method = RequestMethod.GET)
-	public ModelAndView form_utilisateur()
+	
+	/**
+	 * Contrôleur de l'affichage du formulaire de creation d'un utilisateur,
+	 * et du stockage dans la BD
+	 */
+	@RequestMapping(value = "/ajoututilisateur", method = RequestMethod.GET)
+	public ModelAndView cont_form_utilisateur()
 	{
 		try
 		{
@@ -70,6 +87,24 @@ public class UtilisateurController {
 		}catch(Exception e)
 		{
 			 return new ModelAndView("form_utilisateur", "composantes", new ArrayList<Composante>()); 
+		}
+	}
+	
+	
+	
+	/**
+	 * Contrôleur de l'affichage de la liste des utilisateurs existants dans la BD,
+	 * 
+	 */
+	@RequestMapping(value = "/listutilisateurs", method = RequestMethod.GET)
+	public ModelAndView cont_listutilisateurs()
+	{
+		try
+		{
+			return new ModelAndView("listutilisateurs", "listutilisateurs", utilisateurService.getAllUtilisateur());
+		}catch(Exception e)
+		{
+			 return new ModelAndView("form_utilisateur", "listutilisateurs", new ArrayList<Utilisateur>()); 
 		}
 	}
 
