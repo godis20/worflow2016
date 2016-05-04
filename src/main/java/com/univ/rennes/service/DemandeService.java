@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.univ.rennes.model.BesoinDemande;
 import com.univ.rennes.model.Composante;
 import com.univ.rennes.model.Demande;
 import com.univ.rennes.model.TypeDemande;
@@ -63,5 +64,20 @@ public class DemandeService {
 		}
 		
 	}
+	
+	
+	@Transactional
+	public BesoinDemande getBesoinDemandebyId(int id){
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			BesoinDemande besoinDemande =(BesoinDemande) session.get(BesoinDemande.class, id);// recuperer un objet à partir de sa cle primaire
+			return besoinDemande;
+		}catch (Exception e){
+			return null;
+		}
+		
+		
+	}
+	
 	
 }

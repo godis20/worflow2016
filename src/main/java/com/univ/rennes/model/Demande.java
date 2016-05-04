@@ -71,6 +71,7 @@ public class Demande {
 	@Column(name="nom_agt_aremplacer")
 	private String nomAgentAremplacer;
 	
+	
 	@Column(name="date_f_service")
 	private String dateFinService;
 	
@@ -88,7 +89,7 @@ public class Demande {
 	private String foncAgentArecrute;
 	
 	@Column(name="branch_agt_arecruter")  // uniquement pour les demandes classqiques
-	private String foncAgentArecruter;
+	private String branchAgentArecruter;
 	
 	@Column(name="cat_agt_arecruter")  // uniquement pour les demandes classqiques
 	private String catAgentArecruter;
@@ -310,13 +311,13 @@ public class Demande {
 	}
 
 
-	public String getFoncAgentArecruter() {
-		return foncAgentArecruter;
+	public String getBranchAgentArecruter() {
+		return branchAgentArecruter;
 	}
 
 
-	public void setFoncAgentArecruter(String foncAgentArecruter) {
-		this.foncAgentArecruter = foncAgentArecruter;
+	public void setBranchAgentArecruter(String branchAgentArecruter) {
+		this.branchAgentArecruter = branchAgentArecruter;
 	}
 
 

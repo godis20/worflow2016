@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +8,9 @@
 <meta charset="utf-8" />
         <title>Page de connexion principale</title>
 <!--         <link type="text/css" rel="stylesheet" href="inc/style.css" /> -->
+
+
+
 
 </head>
 
@@ -20,27 +24,27 @@
        
 	   <p> 
        <label for="composante">Composante demandeuse :</label>
-       <input type="text" name="composante" id="composante" value="<c:out value="${user.nom }"/>" size="30" maxlength="30"/>
+       <input type="text" name="composante" id="composante" value="<c:out value="${nomComposante}"/>" size="30" maxlength="30"/>
        </p>
        
        <p> 
        <label for="nom">Nom demandeur :</label>
-       <input type="text" name="nom" id="nom" required/>
+       <input type="text" name="nom" id="nom" value="<c:out value="${user.nom}"/>" size="30" maxlength="30"/>
 		</p>
 		
 		<p> 
        <label for="prenom">Prenom demandeur :</label>
-       <input type="text" name="prenom" id="prenom" required/>
+       <input type="text" name="prenom" id="prenom" value="<c:out value="${user.prenom}"/>" size="30" maxlength="30"/>
        </p> 
        
        <p> 
        <label for="telephone">Téléphone :</label>
-       <input type="text" name="telephone" id="telephone" required/>
+       <input type="text" name="telephone" id="telephone" value="<c:out value="${telephone}"/>" size="30" maxlength="30"/>
  		</p> 
  		
  		<p> 
        <label for="email">Adresse email * :</label>
-       <input type="email" name="email" id="email" required/>
+       <input type="email" name="email" id="email" value="<c:out value="${user.email}"/>" size="30" maxlength="30"/>
        </p> 
 
    </fieldset>
@@ -49,20 +53,22 @@
    <fieldset>
        <legend>Détermination du besoin</legend> <!-- Titre du fieldset -->
        <p> 
-       <label for="nature">Nature de la demande</label>
-       <select name="nature" id="nature" required autofocus>
+       <label for="nature">Nature de la demande : </label>
+       <select name="nature" id="nature" required autofocus  >
        	   <option value="none">Choisissez une option </option>
-           <option value="vacant">Emploi vacant</option>
-           <option value="temporaire">Emploi temporaire</option>
-           <option value="renforcement">Emploi pour renforcement</option>
-           <option value="autres">Autres</option>
-        </select> 
-        </p> 
+           <option value="1">Emploi vacant</option>
+           <option value="2">Emploi temporaire</option>
+           <option value="3">Emploi pour renforcement</option>
+           
+        </select>  
         
-        <p>
-        <label for="precisions">Si "Autres", veuillez préciser :</label>
-        <textarea name="precisions" id="precisions" cols="40" rows="1"></textarea>
-      	</p>
+        
+       <!--  <input type="radio" id="nature" name="nature" value="vacant" checked /> Emploi vacant
+        <input type="radio" id="nature" name="nature" value="temporaire" /> Emploi temporaire
+        <input type="radio" id="nature" name="nature" value="renforcement"  /> Emploi pour renforcement
+        <input type="radio" id="nature" name="nature" value="autres" /> Autres -->
+        </p>
+        
           
      
        <p> 
@@ -75,9 +81,11 @@
        <input type="date" name="dateFin" id="dateFin" required>
        </p> 
        
+      
+       
 		<p> 
        <label for="quotite">Quotité de temps de travail* : </label>
-        <select name="nature" id="nature" required>
+        <select name="quotite" id="quotite" required>
            <option value="none">Choisissez une option </option>
            <option value="100">100 %</option>
            <option value="75">75 %</option>
@@ -86,7 +94,48 @@
           
        </select>
        </p> 
+       
+       
+        <fieldset >
+      		 <legend>Agent à remplacer  </legend> <!-- Titre du fieldset --> 
+       
+			        <div id="agent">
+			        
+			       <p> 
+			       <label for="nomagt">Nom : <span class="requis">*</span> </label>
+			       <input type="text" name="nomagt" id="nomagt" value="<c:out value=""/>" size="30" maxlength="30" onblur="verifNom(this)"/>
+			       <span id="erreurnom" class="erreur"></span>
+					</p>
+					
+					<p> 
+			       <label for="prenomagt">Prénom :</label>
+			       <input type="text" name="prenomagt" id="prenomagt" />
+			       </p> 
+			       
+			       <p> 
+			       <label for="dateagt">Date fin de service* :</label>
+			       <input type="date" name="dateagt" id="dateagt" rvalue="<c:out value=""/>" size="30" maxlength="30" onblur="verifDateFin(this)"/>
+			 		</p> 
+			 		
+			 		<p> 
+			       <label for="motif">Motif disponibilité poste * :</label>
+			       
+			        <textarea name="motif" id="motif" rows="2" cols="40" value="<c:out value=""/>" size="30" maxlength="30" onblur="verifMotif(this)">
+			          Ex: décéde, congé maternité...
+			       </textarea> 
+			       </p> 
+			       
+					</div>
+		</fieldset>
+		
+		
    </fieldset>
+   
+   
+  
+ 
+       
+ 
    
    
     <fieldset>
@@ -112,7 +161,7 @@
        
        <p> 
        <label for="fiche">Fiche de poste * </label>
-       <input type="file" name="fiche" id="fiche" required />
+       <input type="file" name="fiche" id="fiche"  />
        <input type="submit" name="ajouter" value="Ajouter" />
 	  </p> 
 		 
@@ -156,6 +205,31 @@
    
    
 </form>
+
+
+
+
+	 <%-- Petite fonction jQuery permettant de masquer le bloc "agent a remplacer" en fonction du type de besoin. --%>
+        <script>
+        	$(document).ready(function(){
+        		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant aux clients existants */
+//         		$("div#ancienClient").hide();
+        		/* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le bloc d'éléments correspondant (nouveau ou ancien client) */
+                
+        		 $("div#agent").hide();
+        		 $("#nature").change(function() {
+                	
+                    
+                    if($("#nature").val() != "renforcement"){
+                    	
+                    	$("div#agent").show();
+                   }
+                    else  $("div#agent").hide();
+                });
+        		 
+            });
+        </script>
+
 
 </body>
 

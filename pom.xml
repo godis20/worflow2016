@@ -136,6 +136,8 @@
 		</dependency>
 		
 		
+	
+		
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -153,6 +155,16 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+        
+        
+        
+        <!-- JQuerry -->
+        <dependency>
+			<groupId>com.efsavage.jquery</groupId>
+			<artifactId>jquery-maven</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+        
 		      
 	</dependencies>
     <build>
