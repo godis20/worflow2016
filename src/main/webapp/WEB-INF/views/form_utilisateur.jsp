@@ -13,14 +13,18 @@
 
         <title>Création d'un utilisateur</title>
 
-        <link type="text/css" rel="stylesheet" href="<c:url value="/ressources/style.css"/>" />
+        <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
 
     </head>
 
     <body>
-    <section>
+    <header class="header">
+    	<jsp:include page="header.jsp"></jsp:include>
+    
+    </header>
+    <section >
 		
 		<div class="menu">
 			
@@ -36,57 +40,58 @@
                <fieldset>
 
                     <legend>Informations utilisateur</legend>
-
+						
+						<p>
 						<label for="nom">Nom :<span class="requis">*</span></label>
 						
 						<input type="text" id="nom" name="nom" value="<c:out value=""/>" size="30" maxlength="30" onblur="verifNom(this)" />
 						
 						<span id="erreurnom" class="erreurnom"></span>
 						
-						<br />
+						</p>
 						
-						
+						<p>
 						<label for="prenom">Prénom : </label>
 						
 						<input type="text" id="prenom" name="prenom" value="<c:out value=""/>" size="30" maxlength="30" />
+						</p>
 						
-						
-						
-						<br />
-						
+						<p>
 						<label for="email">Adresse email :</label><span class="requis">*</span></label>
 						
 						<input type="email" id="email" name="email" value="" size="30" maxlength="60"  onblur="verifMail(this)" />
 						
-						<span id="erreuremail"></span><br />
+						<span id="erreuremail"></span>
+						</p>
 						
-						
-						
+						<p>
 						<label for="password">Mot de passe : <span class="requis">*</span></label>
 						
 						<input type="password" id="password" name="password" value="" size="30" maxlength="60" onblur="verifPassword(this)"/>
 						
 						<span id="erreurpass"></span>
 						
-						<br />
+						</p>
 						
+						<p>
 						<label for="password1">Confirmer Mot de passe : <span class="requis">*</span></label>
 						
 						<input type="password" id="password1" name="password1" value="" size="30" maxlength="60" onblur="verifPassword1(this)"/>
 						
 						<span id="erreurpass1"></span>
 						
-						<br />
+						</p>
 						
-						
+						<p>
 						<label for="poste">Poste : <span class="requis">*</span></label>
 						
 						<input type="text" id="poste" name="poste" value="" size="30" maxlength="30" onblur="verifPoste(this)"/>
 						
 						<span id="erreurposte"></span>
 						
-						<br />
+						</p>
 						
+						<p>
 						<label for="poste">Composante : <span class="requis">*</span></label>
 						
 						<select id = "id_composante" name = "id_composante"   onblur="verifCompo(this)">
@@ -99,12 +104,12 @@
 						
 						<span id="erreurcompo"></span>
 						
-						<br />
+						</p>
                       
 
                 </fieldset>
 
-                <p class="info">${ error }</p>
+                
                 <span id="formulaire"></span>
                 
 
@@ -117,9 +122,15 @@
         </div>
 
 	</section>
+	
+	
+	<footer>
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
     </body>
     
-              
+        <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+   
         <script type="text/javascript">
         
 		        function surligne(champ, erreur)

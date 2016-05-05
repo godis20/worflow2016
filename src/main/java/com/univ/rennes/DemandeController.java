@@ -60,7 +60,7 @@ public class DemandeController {
 	public ModelAndView cont_form_demanderech(HttpServletRequest request)
 	{
 		
-		ModelAndView model = new ModelAndView("form_demandeclas");
+		ModelAndView model = new ModelAndView("form_demanderech");
 		
 		try
 		{

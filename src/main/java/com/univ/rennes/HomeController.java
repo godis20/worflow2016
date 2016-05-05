@@ -101,7 +101,7 @@ public class HomeController {
 			if( user != null)
 			{
 				request.getSession().setAttribute("user", user);
-				return new ModelAndView ("redirect:/ajoututilisateur");
+				return new ModelAndView ("redirect:/ajoutdemandeclas");
 			}
 			
 			

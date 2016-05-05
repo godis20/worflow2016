@@ -4,13 +4,13 @@
  		<ul >
  		
 			<li> 
-			 <a id="iddemandeclas">
+			 <a href="#" id="iddemandeclas">
 			    Gestion demande classique
 			 </a>
 				<ul>
 				
 					<li>
-					  <a>Liste demande</a>
+					  <a href="">Liste demande</a>
 					</li>
 					
 					 <li>
@@ -99,8 +99,12 @@
 </div>
 <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" >
-    $("idedemandeclas").click(function(e){
-    	      $(this).parent().find('ul').slideToggle();
-       }
+$(document).ready(function() {
+
+	$("#iddemandeclas").click(function(e){
+	      $(this).parent().find('ul').slideToggle();
+      }
     );
+});
+
 </script>
