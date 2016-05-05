@@ -7,20 +7,73 @@ html, body {
  margin: 0;
  padding: 0;
  }
+ 
+ body {
+ background-color: #D8D8D8;
+ font-family:"trebuchet ms",sans-serif;
+ font-size:100%;
+ height:100%;
+ width:100%;
+ }
+ 
+ body header {
 
-:required
+    background: #2ECCFA;
+     height: 10%; 
+     margin-left:10%;
+     margin-top:3%; 
+     margin-right:10%;
+ }
+ 
+body section{
+	
+	background:#A9E2F3;
+	height:80%; 
+	margin-left:10%; 
+	margin-right:10%;
+}
+
+.menu{
+	background:#4C0B5F;
+	margin-left:20px; 
+	height:50%; 
+	margin-top:30px; 
+	margin-bottom:30px; 
+	float: left; 
+	width:25%; 
+	overflow:hidden;
+	
+}
+
+.content{
+	
+	background:#8A0808;
+	margin-left:20px; 
+	height:90%; 
+	margin-top:30px; 
+	margin-bottom:5px; 
+	float: left; 
+	width:70%;
+	
+}
+  
+
+body footer {
+	
+	background:#9AFE2E;
+	height:10%; 
+	margin-left:10%; 
+	margin-right:10%;
+  
+}
+    
+    
+:/* required
 {
     background-color: white;
 }
 
-body {
- background-color: #FFFFF0;
- font-family:"trebuchet ms",sans-serif;
- font-size:100%;
- margin:auto;
- width:100%;
- }
- 
+
 form {
  background-color:#F5F5F5;
  padding:auto;
@@ -156,113 +209,113 @@ a:active, a:focus {
  
 
  
- article aside #menu, #menu ul /* Liste */     
+ article aside #menu, #menu ul Liste     
 {
-        padding : 0; /* pas de marge intérieure */
-        margin : 0; /* ni extérieure */
-        list-style : none; /* on supprime le style par défaut de la liste */
-        line-height : 55px; /* on définit une hauteur pour chaque élément */
-        text-align : center; /* on centre le texte qui se trouve dans la liste */
+        padding : 0; pas de marge intérieure
+        margin : 0; ni extérieure
+        list-style : none; on supprime le style par défaut de la liste
+        line-height : 55px; on définit une hauteur pour chaque élément
+        text-align : center; on centre le texte qui se trouve dans la liste
         
         
 }
 
-#menu /* Ensemble du menu */
+#menu Ensemble du menu
 {
-        font-weight : bold; /* on met le texte en gras */
-        font-family : Arial; /* on utilise Arial, c'est plus beau ^^ */
-        font-size : 18px; /* hauteur du texte : 20 pixels */
+        font-weight : bold; on met le texte en gras
+        font-family : Arial; on utilise Arial, c'est plus beau ^^
+        font-size : 18px; hauteur du texte : 20 pixels
 }
 
-#menu a /* Contenu des listes */
+#menu a Contenu des listes
 {
-        display : block; /* on change le type d'élément, les liens deviennent des balises de type block */
-        padding : 0; /* aucune marge intérieure */
-        background : #1E90FF; /* couleur de fond */        
-        color : #fff; /* couleur du texte */
-        text-decoration : none; /* on supprime le style par défaut des liens (la plupart du temps = souligné) */
-        width : 250px; /* largeur */
+        display : block; on change le type d'élément, les liens deviennent des balises de type block
+        padding : 0; aucune marge intérieure
+        background : #1E90FF; couleur de fond        
+        color : #fff; couleur du texte
+        text-decoration : none; on supprime le style par défaut des liens (la plupart du temps = souligné)
+        width : 250px; largeur
         border-radius:{10px 10px 0 0;}
         
         
 }
 
-#menu > li > a {  /* Formes arrondis menus */
+#menu > li > a {  Formes arrondis menus
 	border-radius: 1em 1em 0 0;
 	
 }
 
 
-#menu li /* Éléments des listes */      
+#menu li Éléments des listes      
 { 
         float : left; 
-        /* pour IE qui ne reconnaît pas "transparent" */
-        border-right : 1px solid #fff; /* on met une bordure blanche à droite de chaque élément */
+        pour IE qui ne reconnaît pas "transparent"
+        border-right : 1px solid #fff; on met une bordure blanche à droite de chaque élément
 }
 
-/* IE ne reconnaissant pas le sélecteur ">" */
+IE ne reconnaissant pas le sélecteur ">"
 html>body #menu li
 {
-        border-right: 1px solid transparent ; /* on met une bordure transparente à droite de chaque élément */
+        border-right: 1px solid transparent ; on met une bordure transparente à droite de chaque élément
 }
 
-#menu li ul /* Sous-listes */
+#menu li ul Sous-listes
 { 
-        position: absolute; /* Position absolue */
-        width: 250px; /* Largeur des sous-listes */
-        left: -999em; /* Hop, on envoie loin du champ de vision */
+        position: absolute; Position absolue
+        width: 250px; Largeur des sous-listes
+        left: -999em; Hop, on envoie loin du champ de vision
 }
 
 
-#menu li ul li /* Eléments de sous-listes */
+#menu li ul li Eléments de sous-listes
 {
-        /* pour ie qui ne reconnaît pas "transparent" (comme précédemment) */
-        border-top : 1px solid #fff; /* on met une bordure blanche en haut de chaque élément d'une sous-liste */
+        pour ie qui ne reconnaît pas "transparent" (comme précédemment)
+        border-top : 1px solid #fff; on met une bordure blanche en haut de chaque élément d'une sous-liste
 }
 
-/* IE ne reconnaissant pas le sélecteur ">" */
+IE ne reconnaissant pas le sélecteur ">"
 html>body #menu li ul li                
 {
-        border-top : 1px solid transparent; /* on met une bordure transparente en haut de chaque élément */
+        border-top : 1px solid transparent; on met une bordure transparente en haut de chaque élément
 }
 
 #menu li ul ul 
 {
-        margin    : -22px 0 0 144px ; /* On décale les sous-sous-listes pour qu'elles ne soient pas au dessus des sous-listes */ 
-        /* pour IE qui ne reconnaît pas "transparent" (comme précédemment) */
-        border-left     : 1px solid #fff ; /* Petite bordure à gauche pour ne pas coller ... */      
+        margin    : -22px 0 0 144px ; On décale les sous-sous-listes pour qu'elles ne soient pas au dessus des sous-listes 
+        pour IE qui ne reconnaît pas "transparent" (comme précédemment)
+        border-left     : 1px solid #fff ; Petite bordure à gauche pour ne pas coller ...      
 }
 
-/* IE ne reconnaissant pas le sélecteur ">" ... je me répète ;-) */
+IE ne reconnaissant pas le sélecteur ">" ... je me répète ;-)
 html>body #menu li ul ul                
 {
-        border-left     : 1px solid transparent ; /* on met une bordure transparente sur la gauche de chaque élément */
+        border-left     : 1px solid transparent ; on met une bordure transparente sur la gauche de chaque élément
 }
 
-#menu a:hover /* Lorsque la souris passe sur un des liens */    
+#menu a:hover Lorsque la souris passe sur un des liens    
 {
-        color: #1E90FF; /* On passe le texte en noir... */
-        background: #fff; /* ... et au contraire, le fond en blanc */
+        color: #1E90FF; On passe le texte en noir...
+        background: #fff; ... et au contraire, le fond en blanc
 }
 
 #menu li ul li a 
 {
          background     : #87CEFA;
-         line-height : 50px; /* on définit une hauteur pour chaque élément */
+         line-height : 50px; on définit une hauteur pour chaque élément
         
 }
 
 
 #menu ul {
     position: absolute;
-/* on cache les sous menus complètement sur la gauche */
+on cache les sous menus complètement sur la gauche
     left: -999em;
     text-align: center;
     z-index: 1000;
 }
 
 #menu li:hover ul {
-/* Au survol des li du menu on replace les sous menus */
+Au survol des li du menu on replace les sous menus
     left: auto;
 }
 
@@ -275,35 +328,9 @@ article, header,aside, footer, img {
   display: block;
 }
 
-body header {
-	display: flex;
-    justify-content: space-around;
-    flex-direction:row;
-    align-items: center;
-    height:50%;
-    background: #A52A2A;
-    font-weight:bold
-     width:100%;
-    }
-    
-body article {
-   display: flex;
-    height:400%;
-    flex-direction: column;
-    
-    }
+
     
 
-body footer {
-    display: flex;
-    background:#8B0000;
-    font-weight:bold
- 	text-align : center;
- 	border:2px solid black;
- 	height:15%;
- 	 width:100%;
-}
-  
     
     
 header img
@@ -350,3 +377,4 @@ body header #others a
 }
 
 
+ */

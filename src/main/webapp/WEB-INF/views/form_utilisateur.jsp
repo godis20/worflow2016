@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 
 <html>
+	
 
     <head>
 
@@ -12,17 +13,23 @@
 
         <title>Création d'un utilisateur</title>
 
-        <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
+        <link type="text/css" rel="stylesheet" href="<c:url value="/ressources/style.css"/>" />
        
 
 
     </head>
 
     <body>
-
+    <section>
+		
+		<div class="menu">
+			
+			<jsp:include page="menu.jsp"></jsp:include>
+		
+		</div>
         
 
-        <div>
+        <div class="content">
 
             <form method="post" action="<c:url value="/ajoututilisateur"/>"  onsubmit="return validerform()"  onreset="return confirm('Voulez vous vraiment reinitialiser  ?');">
 
@@ -109,6 +116,7 @@
    
         </div>
 
+	</section>
     </body>
     
               
