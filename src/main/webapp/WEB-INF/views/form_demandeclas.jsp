@@ -207,8 +207,8 @@
 				   </fieldset>
 				   
 				   <input type="reset" value="Annuler" >
-				   <input type="button" value="Enregistrer" >
-				   <input type="submit" value="Envoyer" >
+				   <input type="submit" value="Enregistrer" name="action">
+				   <input type="submit" value="Envoyer" name="action">
 				   
 				   
 				  </fieldset> 

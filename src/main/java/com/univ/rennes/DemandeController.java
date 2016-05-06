@@ -1,6 +1,7 @@
 package com.univ.rennes;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.univ.rennes.model.BesoinDemande;
 import com.univ.rennes.model.Composante;
 import com.univ.rennes.model.Demande;
+import com.univ.rennes.model.LigneStatut;
 import com.univ.rennes.model.Utilisateur;
 import com.univ.rennes.service.DemandeService;
 import com.univ.rennes.service.UtilisateurService;
@@ -107,15 +110,18 @@ public class DemandeController {
 						@RequestParam("intitule") String intitule,
 						@RequestParam("fiche") String fiche,
 						@RequestParam("niveau") String niveau,
-						@RequestParam("argumentaire") String argumentaire
+						@RequestParam("argumentaire") String argumentaire,
+						@RequestParam("action") String action
 		
 			){
 		
 		
 		Demande newDde= new Demande();
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
+		Date date = new Date(); 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		
+		//DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
 		
 		String formattedDate = dateFormat.format(date);
 		
@@ -144,7 +150,13 @@ public class DemandeController {
 		
 		try
 		{
-			newDde.setBesoinDemande(demandeService.getBesoinDemandebyId(nature));
+			if(action.equals("Envoyer")){
+				newDde.setStatutEnvoiDemande(true);
+				
+			}
+			BesoinDemande besoinDemande=demandeService.getBesoinDemandebyId(nature);
+			newDde.setBesoinDemande(besoinDemande);
+			newDde.setTypeDemande(besoinDemande.getTypeDemande());
 			
 			newDde.setDemandeur((Utilisateur) request.getSession().getAttribute("user"));
 			
@@ -168,4 +180,22 @@ public class DemandeController {
 		}
 	}
 	
+	
+
+	/**
+	 * Contrôleur de l'affichage de la liste des demandes existants dans la BD,
+	 * 
+	 */
+	@RequestMapping(value = "/listdemandeclas", method = RequestMethod.GET)
+	public ModelAndView cont_listdemandeclas()
+	{
+		try
+		{
+			return new ModelAndView("listdemandeclas", "listdemandeclas", demandeService.getAllDemandeclas());
+			
+		}catch(Exception e)
+		{
+			 return new ModelAndView("listdemandeclas", "listdemandeclas", new ArrayList<Demande>()); 
+		}
+	}
 }

@@ -1,12 +1,13 @@
-<div>
+<div class="verticalaccordion">
 
 
  		<ul >
  		
 			<li> 
-			 <a href="#" id="iddemandeclas">
-			    Gestion demande classique
-			 </a>
+				<h3>Gestion demande classique</h3>
+			 
+		
+				<div id="classique">
 				<ul>
 				
 					<li>
@@ -39,13 +40,16 @@
 					
 					
 				</ul>
+				
+				</div>
 			</li>
 			
 			
 			<li>
-				 <a id="iddemanderech">
-				    Gestion demande recherche
-				 </a>
+			
+				<h3>Gestion demande recherche</h3>
+				
+				<div>
 			 	<ul>
 			 		<li>
 					  <a>Liste demande</a>
@@ -75,11 +79,17 @@
 					    <a>Cloture Demande</a>
 					</li>
 			 	</ul>
+			 	
+			 	</div>
+			 	
+			 	
+			 </li>
 			
 			<li>
-			      <a id="idadministration">
-				    Administration
-				 </a>
+			
+				<h3>Administration</h3>
+			     
+			     <div>
 				 <ul>
 				 
 				 	<li>
@@ -90,6 +100,8 @@
 					    Nouveau utilisateur
 					 </li>
 				 </ul>
+				 
+				 </div>
 			</li>
 			
 			
@@ -101,7 +113,7 @@
 <script type="text/javascript" >
 $(document).ready(function() {
 
-	$("#iddemandeclas").click(function(e){
+	$("#classique").click(function(e){
 	      $(this).parent().find('ul').slideToggle();
       }
     );

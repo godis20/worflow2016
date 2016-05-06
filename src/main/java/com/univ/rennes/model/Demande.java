@@ -46,7 +46,7 @@ public class Demande {
 	@JoinColumn(name="id_besoin_demande") // emploi vacant, temporaire... ,concerne uniquement demande classique
 	private BesoinDemande besoinDemande;
 	
-	@Column(name="autre_besoin_demande")   // objet ou nature de la demande pour demande recherche uniquement
+	@Column(name="autre_besoin_demande",nullable=true)   // objet ou nature de la demande pour demande recherche uniquement
 	private String autreBesoin;
 	
 	@Column(name="date_d_souhaite")
@@ -55,10 +55,10 @@ public class Demande {
 	@Column(name="date_f_souhaite")
 	private String dateFinSouhaite;
 	
-	@Column(name="duree_souhaitee")
+	@Column(name="duree_souhaitee",nullable=true)
 	private String dureeSouhaite;
 	
-	@Column(name="quotite")              // concerne uniquement demande classique
+	@Column(name="quotite",nullable=true)              // concerne uniquement demande classique
 	private String quotite;
 	
 	
@@ -68,14 +68,14 @@ public class Demande {
 	 *     Demande classique uniquement, si besoin est different de "renforsement"
 	 */
 	
-	@Column(name="nom_agt_aremplacer")
+	@Column(name="nom_agt_aremplacer",nullable=true)
 	private String nomAgentAremplacer;
 	
 	
-	@Column(name="date_f_service")
+	@Column(name="date_f_service",nullable=true)
 	private String dateFinService;
 	
-	@Column(name="motif_dispo_poste")
+	@Column(name="motif_dispo_poste",nullable=true)
 	private String motifDispoPoste;
 	
 	
@@ -85,41 +85,41 @@ public class Demande {
 	 *    Demande classique et demande recherche
 	 */
 	
-	@Column(name="fonc_agt_arecruter")  // uniquement pour les demandes classqiques
+	@Column(name="fonc_agt_arecruter",nullable=true)  // uniquement pour les demandes classqiques
 	private String foncAgentArecrute;
 	
-	@Column(name="branch_agt_arecruter")  // uniquement pour les demandes classqiques
+	@Column(name="branch_agt_arecruter",nullable=true)  // uniquement pour les demandes classqiques
 	private String branchAgentArecruter;
 	
-	@Column(name="cat_agt_arecruter")  // uniquement pour les demandes classqiques
+	@Column(name="cat_agt_arecruter",nullable=true)  // uniquement pour les demandes classqiques
 	private String catAgentArecruter;
 	
-	@Column(name="ficheposte")     // uniquement pour les demandes classqiques
+	@Column(name="ficheposte",nullable=true)     // uniquement pour les demandes classqiques
 	private String ficheposte;
 	
-	@Column(name="intfonc_agt_arecruter") // uniquement pour les demandes classqiques
+	@Column(name="intfonc_agt_arecruter",nullable=true) // uniquement pour les demandes classqiques
 	private String intfoncAgentArecruter;
 	
-	@Column(name="diplom_agt_arecruter")  // uniquement pour les demandes classqiques
+	@Column(name="diplom_agt_arecruter", nullable=true)  // uniquement pour les demandes classqiques
 	private String diplomAgentArecruter;
 	
 	@Column(name="argumentaires") 
 	private String argumentaires;
 
 	
-	@Column(name="nom_chercheur") // uniquement pour les demandes recherches
+	@Column(name="nom_chercheur", nullable=true) // uniquement pour les demandes recherches
 	private String nomChercheur;
 	
-	@Column(name="prenom_chercheur") // uniquement pour les demandes recherches
+	@Column(name="prenom_chercheur",nullable=true) // uniquement pour les demandes recherches
 	private String prenomChercheur;
 	
-	@Column(name="qualite_chercheur") // uniquement pour les demandes recherches
+	@Column(name="qualite_chercheur",nullable=true) // uniquement pour les demandes recherches
 	private String qualiteChercheur;
 	
-	@Column(name="inm_chercheur") // uniquement pour les demandes recherches
+	@Column(name="inm_chercheur",nullable=true) // uniquement pour les demandes recherches
 	private String inmChercheur;
 	
-	@Column(name="missions") // uniquement pour les demandes recherches
+	@Column(name="missions",nullable=true) // uniquement pour les demandes recherches
 	private String missions;
 	
 	
@@ -128,13 +128,13 @@ public class Demande {
 	 *     Demande recherche uniquement
 	 */
 	
-	@Column(name="cf") 
+	@Column(name="cf" ,nullable=true) 
 	private String cf;
 	
-	@Column(name="eotp") 
+	@Column(name="eotp", nullable=true) 
 	private String eotp;
 	
-	@Column(name="domainefonctionnel") 
+	@Column(name="domainefonctionnel",nullable=true) 
 	private String domainefonctionnel;
 	
 	
@@ -147,7 +147,7 @@ public class Demande {
 	@JoinColumn(name="id_instructeur") //uniquement pour les demandes recrutement classique
 	private Utilisateur instructeur;
 	
-	@Column(name="obs_instruction")
+	@Column(name="obs_instructions", nullable=true)
 	private String obsInstruction;
 	
 	
@@ -155,20 +155,33 @@ public class Demande {
 	@JoinColumn(name="id_valideur")
 	private Utilisateur valideur;
 	
-	@Column(name="obs_validation")
+	@Column(name="obs_validation", nullable=true)
 	private String obsValidation;
 	
 	@OneToOne
 	@JoinColumn(name="id_clotureur") 
 	private Utilisateur clotureur;
 	
-	@Column(name="obs_cloture")
+	@Column(name="obs_cloture", nullable=true)
 	private String obsCloture;
 	
 	
 	@OneToOne
 	@JoinColumn(name="id_gestionnaire")  //uniquement pour les demandes recrutement classique
 	private Utilisateur gestionnaire;
+	
+	@Column(name="statut_envoi_demande")
+	private boolean statutEnvoiDemande;
+
+
+	public boolean isStatutEnvoiDemande() {
+		return statutEnvoiDemande;
+	}
+
+
+	public void setStatutEnvoiDemande(boolean statutEnvoiDemande) {
+		this.statutEnvoiDemande = statutEnvoiDemande;
+	}
 
 
 	public Integer getId() {

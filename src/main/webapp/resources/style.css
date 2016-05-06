@@ -6,32 +6,30 @@ html, body {
  padding: 0;
  }
  
- body {
  
+ body {
+	background-color: #fff;
+	font-family: 'OpenSans';
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 4%;
+	margin-bottom: 4%;
+}
 
- background-color: #D8D8D8;
- font-family:"trebuchet ms",sans-serif;
- font-size:100%;
- height:100%;
- width:100%;
- position: absolute;
- }
  
  body header {
 
-     background: #2ECCFA;
-     height: 10%; 
-     margin-left:10%;
-     margin-top:3%; 
-     margin-right:10%;
+    background-color: #eee;
+	border-bottom: 1px solid #e6e6e6;
+	padding: 27px 0;
+	height: 20px;
  }
  
 body section{
 	
-	background:#A9E2F3;
-	height:80%; 
-	margin-left:10%; 
-	margin-right:10%;
+	min-height: 510px;
+	background-color: beige;
+	display: flex;
 }
 
 
@@ -48,6 +46,57 @@ body section{
 	
 }
 
+
+
+.verticalaccordion>ul {
+    margin: 0;
+    padding: 0;
+    list-style:none;
+   	width: 500px;
+}
+
+.verticalaccordion>ul>li {
+    display:block;
+	overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style:none;
+	height:40px;
+	width: 500px;
+
+    /* Decorative CSS */
+    background-color:#f0f0f0;
+}
+
+.verticalaccordion>ul>li>h3 {
+    display:block;
+    margin: 0;
+    padding:10px;
+    height:19px;
+	font-size:95%;
+    /* Decorative CSS */
+    border-top:#f0f0f0 1px solid;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration:none;
+    text-transform:uppercase;
+    color: #000;
+    background: #cccccc;
+}
+
+.verticalaccordion>ul>li>div {
+    margin:0;
+    overflow: auto;
+    padding:10px;
+    height:220px;
+}
+
+.verticalaccordion:hover>ul>li:hover>h3 {
+    /* Decorative CSS */
+    color:#fff;
+    background: #000000;
+}
+
+
 .content{
 	
 	background:#8A0808;
@@ -63,12 +112,9 @@ body section{
 
 body footer {
 	
-	background:#9AFE2E;
-	height:10%; 
-	
-	margin-left:10%; 
-	margin-right:10%;
-    margin-bottom: 3%;
+	background-color: #eee;
+	border-top: 1px solid #d8d8d8;
+	padding: 30px 0;
 }
 
 fieldset.pere{
