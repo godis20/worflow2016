@@ -57,11 +57,9 @@ body section{
 
 .verticalaccordion>ul>li {
     display:block;
-	overflow: hidden;
     margin: 0;
     padding: 0;
     list-style:none;
-	height:40px;
 	width: 500px;
 
     /* Decorative CSS */
@@ -69,6 +67,21 @@ body section{
 }
 
 .verticalaccordion>ul>li>h3 {
+    display:block;
+    margin: 0;
+    padding:10px;
+    height:19px;
+	font-size:95%;
+    /* Decorative CSS */
+    border-top:#f0f0f0 1px solid;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration:none;
+    text-transform:uppercase;
+    color: #000;
+    background: #cccccc;
+}
+
+.verticalaccordion>ul>li>a{
     display:block;
     margin: 0;
     padding:10px;
@@ -96,6 +109,28 @@ body section{
     background: #000000;
 }
 
+#myul>li {
+	display:block;
+    margin: 0;
+    padding: 0;
+    list-style:none;
+    /* Decorative CSS */
+    background-color:#f0f0f0;
+}
+#myul>li>a{
+    display:block;
+    margin: 0;
+    padding:10px;
+    height:19px;
+	font-size:95%;
+    /* Decorative CSS */
+    border-top:#f0f0f0 1px solid;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration:none;
+    text-transform:uppercase;
+    color: #000;
+    background: #cccccc;
+}
 
 .content{
 	
