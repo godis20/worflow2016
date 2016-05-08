@@ -76,14 +76,7 @@
 				           
 				        </select>  
 				        
-				        
-				       <!--  <input type="radio" id="nature" name="nature" value="vacant" checked /> Emploi vacant
-				        <input type="radio" id="nature" name="nature" value="temporaire" /> Emploi temporaire
-				        <input type="radio" id="nature" name="nature" value="renforcement"  /> Emploi pour renforcement
-				        <input type="radio" id="nature" name="nature" value="autres" /> Autres -->
-				        </p>
-				        
-				          
+				       
 				     
 				       <p> 
 				       <label for="dateDeb">Date de prise de fonctions souhaitée* : </label>
@@ -151,16 +144,16 @@
 				    <fieldset>
 				       <legend>Eléments constitutifs de la demande </legend> <!-- Titre du fieldset --> 
 						<p> 
-				       <label for="fonction">Type de fonction * </label>
+				       <label for="fonction">Type de fonction :<span class="requis">*</span> </label>
 				       <input type="text" name="fonction" id="fonction" required/>
 				       </p> 
 				       <p> 
-				       <label for="branche">Branche d'activité * </label>
+				       <label for="branche">Branche d'activité :<span class="requis">*</span> </label>
 				       <input type="text" name="branche" id="branche" required/>
 						</p> 
 						
 						<p> 
-				       <label for="categorie">Catégorie poste </label>
+				       <label for="categorie">Catégorie poste :<span class="requis">*</span> </label>
 				        <select name="categorie" id="categorie" >
 				           <option value="none">Choisissez une option </option>
 				           <option value="A">A </option>
@@ -170,18 +163,18 @@
 				       </p> 
 				       
 				       <p> 
-				       <label for="fiche">Fiche de poste * </label>
+				       <label for="fiche">Fiche de poste :<span class="requis">*</span> </label>
 				       <input type="file" name="fiche" id="fiche"  />
 				       <input type="submit" name="ajouter" value="Ajouter" />
 					  </p> 
 						 
 						 <p> 
-				       <label for="intitule">Intitule de la fonction *</label>
+				       <label for="intitule">Intitule de la fonction :<span class="requis">*</span> </label>
 				       <input type="text" name="intitule" id="intitule" required/>
 				       </p> 
 				       
 				       <p> 
-				       <label for="niveau">Niveau diplôme  *</label>
+				       <label for="niveau">Niveau diplôme  :<span class="requis">*</span> </label>
 				        <select name="niveau" id="niveau"  required>
 				           <option value="none">Choisissez une option </option>
 				           <option value="sup">BAC </option>
@@ -198,7 +191,7 @@
 				       </p> 
 				       
 				      <p>
-				       <label for="argumentaire"> Argumentaires* : </label> 
+				       <label for="argumentaire"> Argumentaires :<span class="requis">*</span> </label>
 				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" required>
 				       Votre argumentaire par rapport à la demande
 				       </textarea>       

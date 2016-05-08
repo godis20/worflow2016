@@ -38,7 +38,6 @@ public class DemandeService {
 	 */
 	
 	
-	
 	@Transactional
 	public List<TypeDemande> getTypeListeDemande(){
 		
@@ -48,6 +47,7 @@ public class DemandeService {
 				
 		return list;
 	}
+	
 	
 	/**
 	 * methode qui effectue l'ajout d'une demande cree  par l'utilisateur dans la BD
@@ -106,9 +106,13 @@ public class DemandeService {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Demande> getAllDemandeclas(){
+		
+		int id_clas=1;
 		try{
 			Session session=sessionFactory.getCurrentSession();
-			List<Demande> list = session.createQuery("select p from Demande p").list();//  recuperer la liste des demandes de la BD
+			List<Demande> list = session.createQuery("select p from Demande d"
+					+ " where d.typeDemande.id = id_clas")
+					.setParameter("id_clas", id_clas).list();//  recuperer la liste des demandes recherches  de la BD
 			return list;
 		}catch (Exception e){
 			return null;
@@ -116,6 +120,65 @@ public class DemandeService {
 	}
 	
 	
+	/**
+	 * methode qui recupere toutes les demandes recherches  de la BD
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Demande> getAllDemanderech(){
+		int id_rech=2;
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			List<Demande> list = session.createQuery("select p from Demande d"
+					+ " where d.typeDemande.id = id_rech")
+					.setParameter("id_rech", id_rech).list();//  recuperer la liste des demandes recherches  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	
+	
+	
+	/**
+	 * methode qui recupere une demande dans la BD à partir de son ID
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Demande getDemandebyId(int id){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			Demande demande =(Demande) session.get(Demande.class, id);
+			return demande;
+			
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	/**
+	 * methode qui recupere une demande dans la BD à partir de son ID
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Demande setDemandebyInstruction(Utilisateur instructeur, String date, String observation){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			/*Demande demande =(Demande) session.get(Demande.class, date);*/
+			return null;
+			
+		}catch (Exception e){
+			return null;
+		}	
+	}
 	
 	
 }

@@ -43,11 +43,9 @@ public class Demande {
 	
 	
 	@OneToOne
-	@JoinColumn(name="id_besoin_demande") // emploi vacant, temporaire... ,concerne uniquement demande classique
+	@JoinColumn(name="id_besoin_demande") 
 	private BesoinDemande besoinDemande;
 	
-	@Column(name="autre_besoin_demande",nullable=true)   // objet ou nature de la demande pour demande recherche uniquement
-	private String autreBesoin;
 	
 	@Column(name="date_d_souhaite")
 	private String dateDebSouhaite;
@@ -234,14 +232,7 @@ public class Demande {
 	}
 
 
-	public String getAutreBesoin() {
-		return autreBesoin;
-	}
-
-
-	public void setAutreBesoin(String autreBesoin) {
-		this.autreBesoin = autreBesoin;
-	}
+	
 
 
 	public String getDateDebSouhaite() {

@@ -119,7 +119,7 @@
 			       <p>
 			       <label for="missions"> Missions : <span class="requis">*</span></label>
 			       <textarea name="missions" id="missions" rows="6" cols="50" required>
-			        Detaillez les missions
+			       Principales missions
 			       </textarea>       
 			       </p>
 			        
@@ -150,7 +150,7 @@
 			      
 			       
 			       <p>
-			       <label for="argumentaire"> Argumentaires* : </label> 
+			       <label for="argumentaire"> Argumentaires : <span class="requis">*</span></label>
 			       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" required>
 			       Votre argumentaire par rapport à la demande
 			       </textarea>       
@@ -158,11 +158,11 @@
 			
 			   </fieldset>
 			   
-			   <input type="reset" value="Annuler" >
-			   <input type="button" value="Enregistrer" >
-			   <input type="submit" value="Envoyer" >
+			       <input type="reset" value="Annuler" >
+				   <input type="submit" value="Enregistrer" name="action">
+				   <input type="submit" value="Envoyer" name="action">
 			   
-			   
+			
 			  </fieldset> 
 			 
 			</form>

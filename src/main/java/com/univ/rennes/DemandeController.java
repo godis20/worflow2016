@@ -82,8 +82,8 @@ public class DemandeController {
 	
 	
 	/**
-	 * controleur de traitement du formulaire de creation de demande de recrutement
-	 *
+	 * Contrôleur de traitement du formulaire de creation de demande de recrutement
+	 * classique
 	 */
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/ajoutdemandeclas", method = RequestMethod.POST)
@@ -170,12 +170,110 @@ public class DemandeController {
 			
 			
 			model.addObject("utilisateur", request.getSession().getAttribute("user"));
-			model.addObject("error", "Erreur lors de l'ajout de la demande");
+			model.addObject("error", "Erreur lors de l'ajout de la demande dans la base de donnée");
 			return model;
 		}catch(Exception e)
 		{
 			model.addObject("utilisateur", request.getSession().getAttribute("user"));
-			model.addObject("error", "Erreur lors de l'ajout de la demande");
+			model.addObject("error", "Erreur lors de la formation de l'objet demande");
+			return model;
+		}
+	}
+	
+	
+	
+	/**
+	 * Contrôleur de traitement du formulaire de creation de demande de recrutement
+	 * classique
+	 */
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/ajoutdemanderech", method = RequestMethod.POST)
+	public ModelAndView cont_ajoutdemanderech(
+
+						
+						HttpServletRequest request,
+						@RequestParam("telephone") String telephone,
+						@RequestParam("objet") int objet,// objet  de la demande
+				
+						@RequestParam("dateDeb") String dateDeb, //date debut du contrat 
+						@RequestParam("dateFin") String dateFin,
+						@RequestParam("duree") String duree,
+						@RequestParam("qualite") String qualite,//qualité de l'etudiant
+    					@RequestParam("nomAgent") String nomAgent, // nom de l'etudiant à recruter
+					    @RequestParam("prenomAgent") String prenomAgent,
+						@RequestParam("inm") String inm, 
+						@RequestParam("missions") String missions, //missions du poste 
+						@RequestParam("cf") String cf,
+						@RequestParam("eotp") String eotp,
+						@RequestParam("domaine") String domaine, 
+
+						@RequestParam("argumentaire") String argumentaire,
+						@RequestParam("action") String action
+
+		
+			){
+		
+		
+		Demande newDde= new Demande();
+		
+		Date date = new Date(); 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		
+	
+		String formattedDate = dateFormat.format(date);
+		
+		newDde.setDatecreationDemande(formattedDate);
+		
+		
+		
+		newDde.setNomChercheur(nomAgent);
+		newDde.setPrenomChercheur(prenomAgent);
+		newDde.setDateDebSouhaite(dateDeb);
+		newDde.setDateFinSouhaite(dateFin);
+		newDde.setQualiteChercheur(qualite);
+	
+		
+		newDde.setInmChercheur(inm);
+		newDde.setMissions(missions);
+	
+		newDde.setCf(cf);
+		newDde.setEotp(eotp);
+		newDde.setDomainefonctionnel(domaine);
+		newDde.setArgumentaires(argumentaire);
+		
+		ModelAndView model = new ModelAndView("form_demanderech");
+		
+		try
+		{
+			//4 est l'ID du besoin correspondant à "autres" dans la table "besoin_demande"
+			//il est propre au demande de recrutement recherche
+			
+			BesoinDemande besoinDemande=demandeService.getBesoinDemandebyId(4); 
+			newDde.setBesoinDemande(besoinDemande);
+			newDde.setTypeDemande(besoinDemande.getTypeDemande());
+			if(action.equals("Envoyer")){
+				newDde.setStatutEnvoiDemande(true);
+				
+			}
+			
+			newDde.setDemandeur((Utilisateur) request.getSession().getAttribute("user"));
+			
+			demandeService.ajoutDemande(newDde);
+			
+			if(newDde!=null){
+			
+			return new ModelAndView("redirect:/listdemanderech");
+			
+			}
+			
+			
+			model.addObject("utilisateur", request.getSession().getAttribute("user"));
+			model.addObject("error", "Erreur lors de l'ajout de la demande dans la base de donnée");
+			return model;
+		}catch(Exception e)
+		{
+			model.addObject("utilisateur", request.getSession().getAttribute("user"));
+			model.addObject("error", "Erreur lors de la formation de l'objet demande");
 			return model;
 		}
 	}
@@ -183,7 +281,7 @@ public class DemandeController {
 	
 
 	/**
-	 * Contrôleur de l'affichage de la liste des demandes existants dans la BD,
+	 * Contrôleur de l'affichage de la liste des demandes classiques existants dans la BD,
 	 * 
 	 */
 	@RequestMapping(value = "/listdemandeclas", method = RequestMethod.GET)
@@ -196,6 +294,100 @@ public class DemandeController {
 		}catch(Exception e)
 		{
 			 return new ModelAndView("listdemandeclas", "listdemandeclas", new ArrayList<Demande>()); 
+		}
+	}
+	
+	
+	/**
+	 * Contrôleur de l'affichage de la liste des demandes recherches existantes dans la BD,
+	 * 
+	 */
+	@RequestMapping(value = "/listdemanderech", method = RequestMethod.GET)
+	public ModelAndView cont_listdemanderech()
+	{
+		try
+		{
+			return new ModelAndView("listdemanderech", "listdemanderech", demandeService.getAllDemanderech());
+			
+		}catch(Exception e)
+		{
+			 return new ModelAndView("listdemanderech", "listdemanderech", new ArrayList<Demande>()); 
+		}
+	}
+	
+	
+
+
+	/**
+	 * contrôleur de l'affichage du formulaire d'instruction d'une demande
+	 *
+	 */
+	@RequestMapping(value = "/instruiredemande", method = RequestMethod.GET)
+	public ModelAndView cont_form_instruiredde()
+	{	
+		
+		ModelAndView model = new ModelAndView("form_instruiredde");
+		try
+		{
+			DemandeService demandeService= new DemandeService();
+			Demande demande=demandeService.getDemandebyId(2);
+		
+			model.addObject("demande", demande);
+			
+			return model;
+		}catch(Exception e)
+		{
+			return model; 
+		}
+	}
+	
+	
+	
+	/**
+	 * contrôleur de la mise à jour d'une demande classique
+	 * apres une instruction deladite demande
+	 *
+	 */
+	@RequestMapping(value = "/instruiredemande", method = RequestMethod.POST)
+	public ModelAndView cont_form_instruiredde(	
+			
+					HttpServletRequest request,
+					@RequestParam("observation") String observation
+			
+			)
+	{	
+		
+		ModelAndView model = new ModelAndView("form_instructiondde");
+		try
+		{
+			Date date = new Date(); 
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			
+			
+			String dateInstruction = dateFormat.format(date);
+			
+			Utilisateur instructeur =(Utilisateur) request.getSession().getAttribute("user");
+			
+			DemandeService demandeService= new DemandeService();
+			
+			Demande demande = demandeService.setDemandebyInstruction(instructeur, dateInstruction, observation);
+			
+			if(demande!=null){
+		
+			return new ModelAndView("redirect:/listdemandeclas");
+			}
+			
+	
+			Demande demandeInitial=demandeService.getDemandebyId(2);
+		
+			model.addObject("demande", demandeInitial);
+			model.addObject("error", "Erreur lors de la mise à jour de la demande");
+			return model; 
+			
+		}catch(Exception e)
+		{	
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
 		}
 	}
 }
