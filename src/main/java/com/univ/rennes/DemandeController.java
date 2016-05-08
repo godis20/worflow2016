@@ -326,7 +326,7 @@ public class DemandeController {
 	public ModelAndView cont_form_instruiredde()
 	{	
 		
-		ModelAndView model = new ModelAndView("form_instruiredde");
+		ModelAndView model = new ModelAndView("form_instructiondde");
 		try
 		{
 			DemandeService demandeService= new DemandeService();

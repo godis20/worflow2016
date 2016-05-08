@@ -63,9 +63,9 @@
 				
 				<div>- Eléments constitutifs de la demande <br/>
 				
-						<label>Type de fonction, Branche d'activité et Catégorie poste:   <c:out value="${demande.foncAgentArecrute ,demande.branchAgentArecruter et demande.catAgentArecruter}"/> </label>
+						<label>Type de fonction, Branche d'activité et Catégorie poste:   <c:out value="${demande.foncAgentArecrute demande.branchAgentArecruter  demande.catAgentArecruter}"/> </label>
 						<label>Fiche de poste :<%--  <c:out value="${demande.dateDebSouhaite} ${demande.dateFinSouhaite} "/> --%> </label>		
-						<label> Intitule de la fonction et Niveau de diplome requis :  <c:out value="${demande.intfoncAgentArecruter et demande.diplomAgentArecruter}"/> </label>
+						<label> Intitule de la fonction et Niveau de diplome requis :  <c:out value="${demande.intfoncAgentArecruter  demande.diplomAgentArecruter}"/> </label>
 						<label> Argumentaire de la demande:  <c:out value="${demande.argumentaires}"/> </label>
 				
 				</div>
