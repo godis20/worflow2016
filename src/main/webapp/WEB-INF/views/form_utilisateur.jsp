@@ -105,6 +105,8 @@
 						<span id="erreurcompo"></span>
 						
 						</p>
+						
+						<span> <c:out value="${error}"/></span>
                       
 
                 </fieldset>
@@ -112,7 +114,7 @@
                 
                 <span id="formulaire"></span>
                 
-
+				
                 <input type="submit" value="Valider"  />
 
                 <input type="reset" value="Remettre à zéro" /> <br />

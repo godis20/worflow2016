@@ -38,27 +38,27 @@
 				       
 					   <p> 
 				       <label for="composante">Composante demandeuse :</label>
-				       <input type="text" name="composante" id="composante" value="<c:out value="${nomComposante}"/>" size="30" maxlength="30"/>
+				       <input type="text" name="composante" id="composante" value="<c:out value="${nomComposante}"/>" size="30" maxlength="30" disabled="disabled" />
 				       </p>
 				       
 				       <p> 
 				       <label for="nom">Nom demandeur :</label>
-				       <input type="text" name="nom" id="nom" value="<c:out value="${user.nom}"/>" size="30" maxlength="30"/>
+				       <input type="text" name="nom" id="nom" value="<c:out value="${user.nom}"/>" size="30" maxlength="30" disabled="disabled" />
 						</p>
 						
 						<p> 
 				       <label for="prenom">Prenom demandeur :</label>
-				       <input type="text" name="prenom" id="prenom" value="<c:out value="${user.prenom}"/>" size="30" maxlength="30"/>
+				       <input type="text" name="prenom" id="prenom" value="<c:out value="${user.prenom}"/>" size="30" maxlength="30" disabled="disabled" />
 				       </p> 
 				       
 				       <p> 
 				       <label for="telephone">Téléphone :</label>
-				       <input type="text" name="telephone" id="telephone" value="<c:out value="${telephone}"/>" size="30" maxlength="30"/>
+				       <input type="text" name="telephone" id="telephone" value="<c:out value="${telephone}"/>" size="30" maxlength="30" />
 				 		</p> 
 				 		
 				 		<p> 
 				       <label for="email">Adresse email * :</label>
-				       <input type="email" name="email" id="email" value="<c:out value="${user.email}"/>" size="30" maxlength="30"/>
+				       <input type="email" name="email" id="email" value="<c:out value="${user.email}"/>" size="30" maxlength="30" disabled="disabled" />
 				       </p> 
 				
 				   </fieldset>

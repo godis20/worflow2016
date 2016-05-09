@@ -322,7 +322,7 @@ public class DemandeController {
 	 * contrôleur de l'affichage du formulaire d'instruction d'une demande
 	 *
 	 */
-	@RequestMapping(value = "/instruiredemande", method = RequestMethod.GET)
+	@RequestMapping(value = "/instructiondemande", method = RequestMethod.GET)
 	public ModelAndView cont_form_instruiredde()
 	{	
 		
@@ -348,7 +348,7 @@ public class DemandeController {
 	 * apres une instruction deladite demande
 	 *
 	 */
-	@RequestMapping(value = "/instruiredemande", method = RequestMethod.POST)
+	@RequestMapping(value = "/instructiondemande", method = RequestMethod.POST)
 	public ModelAndView cont_form_instruiredde(	
 			
 					HttpServletRequest request,

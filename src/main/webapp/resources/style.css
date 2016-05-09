@@ -19,23 +19,42 @@ html, body {
  
  body header {
 
-    background-color: #eee;
+    background-color: #A9C7CB;
 	border-bottom: 1px solid #e6e6e6;
 	padding: 27px 0;
 	height: 20px;
  }
  
+ 
+ 
+ #others ul>li, a
+{
+    
+    display: inline-flex;
+    text-decoration:none;
+    list-style:none;
+   
+   
+  
+}
+
+
+.header{
+	display: flex;
+	justify-content: flex-end;
+}
+ 
 body section{
 	
 	min-height: 510px;
-	background-color: beige;
+	background-color: #E6E6E6;
 	display: flex;
 }
 
 
 
 .menu{
-	background:#4C0B5F;
+	background:#0489B1;
 	margin-left:20px; 
 	height:50%; 
 	margin-top:30px; 
@@ -63,7 +82,7 @@ body section{
 	width: 500px;
 
     /* Decorative CSS */
-    background-color:#f0f0f0;
+    background-color:#E6E6E6;
 }
 
 .verticalaccordion>ul>li>h3 {
@@ -77,8 +96,8 @@ body section{
     font-family: Arial, Helvetica, sans-serif;
     text-decoration:none;
     text-transform:uppercase;
-    color: #000;
-    background: #cccccc;
+    color: white;
+    background: #0489B1;
 }
 
 .verticalaccordion>ul>li>a{
@@ -92,8 +111,8 @@ body section{
     font-family: Arial, Helvetica, sans-serif;
     text-decoration:none;
     text-transform:uppercase;
-    color: #000;
-    background: #cccccc;
+    color: white;
+    background: #0489B1;
 }
 
 .verticalaccordion>ul>li>div {
@@ -115,7 +134,7 @@ body section{
     padding: 0;
     list-style:none;
     /* Decorative CSS */
-    background-color:#f0f0f0;
+    background-color:#96CED2;
 }
 #myul>li>a{
     display:block;
@@ -128,13 +147,13 @@ body section{
     font-family: Arial, Helvetica, sans-serif;
     text-decoration:none;
     text-transform:uppercase;
-    color: #000;
-    background: #cccccc;
+    color: white;
+    background: #96CED2;
 }
 
 .content{
 	
-	background:#8A0808;
+	background:white;
 	margin-left:20px; 
 	height:90%; 
 	margin-top:30px; 
@@ -147,9 +166,11 @@ body section{
 
 body footer {
 	
-	background-color: #eee;
+	background-color: #4B686A;
 	border-top: 1px solid #d8d8d8;
 	padding: 30px 0;
+	text-align: center;
+	color: white;
 }
 
 fieldset.pere{
@@ -395,14 +416,7 @@ Au survol des li du menu on replace les sous menus
 
 
 
-
-
-article, header,aside, footer, img {
-  display: block;
-}
-
-
-    
+  
 
     
     

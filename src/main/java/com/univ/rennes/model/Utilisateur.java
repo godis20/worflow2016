@@ -38,6 +38,32 @@ public class Utilisateur {
 	@JoinColumn(name="id_composante")
 	private Composante composante;
 	
+	@Column(name="datecreation_utilisateur")
+	private String dateCreationUtilisateur;
+	
+	@OneToOne
+	@JoinColumn(name="createur_utilisateur", nullable=false)
+	private Utilisateur createur;
+	
+	
+	
+	
+
+	public Utilisateur getCreateur() {
+		return createur;
+	}
+
+	public void setCreateur(Utilisateur createur) {
+		this.createur = createur;
+	}
+
+	public String getDateCreationUtilisateur() {
+		return dateCreationUtilisateur;
+	}
+
+	public void setDateCreationUtilisateur(String dateCreationUtilisateur) {
+		this.dateCreationUtilisateur = dateCreationUtilisateur;
+	}
 
 	public Integer getId() {
 		return id;
