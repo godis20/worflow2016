@@ -193,7 +193,12 @@ public class DemandeService {
 		
 		try{
 			Session session=sessionFactory.getCurrentSession();
-			/*Demande demande =(Demande) session.get(Demande.class, date);*/
+			
+			/*Demande resultat= (demande)session.createQuery("update Demande d set c.instructeur=:instructeur c.obsInstruction=:observation where c.id:= idDde ")
+						.setParameter("instructeur", instructeur)
+						.setParameter("observation", observation)
+						.setParameter("idDde", idDde).executeUpdate();
+			Demande demande =(Demande) session.get(Demande.class, date);*/
 			return null;
 			
 		}catch (Exception e){
