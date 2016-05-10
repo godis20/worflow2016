@@ -46,7 +46,21 @@ public class Demande {
 	@JoinColumn(name="id_besoin_demande") 
 	private BesoinDemande besoinDemande;
 	
+	@Column(name="autre_besoin_demande") // objet demande recrutement recherche
+	private String autreBesoinDemande;
 	
+	
+	
+	public String getAutreBesoinDemande() {
+		return autreBesoinDemande;
+	}
+
+
+	public void setAutreBesoinDemande(String autreBesoinDemande) {
+		this.autreBesoinDemande = autreBesoinDemande;
+	}
+
+
 	@Column(name="date_d_souhaite")
 	private String dateDebSouhaite;
 	
@@ -170,6 +184,35 @@ public class Demande {
 	
 	@Column(name="statut_envoi_demande")
 	private boolean statutEnvoiDemande;
+	
+	
+	@OneToOne
+	@JoinColumn(name="statut_encours" , nullable=true)  
+	private StatutDemande statutEnCours;
+
+    
+	@Column(name="date_derniere_modification", nullable=true)
+	private String dateDerniereModification;
+	
+	
+	public String getDateDerniereModification() {
+		return dateDerniereModification;
+	}
+
+
+	public void setDateDerniereModification(String dateDerniereModification) {
+		this.dateDerniereModification = dateDerniereModification;
+	}
+
+
+	public StatutDemande getStatutEnCours() {
+		return statutEnCours;
+	}
+
+
+	public void setStatutEnCours(StatutDemande statutEnCours) {
+		this.statutEnCours = statutEnCours;
+	}
 
 
 	public boolean isStatutEnvoiDemande() {

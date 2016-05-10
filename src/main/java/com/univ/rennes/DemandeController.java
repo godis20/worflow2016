@@ -145,6 +145,7 @@ public class DemandeController {
 		newDde.setIntfoncAgentArecruter(intitule);
 		newDde.setDiplomAgentArecruter(niveau);
 		newDde.setArgumentaires(argumentaire);
+		newDde.setStatutEnCours(demandeService.getStatutDemandebyId(1));
 		
 		ModelAndView model = new ModelAndView("form_demandeclas");
 		
@@ -197,7 +198,7 @@ public class DemandeController {
 						
 						HttpServletRequest request,
 						@RequestParam("telephone") String telephone,
-						@RequestParam("objet") int objet,// objet  de la demande
+						@RequestParam("objet") String objet,// objet  de la demande
 				
 						@RequestParam("dateDeb") String dateDeb, //date debut du contrat 
 						@RequestParam("dateFin") String dateFin,
@@ -239,12 +240,12 @@ public class DemandeController {
 		
 		newDde.setInmChercheur(inm);
 		newDde.setMissions(missions);
-	
+		newDde.setAutreBesoinDemande(objet);
 		newDde.setCf(cf);
 		newDde.setEotp(eotp);
 		newDde.setDomainefonctionnel(domaine);
 		newDde.setArgumentaires(argumentaire);
-		
+		newDde.setStatutEnCours(demandeService.getStatutDemandebyId(1));
 		ModelAndView model = new ModelAndView("form_demanderech");
 		
 		try
@@ -386,7 +387,7 @@ public class DemandeController {
 	
 	
 	/**
-	 * contrôleur de la mise à jour d'une demande classique
+	 * Contrôleur de la mise à jour d'une demande classique
 	 * apres une instruction deladite demande
 	 *
 	 */
@@ -394,7 +395,8 @@ public class DemandeController {
 	public ModelAndView cont_form_instruiredde(	
 			
 					HttpServletRequest request,
-					@RequestParam("observation") String observation
+					@RequestParam("observation") String observation,
+					@RequestParam("iddemande") int iddemande
 					
 			
 			)
@@ -412,8 +414,12 @@ public class DemandeController {
 			Utilisateur instructeur =(Utilisateur) request.getSession().getAttribute("user");
 			
 			
+			Demande demande = demandeService.getDemandebyId(iddemande);
+			demande.setObsInstruction(observation);
+			demande.setInstructeur(instructeur);
+			demande.setStatutEnCours(demandeService.getStatutDemandebyId(2));
 			
-			Demande demande = demandeService.setDemandebyInstruction(instructeur, dateInstruction, observation);
+			demande = demandeService.setDemandebyInstruction(dateInstruction, demande);
 			
 			if(demande!=null){
 		

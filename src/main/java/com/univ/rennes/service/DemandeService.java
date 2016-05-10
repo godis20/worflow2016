@@ -16,6 +16,7 @@ import com.univ.rennes.model.BesoinDemande;
 import com.univ.rennes.model.Composante;
 import com.univ.rennes.model.Demande;
 import com.univ.rennes.model.LigneStatut;
+import com.univ.rennes.model.StatutDemande;
 import com.univ.rennes.model.TypeDemande;
 import com.univ.rennes.model.Utilisateur;
 
@@ -60,6 +61,9 @@ public class DemandeService {
 				LigneStatut ligneStatut= new LigneStatut();
 				
 				Session session=sessionFactory.getCurrentSession();
+				
+				demande.setDateDerniereModification(demande.getDatecreationDemande());
+				
 				session.persist(demande); //methode hibernate pour faire un ajout dans la session
 				session.flush(); // methode hibernate pour sauvegarder l'ajout dans la BD
 				
@@ -187,19 +191,30 @@ public class DemandeService {
 	 * Methode qui recupere une demande dans la BD à partir de son ID
 	 *
 	 */
-	@SuppressWarnings("unchecked")
+
 	@Transactional
-	public Demande setDemandebyInstruction(Utilisateur instructeur, String date, String observation){
+	public Demande setDemandebyInstruction(String date, Demande demande){
 		
 		try{
+			
 			Session session=sessionFactory.getCurrentSession();
 			
-			/*Demande resultat= (demande)session.createQuery("update Demande d set c.instructeur=:instructeur c.obsInstruction=:observation where c.id:= idDde ")
-						.setParameter("instructeur", instructeur)
-						.setParameter("observation", observation)
-						.setParameter("idDde", idDde).executeUpdate();
-			Demande demande =(Demande) session.get(Demande.class, date);*/
-			return null;
+			demande.setDateDerniereModification(date);
+			session.merge(demande);
+			session.flush();
+			
+			if(demande != null)
+			{
+				LigneStatut lignestatut = new LigneStatut();
+				lignestatut.setDate(date);
+				lignestatut.setId_demande(demande.getId());
+				lignestatut.setId_statut_demande(2);
+				
+				session.persist(lignestatut);
+				session.flush();
+			}
+			
+			return demande;
 			
 		}catch (Exception e){
 			return null;
@@ -207,6 +222,25 @@ public class DemandeService {
 	}
 	
 	
+	
+	/**
+	 * Methode qui recupere un Statutdemande dans la BD à partir de son ID
+	 *
+	 */
+
+	@Transactional
+	public StatutDemande getStatutDemandebyId(int id){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			StatutDemande statuDemande =(StatutDemande) session.get(StatutDemande.class, id);
+			return statuDemande;
+			
+		}catch (Exception e){
+			return null;
+		}	
+	}
 	
 	
 }

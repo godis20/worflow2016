@@ -149,6 +149,7 @@
 				<p>
 				<label for="observation"> Observations :<span class="requis">*</span> </label>
 				<textarea name="observation" id="observation" rows="6" cols="50" required>Vos observations</textarea>       
+				<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
 				</p>
 			
 			
