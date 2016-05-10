@@ -105,7 +105,7 @@ public class HomeController {
 			}
 			
 			
-			model.addObject("error", "le login et/ ou de passe sont incorrects");
+			model.addObject("error", "le login et/ ou mot de passe sont incorrects");
 			return model;
 			
 		} catch (Exception e){

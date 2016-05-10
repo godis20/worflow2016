@@ -150,6 +150,8 @@ public class DemandeController {
 		
 		try
 		{
+		
+		
 			if(action.equals("Envoyer")){
 				newDde.setStatutEnvoiDemande(true);
 				
@@ -172,7 +174,9 @@ public class DemandeController {
 			model.addObject("utilisateur", request.getSession().getAttribute("user"));
 			model.addObject("error", "Erreur lors de l'ajout de la demande dans la base de donnée");
 			return model;
-		}catch(Exception e)
+			
+		} catch(Exception e)
+		
 		{
 			model.addObject("utilisateur", request.getSession().getAttribute("user"));
 			model.addObject("error", "Erreur lors de la formation de l'objet demande");
@@ -184,7 +188,7 @@ public class DemandeController {
 	
 	/**
 	 * Contrôleur de traitement du formulaire de creation de demande de recrutement
-	 * classique
+	 * recherche
 	 */
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/ajoutdemanderech", method = RequestMethod.POST)
@@ -251,6 +255,7 @@ public class DemandeController {
 			BesoinDemande besoinDemande=demandeService.getBesoinDemandebyId(4); 
 			newDde.setBesoinDemande(besoinDemande);
 			newDde.setTypeDemande(besoinDemande.getTypeDemande());
+			
 			if(action.equals("Envoyer")){
 				newDde.setStatutEnvoiDemande(true);
 				
@@ -319,28 +324,65 @@ public class DemandeController {
 
 
 	/**
-	 * contrôleur de l'affichage du formulaire d'instruction d'une demande
+	 * contrôleur de l'affichage des liste de demandes à instruire
+	 *
+	 */
+	@RequestMapping(value = "/listddeainstruire", method = RequestMethod.GET)
+	public ModelAndView cont_listddeainstruire()
+	{	
+		
+		
+		try
+							
+		{
+			
+			return new ModelAndView("listddeainstruire", "listddeainstruire", demandeService.getAllDdeAinstruire());
+			
+			
+		}catch(Exception e)
+		{
+			return new ModelAndView("listddeainstruire", "listddeainstruire", new ArrayList<Demande>()); 
+		}
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * contrôleur de la mise à jour d'une demande classique
+	 * apres une instruction deladite demande
 	 *
 	 */
 	@RequestMapping(value = "/instructiondemande", method = RequestMethod.GET)
-	public ModelAndView cont_form_instruiredde()
+	public ModelAndView cont_form_instruiredde(
+			@RequestParam ("idDde") int idDde)
 	{	
 		
 		ModelAndView model = new ModelAndView("form_instructiondde");
 		try
 		{
-			DemandeService demandeService= new DemandeService();
-			Demande demande=demandeService.getDemandebyId(2);
-		
+			
+			Demande demande = demandeService.getDemandebyId(idDde);
+			
+			if(demande != null){
+			
 			model.addObject("demande", demande);
 			
+			return model; 
+			}
+			
+			model.addObject("error", "La demande n'existe pas ");
 			return model;
-		}catch(Exception e)
-		{
+			
+			
+		} catch(Exception e)
+		{	
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
 			return model; 
 		}
 	}
-	
 	
 	
 	/**
@@ -368,7 +410,7 @@ public class DemandeController {
 			
 			Utilisateur instructeur =(Utilisateur) request.getSession().getAttribute("user");
 			
-			DemandeService demandeService= new DemandeService();
+			
 			
 			Demande demande = demandeService.setDemandebyInstruction(instructeur, dateInstruction, observation);
 			

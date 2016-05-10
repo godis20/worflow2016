@@ -33,7 +33,7 @@ public class DemandeService {
 	
 	
 	/**
-	 * methode qui recupere un utilisateur dans la BD avec le login (email) de celui ci
+	 * Methode qui recupere un utilisateur dans la BD avec le login (email) de celui ci
 	 *
 	 */
 	
@@ -50,14 +50,14 @@ public class DemandeService {
 	
 	
 	/**
-	 * methode qui effectue l'ajout d'une demande cree  par l'utilisateur dans la BD
+	 * Methode qui effectue l'ajout d'une demande cree  par l'utilisateur dans la BD
 	 *
 	 */
 	@Transactional
 	public Demande ajoutDemande(Demande demande){
 			
 		try{
-				LigneStatut ligneStatut=new LigneStatut();
+				LigneStatut ligneStatut= new LigneStatut();
 				
 				Session session=sessionFactory.getCurrentSession();
 				session.persist(demande); //methode hibernate pour faire un ajout dans la session
@@ -72,7 +72,7 @@ public class DemandeService {
 				session.flush();
 				
 				}
-				return demande; // retour de l'utilisateur cree
+				return demande; // retour de la demande cree
 		
 		} catch (Exception e){
 			
@@ -83,7 +83,7 @@ public class DemandeService {
 	
 	
 	/**
-	 * methode qui retourne une instance de "Besoin demande" à partir de l'ID
+	 * Methode qui retourne une instance de "Besoin demande" à partir de l'ID
 	 *
 	 */
 	@Transactional
@@ -100,19 +100,19 @@ public class DemandeService {
 	}
 	
 	/**
-	 * methode qui recupere toutes les demandes classiques  de la BD
+	 * Methode qui recupere toutes les demandes classiques  de la BD
 	 *
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Demande> getAllDemandeclas(){
 		
-		int id_clas=1;
+		
 		try{
 			Session session=sessionFactory.getCurrentSession();
-			List<Demande> list = session.createQuery("select p from Demande d"
-					+ " where d.typeDemande.id = id_clas")
-					.setParameter("id_clas", id_clas).list();//  recuperer la liste des demandes recherches  de la BD
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1'")
+					.list();//  recuperer la liste des demandes recherches  de la BD
 			return list;
 		}catch (Exception e){
 			return null;
@@ -121,18 +121,39 @@ public class DemandeService {
 	
 	
 	/**
-	 * methode qui recupere toutes les demandes recherches  de la BD
+	 * Methode qui recupere toutes les demandes recherches  de la BD
 	 *
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Demande> getAllDemanderech(){
-		int id_rech=2;
+		
 		try{
 			Session session=sessionFactory.getCurrentSession();
-			List<Demande> list = session.createQuery("select p from Demande d"
-					+ " where d.typeDemande.id = id_rech")
-					.setParameter("id_rech", id_rech).list();//  recuperer la liste des demandes recherches  de la BD
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '2'")
+					.list();//  recuperer la liste des demandes recherches  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	/**
+	 * Methode qui recupere toutes les demandes en attende d'instruction  de la BD
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Demande> getAllDdeAinstruire(){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and d.instructeur.id= null and d.statutEnvoiDemande=true")
+					.list();//  recuperer la liste des demandes recherches  de la BD
 			return list;
 		}catch (Exception e){
 			return null;
@@ -142,9 +163,8 @@ public class DemandeService {
 	
 	
 	
-	
 	/**
-	 * methode qui recupere une demande dans la BD à partir de son ID
+	 * Methode qui recupere une demande dans la BD à partir de son ID
 	 *
 	 */
 	@SuppressWarnings("unchecked")
@@ -153,6 +173,7 @@ public class DemandeService {
 		
 		try{
 			Session session=sessionFactory.getCurrentSession();
+			
 			Demande demande =(Demande) session.get(Demande.class, id);
 			return demande;
 			
@@ -163,7 +184,7 @@ public class DemandeService {
 	
 	
 	/**
-	 * methode qui recupere une demande dans la BD à partir de son ID
+	 * Methode qui recupere une demande dans la BD à partir de son ID
 	 *
 	 */
 	@SuppressWarnings("unchecked")
@@ -179,6 +200,8 @@ public class DemandeService {
 			return null;
 		}	
 	}
+	
+	
 	
 	
 }

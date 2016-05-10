@@ -42,7 +42,7 @@ public class Utilisateur {
 	private String dateCreationUtilisateur;
 	
 	@OneToOne
-	@JoinColumn(name="createur_utilisateur", nullable=false)
+	@JoinColumn(name="createur_utilisateur", nullable=true)
 	private Utilisateur createur;
 	
 	

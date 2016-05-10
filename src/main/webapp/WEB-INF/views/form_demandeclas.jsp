@@ -69,7 +69,7 @@
 				       <p> 
 				       <label for="nature">Nature de la demande : </label>
 				       <select name="nature" id="nature" required autofocus  >
-				       	   <option value="none">Choisissez une option </option>
+				       	   <option value="-1">Choisissez une option </option>
 				           <option value="1">Emploi vacant</option>
 				           <option value="2">Emploi temporaire</option>
 				           <option value="3">Emploi pour renforcement</option>
@@ -94,10 +94,10 @@
 				       <label for="quotite">Quotité de temps de travail* : </label>
 				        <select name="quotite" id="quotite" required>
 				           <option value="none">Choisissez une option </option>
-				           <option value="100">100 %</option>
-				           <option value="75">75 %</option>
-				           <option value="50">50 %</option>
-				           <option value="25">25 %</option>
+				           <option value="100%">100 %</option>
+				           <option value="75%">75 %</option>
+				           <option value="50%">50 %</option>
+				           <option value="25%">25 %</option>
 				          
 				       </select>
 				       </p> 
@@ -198,6 +198,8 @@
 				       </p>
 				
 				   </fieldset>
+				   
+				   <c:out value="${error}"></c:out>
 				   
 				   <input type="reset" value="Annuler" >
 				   <input type="submit" value="Enregistrer" name="action">

@@ -16,6 +16,12 @@
 		    <input type="text" name="statut" id="statut" />
 		    </p>
 		    
+		    <p> 
+		  
+		    <input type="submit" value="Rechercher" name="action">
+		    
+		    </p>
+		    
 
 
 </fieldset>
