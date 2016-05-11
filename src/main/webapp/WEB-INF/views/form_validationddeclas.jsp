@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Instruction demande classique</title>
+        <title>Validation demande classique</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
@@ -30,18 +30,18 @@
 		
 		<div class="content">
 		
-			<form method="post" action="instructiondemande">
+			<form method="post" action="validationdemandeclas">
 			
 			
 			<fieldset class="pere">
 				 
-				 	<span> <c:out value="${error}"/></span>
+				 	<span class="erreur"> <c:out value="${error}"/></span>
 				 
 				   <fieldset>
 				       <legend>Emetteur de la demande </legend> <!-- Titre du fieldset --> 
 				       
 					   <p> 
-				       <label for="datecreation">Demande emise le : <span class="affichage"> <c:out value="${demande.datecreationDemande}"/>  </span> </label> 
+				       <label for="datecreation">Demande emise le : <span class="affichage" > <c:out value="${demande.datecreationDemande}"/>  </span> </label> 
 				       
 				       </p>
 				       
@@ -121,7 +121,7 @@
 				      
 						
 				       <p> 
-				       <label for="fiche">Fiche de poste :<span ></span> </label>
+				       <label for="fiche">Fiche de poste :<span class="affichage"></span> </label>
 				      
 					  </p> 
 						 
@@ -146,9 +146,11 @@
 				
 				<legend> Instruction de la demande </legend>
 				
+				<label>Demande instruite par : <span class="affichage"> <c:out value="${demande.instructeur.nom} ${demande.instructeur.prenom} "/></span>
+				
 				<p>
-				<label for="observation"> Observations :<span class="requis">*</span> </label>
-				<textarea name="observation" id="observation" rows="6" cols="50" required>Vos observations</textarea>       
+				<label for="observation"> Observations :</label>
+				<textarea name="observation" id="observation" rows="6" cols="50" disabled="disabled" ><c:out value="${demande.obsInstruction }"/></textarea>       
 				<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
 				</p>
 			
@@ -156,9 +158,29 @@
 			
 			</fieldset>
 			
+			
+			<fieldset>
+				
+				<legend> Validation de la demande </legend>
+				
+				<p>
+				<label for="obsValidation">Remarques :</label>
+				<textarea name="obsValidation" id="obsValidation" rows="6" cols="50" required >Vos remarques</textarea>       
+				<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
+				</p>
+			
+				<p>
+				 
+				<input  type="radio" name="avis" value="oui" id="oui" checked/> <label for="oui">Oui</label>
+       			<input  type="radio" name="avis" value="non" id="non" /> <label for="non">Non</label>
+				
+				</p>
+			
+			</fieldset>
+			
 					<input type="reset" value="Annuler" >
 				 
-				    <input type="submit" value="Instruire" name="action">
+				    <input type="submit" value="Valider" name="action">
 			
 			
 			</fieldset>

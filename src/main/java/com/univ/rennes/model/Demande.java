@@ -170,6 +170,9 @@ public class Demande {
 	@Column(name="obs_validation", nullable=true)
 	private String obsValidation;
 	
+	@Column(name="avis_validation", nullable=true)
+	private String avisValidation;
+	
 	@OneToOne
 	@JoinColumn(name="id_clotureur") 
 	private Utilisateur clotureur;
@@ -195,6 +198,18 @@ public class Demande {
 	private String dateDerniereModification;
 	
 	
+	
+	
+	public String getAvisValidation() {
+		return avisValidation;
+	}
+
+
+	public void setAvisValidation(String avisValidation) {
+		this.avisValidation = avisValidation;
+	}
+
+
 	public String getDateDerniereModification() {
 		return dateDerniereModification;
 	}

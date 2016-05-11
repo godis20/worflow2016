@@ -25,7 +25,7 @@ html, body {
 	height: 20px;
  }
  
- 
+
  
  #others ul>li, a
 {
@@ -151,6 +151,14 @@ body section{
     background: #96CED2;
 }
 
+
+#myul>li a:hover Lorsque la souris passe sur un des liens    
+{
+        color: #96CED2; On passe le texte en noir...
+        background: white; ... et au contraire, le fond en blanc
+}
+
+
 .content{
 	
 	background:white;
@@ -163,6 +171,8 @@ body section{
 	
 }
   
+  
+
 
 body footer {
 	
@@ -190,17 +200,80 @@ fieldset.pere{
  }  
  
  legend {
- font-size:120%;	
+ font-size:110%;	
  color:#000000;
- font-weight:bold
+ font-weight:bold;
 
  }
  
  label {
- margin-top:5px;
- font-weight:bold
+ margin-top:4px;
+ font-weight:bold;
+ color:#2C3439;
  }
     
+    
+    
+ span.affichage{
+ 
+ 	font-weight:normal;
+ }
+ 
+ 
+input[type=radio]{
+
+ margin-left:30px;
+ width:20px;
+
+ }
+ 
+ 
+input[type=submit], input[type=reset],input[type=button] {
+ width:100px;
+ margin-left:10px;
+ 
+ box-shadow:1px 1px 1px #A9C7CB;
+ cursor:pointer;
+ }
+
+ 
+ input, textarea, select {
+ padding:2px;
+ border:1px solid #F5C5C5;
+ border-radius:5px;
+
+ box-shadow:4px 1px 2px #C0C0C0 inset;
+ }
+ 
+ 
+ a:link {
+ color: white;
+ text-decoration: underline;
+ }
+ 
+a:visited {
+ color: gray;
+ }
+ 
+body header a:hover {
+ color: #0489B1;
+ text-decoration: none;
+}
+
+body footer a:hover {
+ color: #0489B1;
+ text-decoration: none;
+}
+
+body artiche a:hover {
+ color: #800000;
+ text-decoration: none;
+}
+
+a:active, a:focus {
+ color: red;
+}
+ 
 :/* required
 {
     background-color: white;
@@ -221,57 +294,6 @@ input, select, option {
  }
  
  
-input, textarea, select {
- padding:3px;
- border:1px solid #F5C5C5;
- border-radius:5px;
- width:300px;
- box-shadow:4px 1px 2px #C0C0C0 inset;
- }
- 
-select {
-	
- margin-top:10px;
- 
- }
- 
-input[type=radio] {
- background-color:transparent;
- border:none;
- width:10px;
- }
- 
-input[type=submit], input[type=reset],input[type=button] {
- width:100px;
- margin-left:10px;
- box-shadow:1px 1px 1px #800000;
- cursor:pointer;
- }
- 
- a:link {
- color: white;
- text-decoration: underline;
- }
-a:visited {
- color: gray;
- }
-body header a:hover {
- color: #6495ED;
- text-decoration: none;
-}
-
-body footer a:hover {
- color: #4682B4;
- text-decoration: none;
-}
-
-body artiche a:hover {
- color: #800000;
- text-decoration: none;
-}
-a:active, a:focus {
- color: red;
-}
 
 
 <!-- mise en forme propre a la page connexion --> 
@@ -386,11 +408,7 @@ html>body #menu li ul ul
         border-left     : 1px solid transparent ; on met une bordure transparente sur la gauche de chaque élément
 }
 
-#menu a:hover Lorsque la souris passe sur un des liens    
-{
-        color: #1E90FF; On passe le texte en noir...
-        background: #fff; ... et au contraire, le fond en blanc
-}
+
 
 #menu li ul li a 
 {

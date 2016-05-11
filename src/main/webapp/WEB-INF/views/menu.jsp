@@ -31,11 +31,11 @@
 					</li>
 					
 					<li>
-					    <a href="">Validation Demande</a>
+					    <a href="listddeclasavalider">Validation Demande</a>
 					</li>
 					
 					<li>
-					    <a href="">Cloture Demande</a>
+					    <a href="listddeclasacloturer">Cloture Demande</a>
 					</li>
 					
 					
@@ -68,7 +68,7 @@
 					</li>
 			
 					<li>
-					    <a href="">Validation Demande</a>
+					    <a href="listdderechavalider">Validation Demande</a>
 					</li>
 					
 					<li>

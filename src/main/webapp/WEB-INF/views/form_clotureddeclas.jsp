@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Instruction demande classique</title>
+        <title>Cloture demande classique</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
@@ -30,18 +30,18 @@
 		
 		<div class="content">
 		
-			<form method="post" action="instructiondemande">
+			<form method="post" action="cloturedemandeclas">
 			
 			
 			<fieldset class="pere">
 				 
-				 	<span> <c:out value="${error}"/></span>
+				 	<span class="erreur"> <c:out value="${error}"/></span>
 				 
 				   <fieldset>
 				       <legend>Emetteur de la demande </legend> <!-- Titre du fieldset --> 
 				       
 					   <p> 
-				       <label for="datecreation">Demande emise le : <span class="affichage"> <c:out value="${demande.datecreationDemande}"/>  </span> </label> 
+				       <label for="datecreation">Demande emise le : <span class="affichage" > <c:out value="${demande.datecreationDemande}"/>  </span> </label> 
 				       
 				       </p>
 				       
@@ -121,7 +121,7 @@
 				      
 						
 				       <p> 
-				       <label for="fiche">Fiche de poste :<span ></span> </label>
+				       <label for="fiche">Fiche de poste :<span class="affichage"></span> </label>
 				      
 					  </p> 
 						 
@@ -134,7 +134,7 @@
 				       
 				      <p>
 				       <label for="argumentaire"> Argumentaires : </label>
-				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50"  disabled="disabled" ><c:out value="${demande.argumentaires }"/>
+				       <textarea name="argumentaire" id="argumentaire" rows="4" cols="50"  disabled="disabled" ><c:out value="${demande.argumentaires }"/>
 				      
 				       </textarea>       
 				       </p>
@@ -146,19 +146,73 @@
 				
 				<legend> Instruction de la demande </legend>
 				
+				<label>Demande instruite par : <span class="affichage"> <c:out value="${demande.instructeur.nom} ${demande.instructeur.prenom} "/></span></label>
+				
 				<p>
-				<label for="observation"> Observations :<span class="requis">*</span> </label>
-				<textarea name="observation" id="observation" rows="6" cols="50" required>Vos observations</textarea>       
-				<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
+				<label for="observation"> Observations :</label>
+				<textarea name="observation" id="observation" rows="4" cols="50" disabled="disabled" ><c:out value="${demande.obsInstruction }"/></textarea>       
+		
 				</p>
 			
 			
 			
 			</fieldset>
 			
+			
+			<fieldset>
+				
+				<legend> Validation de la demande </legend>
+				
+				<label>Demande validée par : <span class="affichage"> <c:out value="${demande.valideur.nom} ${demande.valideur.prenom} "/></span></label>;
+				<label>Avis validateur : <span class="affichage"> <c:out value="${demande.avisValidation} "/></span></label>
+				
+				<p>
+				
+				<label for="obsValidation">Remarques :</label>
+				<textarea name="obsValidation" id="obsValidation" rows="4" cols="50" disabled="disabled" ><c:out value="${demande.obsValidation }"/></textarea>       
+		
+				</p>
+			
+				
+			
+			</fieldset>
+			
+			<fieldset>
+				
+				<legend> Clôture de la demande </legend>
+				
+						<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
+						<p> 
+				       <label for="nomAgent">Nom Agent : <span class="requis">*</span> </label>
+				       <input type="text" name="nomAgent" id="nomAgent" required/>
+				       <label for="prenomAgent">Prenom Agent :<span class="requis">*</span> </label>
+				       <input type="text" name="prenomAgent" id="prenomAgent" required />
+				       </p>
+				       
+				      
+				       
+				       <p> 
+				       <label for="dateDebutAgent">Date debut contrat : <span class="requis">*</span> </label>
+				       <input type="date" name="dateDebutAgent" id="dateDebutAgent" required>
+				       <label for="dateFinAgent">Date fin contrat: <span class="requis">*</span> </label>
+				       <input type="date" name="dateFinAgent" id="dateFinAgent" required>
+				       </p>
+				       
+				       <p> 
+				       <label for="obsCloture">Observations : <span class="requis">*</span> </label>
+				      
+				       	<textarea name="obsCloture" id="obsCloture" rows="2" cols="50"  >Vos observations</textarea>   
+				       </p>
+				        
+				       
+				
+				
+							
+			</fieldset>
+			
 					<input type="reset" value="Annuler" >
 				 
-				    <input type="submit" value="Instruire" name="action">
+				    <input type="submit" value="Clôturer" name="action">
 			
 			
 			</fieldset>

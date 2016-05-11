@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Liste demande recherche</title>
+        <title>Demandes en attente de validation</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
@@ -35,7 +35,7 @@
 			
 			<fieldset>
 			
-			<legend>Liste demandes recherches du système </legend>
+			<legend>Demandes en attente de validation </legend>
 		
 			<table>
         			<tr>
@@ -60,7 +60,7 @@
             
                 <%-- Parcours de la liste des clients en session, et utilisation de l'objet varStatus. --%>
             
-           		 <c:forEach items="${listdemanderech}" var="mapClients" varStatus="boucle">
+           		 <c:forEach items="${listddeclasavalider}" var="mapDde" varStatus="boucle">
             	
             
                		 <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
@@ -70,22 +70,23 @@
 
 			                    <%-- Affichage des propriétés du bean demande, qui est stocké en tant que valeur de l'entrée courante de la list --%>
 			
-			                    <td><c:out value="${ mapClients.id }"/></td>
+			                    <td><c:out value="${ mapDde.id }"/></td>
 			
-			                    <td><c:out value="${ mapClients.demandeur.nom }  ${ mapClients.demandeur.prenom }"/></td>
+			                    <td><c:out value="${ mapDde.demandeur.nom }  ${ mapDde.demandeur.prenom }"/></td>
 			
-			                    <td><c:out value="${ mapClients.demandeur.composante.libelle_composante }"/></td> 
+			                    <td><c:out value="${ mapDde.demandeur.composante.libelle_composante }"/></td> 
 			
-			                    <td><c:out value="${ mapClients.datecreationDemande }"/></td>
+			                    <td><c:out value="${ mapDde.datecreationDemande }"/></td>
 			
-			                    <td><c:out value="${ mapClients.autreBesoinDemande }"/></td> 
+			                    <td><c:out value="${ mapDde.besoinDemande.libelleBesoinDemande }"/></td> 
 			                    
 			                    
 			                    
 			                     <td class="statut">
 			                     
-			                
-			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Image" /> 
+			                		<a href="<c:url value="/validationdemandeclas"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
+			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Valider" /> 
+			                        </a>
 			
 			
 			                     </td>
@@ -94,7 +95,7 @@
 			
 			                    <td class="document">
 			
-			                            <a href="<c:url value="/afficherdemanderech"><c:param name="" value="" /></c:url>">
+			                            <a href="<c:url value="/afficherdemandeclas"><c:param name="" value="" /></c:url>">
 			
 			                            <img src="<c:url value="/ressources/pdf.png"/>" alt="" />
 			

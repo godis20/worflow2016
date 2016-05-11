@@ -16,6 +16,7 @@ import com.univ.rennes.model.BesoinDemande;
 import com.univ.rennes.model.Composante;
 import com.univ.rennes.model.Demande;
 import com.univ.rennes.model.LigneStatut;
+import com.univ.rennes.model.Recrutement;
 import com.univ.rennes.model.StatutDemande;
 import com.univ.rennes.model.TypeDemande;
 import com.univ.rennes.model.Utilisateur;
@@ -188,7 +189,7 @@ public class DemandeService {
 	
 	
 	/**
-	 * Methode qui recupere une demande dans la BD à partir de son ID
+	 * Methode qui met à jour une demande instruite dans la BD 
 	 *
 	 */
 
@@ -243,4 +244,212 @@ public class DemandeService {
 	}
 	
 	
-}
+	
+
+	/**
+	 * Methode qui recupere toutes les demandes en attende de validation  de la BD
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Demande> getAllDdeclasAvalider(){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and d.instructeur.id is not null and d.statutEnvoiDemande=true"
+					+ " and d.statutEnCours.id = '2' and d.valideur.id = null ")
+					.list();
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+
+	/**
+	 * Methode qui recupere toutes les demandes recherche en attende de validation  de la BD
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Demande> getAllDderechAvalider(){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '2' and d.instructeur.id = null and d.statutEnvoiDemande=true"
+					+ " and d.statutEnCours.id = '1' and d.valideur.id = null ")
+					.list();
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	
+	
+	/**
+	 * Methode qui met à jour une demande classique validée dans la BD 
+	 *
+	 */
+
+	@Transactional
+	public Demande setDemandebyValidationclas(String date, Demande demande){
+		
+		try{
+			
+			Session session=sessionFactory.getCurrentSession();
+			
+			demande.setDateDerniereModification(date);
+			session.merge(demande);
+			session.flush();
+			
+			//Si la MAJ est un succes, rajouter la ligne de modification de la demande dans la table
+			//LigneStatut
+			if(demande != null)
+			{
+				LigneStatut lignestatut = new LigneStatut();
+				lignestatut.setDate(date);
+				lignestatut.setId_demande(demande.getId());
+				lignestatut.setId_statut_demande(3);
+				
+				session.persist(lignestatut);
+				session.flush();
+			}
+			
+			return demande;
+			
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	
+
+	/**
+	 * Methode qui recupere toutes les demandes en attende de clôture  de la BD
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Demande> getAllDdeclasAcloturer(){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and d.instructeur.id is not null and d.statutEnvoiDemande=true"
+					+ " and d.statutEnCours.id = '3' and d.valideur.id is not  null and d.clotureur.id =  null  "
+					+ " and d.avisValidation is not null")
+					.list();
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	
+	
+	/**
+	 * Methode qui met à jour une demande classique "acceptée" cloturee dans la BD 
+	 *
+	 */
+
+	@Transactional
+	public Demande setDemandebyClotureclas1(String date, Demande demande, String nomAgent, String prenomAgent, 
+											
+					String dateDebutAgent, String dateFinAgent){
+		
+		try{
+			
+			Session session=sessionFactory.getCurrentSession();
+			
+			demande.setDateDerniereModification(date);
+			session.merge(demande);
+			session.flush();
+			
+			//Si la MAJ est un succes, 
+			if(demande != null)
+			{
+				LigneStatut lignestatut = new LigneStatut();
+				lignestatut.setDate(date);
+				lignestatut.setId_demande(demande.getId());
+				lignestatut.setId_statut_demande(4);
+				
+				
+				session.persist(lignestatut);
+				session.flush();
+				
+				Recrutement recrutement= new Recrutement();
+				recrutement.setNomAgent(nomAgent);
+				recrutement.setPrenomAgent(prenomAgent);
+				recrutement.setDateDebutAgent(dateDebutAgent);
+				recrutement.setDateFinAgent(dateFinAgent);
+				recrutement.setDemande(demande);
+				
+				session.persist(recrutement);
+				session.flush();
+				
+			}
+			
+			return demande;
+			
+		}catch (Exception e){
+			
+			return null;
+		}	
+	}
+	
+	
+	
+	
+	/**
+	 * Methode qui met à jour une demande classique "refusée" cloturee dans la BD 
+	 *
+	 */
+
+	@Transactional
+	public Demande setDemandebyClotureclas2(String date, Demande demande){
+		
+		try{
+			
+			Session session=sessionFactory.getCurrentSession();
+			
+			demande.setDateDerniereModification(date);
+			session.merge(demande);
+			session.flush();
+			
+			//Si la MAJ est un succes, rajouter la ligne de modification de la demande dans la table
+			//LigneStatut
+			if(demande != null)
+			{
+				LigneStatut lignestatut = new LigneStatut();
+				lignestatut.setDate(date);
+				lignestatut.setId_demande(demande.getId());
+				lignestatut.setId_statut_demande(4);
+				
+				session.persist(lignestatut);
+				session.flush();
+			}
+			
+			return demande;
+			
+		}catch (Exception e){
+			
+			return null;
+		}	
+	}
+	
+	
+	
+	
+}	
+	
+

@@ -31,7 +31,7 @@ public class DemandeController {
 	
 
 	/**
-	 * controleur de l'affichage du formulaire de creation de demande de recrutement classqiue
+	 * Contrôleur de l'affichage du formulaire de creation d'une demande de recrutement classqiue
 	 *
 	 */
 	@RequestMapping(value = "/ajoutdemandeclas", method = RequestMethod.GET)
@@ -55,8 +55,9 @@ public class DemandeController {
 	}
 	
 	
+	
 	/**
-	 * controleur de l'affichage du formulaire de creation de demande de recrutement recherche
+	 * Contrôleur de l'affichage du formulaire de creation de demande de recrutement recherche
 	 *
 	 */
 	@RequestMapping(value = "/ajoutdemanderech", method = RequestMethod.GET)
@@ -79,6 +80,7 @@ public class DemandeController {
 		}
 	}
 
+	
 	
 	
 	/**
@@ -134,6 +136,7 @@ public class DemandeController {
 		newDde.setDateFinSouhaite(dateFin);
 		newDde.setQuotite(quotite);
 		
+		//String nometprenomAgent= nomagt +"   "+ prenomagt;
 		newDde.setNomAgentAremplacer(nomagt);
 		newDde.setDateFinService(dateagt);
 		newDde.setMotifDispoPoste(motif);
@@ -184,6 +187,7 @@ public class DemandeController {
 			return model;
 		}
 	}
+	
 	
 	
 	
@@ -304,6 +308,7 @@ public class DemandeController {
 	}
 	
 	
+	
 	/**
 	 * Contrôleur de l'affichage de la liste des demandes recherches existantes dans la BD,
 	 * 
@@ -352,8 +357,8 @@ public class DemandeController {
 	
 	
 	/**
-	 * contrôleur de la mise à jour d'une demande classique
-	 * apres une instruction deladite demande
+	 * Contrôleur l'affichage d'une demande pour instruction
+	 * 
 	 *
 	 */
 	@RequestMapping(value = "/instructiondemande", method = RequestMethod.GET)
@@ -417,8 +422,12 @@ public class DemandeController {
 			Demande demande = demandeService.getDemandebyId(iddemande);
 			demande.setObsInstruction(observation);
 			demande.setInstructeur(instructeur);
+			
+			// met à jour le statut de la demande "instruite" qui correspond à 2 dans la BD
 			demande.setStatutEnCours(demandeService.getStatutDemandebyId(2));
 			
+			
+			//appel de la methode qui procède à la MAJ de la demande dans la BD
 			demande = demandeService.setDemandebyInstruction(dateInstruction, demande);
 			
 			if(demande!=null){
@@ -427,7 +436,7 @@ public class DemandeController {
 			}
 			
 	
-			Demande demandeInitial=demandeService.getDemandebyId(2);
+			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 		
 			model.addObject("demande", demandeInitial);
 			model.addObject("error", "Erreur lors de la mise à jour de la demande");
@@ -435,8 +444,395 @@ public class DemandeController {
 			
 		}catch(Exception e)
 		{	
+			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+			
+			model.addObject("demande", demandeInitial);
 			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
 			return model; 
 		}
 	}
+	
+	
+	
+	/**
+	 * Contrôleur de l'affichage des liste de demandes classiques à valider
+	 *
+	 */
+	@RequestMapping(value = "/listddeclasavalider", method = RequestMethod.GET)
+	public ModelAndView cont_listddeclasavalider()
+	{	
+		
+		
+		try
+							
+		{
+			
+			return new ModelAndView("listddeclasavalider", "listddeclasavalider", demandeService.getAllDdeclasAvalider());
+			
+			
+		}catch(Exception e)
+		{
+			return new ModelAndView("listddeclasavalider", "listddeclasavalider", new ArrayList<Demande>()); 
+		}
+	}
+	
+	
+	
+	/**
+	 * Contrôleur de l'affichage des  demandes recherches à valider
+	 *
+	 */
+	@RequestMapping(value = "/listdderechavalider", method = RequestMethod.GET)
+	public ModelAndView cont_listdderechavalider()
+	{	
+		
+		
+		try
+							
+		{
+			
+			return new ModelAndView("listdderechavalider", "listdderechavalider", demandeService.getAllDderechAvalider());
+			
+			
+		}catch(Exception e)
+		{
+			return new ModelAndView("listdderechavalider", "listdderechavalider", new ArrayList<Demande>()); 
+		}
+	}
+	
+	
+
+	/**
+	 * Contrôleur l'affichage d'une demande classique pour validation
+	 *
+	 */
+	@RequestMapping(value = "/validationdemandeclas", method = RequestMethod.GET)
+	public ModelAndView cont_form_validationddeclas(
+			@RequestParam ("idDde") int idDde)
+	{	
+		
+		ModelAndView model = new ModelAndView("form_validationddeclas");
+		try
+		{
+			
+			Demande demande = demandeService.getDemandebyId(idDde);
+			
+			if(demande != null){
+			
+			model.addObject("demande", demande);
+			
+			return model; 
+			}
+			
+			model.addObject("error", "La demande n'existe pas ");
+			return model;
+			
+			
+		} catch(Exception e)
+		{	
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
+		}
+	}
+	
+	
+	
+	/**
+	 * Contrôleur l'affichage d'une demande recherche pour validation
+	 *
+	 */
+	@RequestMapping(value = "/validationdemanderech", method = RequestMethod.GET)
+	public ModelAndView cont_form_validationdderech(
+			@RequestParam ("idDde") int idDde)
+	{	
+		
+		ModelAndView model = new ModelAndView("form_validationdderech");
+		try
+		{
+			
+			Demande demande = demandeService.getDemandebyId(idDde);
+			
+			if(demande != null){
+			
+			model.addObject("demande", demande);
+			
+			return model; 
+			}
+			
+			model.addObject("error", "La demande n'existe pas ");
+			return model;
+			
+			
+		} catch(Exception e)
+		{	
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
+		}
+	}
+	
+	
+	
+	
+	/**
+	 * Contrôleur de la mise à jour d'une demande classique
+	 * après  validation deladite demande
+	 *
+	 */
+	@RequestMapping(value = "/validationdemandeclas", method = RequestMethod.POST)
+	public ModelAndView cont_form_validationddeclas(	
+			
+					HttpServletRequest request,
+					@RequestParam("obsValidation") String obsValidation,
+					@RequestParam("iddemande") int iddemande,
+					@RequestParam("avis") String avis
+					
+			
+			)
+	{	
+		
+		ModelAndView model = new ModelAndView("form_validationddeclas");
+		try
+		{
+			Date date = new Date(); 
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			
+			
+			String dateValidation = dateFormat.format(date);
+			
+			//recuperation de le l'objet "Validateur", celui qui valide la demande
+			Utilisateur validateur =(Utilisateur) request.getSession().getAttribute("user");
+			
+			//recuperation de la demande à mettre a jour dans la BD
+			Demande demande = demandeService.getDemandebyId(iddemande);
+			
+			
+			demande.setValideur(validateur);
+			
+			// met à jour le statut de la demande "validée" qui correspond à 3 dans la BD
+			demande.setStatutEnCours(demandeService.getStatutDemandebyId(3)); 
+			
+			//Si la demande a été accepté, 
+			if(avis.equals("oui")){
+				
+				//Construction du message du validateur
+				obsValidation= "Demande acceptée. Autres: "+ obsValidation;
+
+				//Passer l'avis dans la BD à oui
+				demande.setAvisValidation("oui");	
+				
+			} else {
+				
+				//Construction du message du validateur
+				obsValidation= "Demande refusée. Autres: "+ obsValidation;
+				
+
+				//Passer l'avis dans la BD à oui
+				demande.setAvisValidation("non");
+					
+			}
+			
+
+			demande.setObsValidation(obsValidation);
+			
+			//appel de la methode qui procède à la MAJ de la demande dans la BD
+			demande = demandeService.setDemandebyValidationclas(dateValidation, demande);
+			
+			
+			//si l'operation de mise à jour s'est bien effectuée
+			if(demande!=null){
+		
+			return new ModelAndView("redirect:/listdemandeclas");
+			}
+			
+	
+			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+		
+			model.addObject("demande", demandeInitial);
+			model.addObject("error", "Erreur lors de la mise à jour de la demande");
+			return model; 
+			
+		}catch(Exception e)
+		
+		{	
+			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+			
+			model.addObject("demande", demandeInitial);
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
+		}
+	}
+
+	
+	
+	
+	
+	
+	
+
+	/**
+	 * Contrôleur  de l'affichage des demandes classiques à cloturer
+	 *
+	 */
+	@RequestMapping(value = "/listddeclasacloturer", method = RequestMethod.GET)
+	public ModelAndView cont_listddeclasacloturer(
+			)
+	{	
+		
+		try
+		
+		{
+			
+			return new ModelAndView("listddeclasacloturer", "listddeclasacloturer", demandeService.getAllDdeclasAcloturer());
+			
+			
+		}catch(Exception e)
+		{
+			return new ModelAndView("listddeclasacloturer", "listddeclasacloturer", new ArrayList<Demande>()); 
+		}
+	}
+	
+	
+	
+	
+	
+	/**
+	 * Contrôleur l'affichage d'une demande classique pour clôture
+	 *
+	 */
+	@RequestMapping(value = "/cloturedemandeclas", method = RequestMethod.GET)
+	public ModelAndView cont_form_clotureddeclas(
+			@RequestParam ("idDde") int idDde)
+	{	
+		
+		ModelAndView model = new ModelAndView("form_clotureddeclas");
+		try
+		{
+			
+			Demande demande = demandeService.getDemandebyId(idDde);
+			
+			if(demande != null){
+			
+			model.addObject("demande", demande);
+			
+			return model; 
+			}
+			
+			model.addObject("error", "La demande n'existe pas ");
+			return model;
+			
+			
+		} catch(Exception e)
+		{	
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
+		}
+	}
+	
+	
+	
+	/**
+	 * Contrôleur de la mise à jour d'une demande classique
+	 * après  clÖture deladite demande
+	 *
+	 */
+	@RequestMapping(value = "/cloturedemandeclas", method = RequestMethod.POST)
+	public ModelAndView cont_form_clotureddeclas(	
+			
+					HttpServletRequest request,
+					@RequestParam("obsCloture") String obsCloture,
+					@RequestParam("iddemande") int iddemande,
+					
+					@RequestParam("nomAgent") String nomAgent,
+					@RequestParam("prenomAgent") String prenomAgent,
+					@RequestParam("dateDebutAgent") String dateDebutAgent,
+					@RequestParam("dateFinAgent") String dateFinAgent
+					
+					
+			
+			)
+	{	
+		
+		ModelAndView model = new ModelAndView("form_clotureddeclas");
+		try
+		{
+			Date date = new Date(); 
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			
+			
+			String dateCloture = dateFormat.format(date);
+			
+			//recuperation de le l'objet "Clotureur", celui qui valide la demande
+			Utilisateur clotureur =(Utilisateur) request.getSession().getAttribute("user");
+			
+			//recuperation de la demande à mettre a jour dans la BD
+			Demande demande = demandeService.getDemandebyId(iddemande);
+			
+			
+			//Verication que le demandeur et le clotureur sont identiques
+			if (clotureur.getId()  == demande.getDemandeur().getId()){
+				
+						demande.setClotureur(clotureur);
+				
+			
+						// met à jour le statut de la demande "validée" qui correspond à 4 dans la BD
+						demande.setStatutEnCours(demandeService.getStatutDemandebyId(4)); 
+						
+						//Si la demande avais été accepté par le validateur, 
+						if(demande.getAvisValidation()=="oui"){
+							
+							demande.setObsCloture(obsCloture);
+							
+							//appel de la methode qui procède à la MAJ de la demande dans la BD
+							demande = demandeService.setDemandebyClotureclas1(dateCloture, demande,
+									nomAgent,prenomAgent, dateDebutAgent,dateFinAgent);
+							
+							
+						} else {
+							
+					
+							demande.setObsCloture(obsCloture);
+							
+							//appel de la methode qui procède à la MAJ de la demande dans la BD
+							demande = demandeService.setDemandebyClotureclas2(dateCloture, demande);
+								
+						}
+						
+			
+						
+						
+						//si l'operation de mise à jour s'est bien effectuée
+						if(demande!=null){
+					
+						return new ModelAndView("redirect:/listdemandeclas");
+						}
+						
+				
+						Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+					
+						model.addObject("demande", demandeInitial);
+						model.addObject("error", "Erreur lors de la mise à jour de la demande");
+						return model; 
+			}
+			
+		}catch(Exception e)
+		
+		{	
+			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+			
+			model.addObject("demande", demandeInitial);
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
+		}
+		return null;
+	}
+
+	
+	
+	
 }
+
+
+
+
+
+
