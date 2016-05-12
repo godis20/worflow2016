@@ -450,6 +450,49 @@ public class DemandeService {
 	
 	
 	
+	/**
+	 * Methode qui recupere toutes les demandes classiques en attende de la finalisation  
+	 * de la procedure d'envoie. 
+	 *
+	 */
+
+	@Transactional
+	public List<Demande> getAllDdeclasAfinaliser(){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and d.instructeur.id= null and d.statutEnvoiDemande=false")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	/**
+	 * Methode qui recupere toutes les demandes recherches en attende de la finalisation  
+	 * de la procedure d'envoie. 
+	 *
+	 */
+
+	@Transactional
+	public List<Demande> getAllDderechAfinaliser(){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '2' and d.valideur.id= null and d.statutEnvoiDemande=false")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
 }	
 	
 

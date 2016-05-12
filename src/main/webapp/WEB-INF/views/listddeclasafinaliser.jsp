@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Demandes recherches en attente de validation</title>
+        <title>Demandes classique à finaliser</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
@@ -31,11 +31,11 @@
 		<div class="content">
 		
 		
-			<jsp:include page="form_recherchedemanderech.jsp"></jsp:include>
+			<jsp:include page="form_recherchedemandeclas.jsp"></jsp:include>
 			
 			<fieldset>
 			
-			<legend>Demandes en attente de validation </legend>
+			<legend>Demandes classique à finaliser </legend>
 		
 			<table>
         			<tr>
@@ -60,7 +60,7 @@
             
                 <%-- Parcours de la liste des clients en session, et utilisation de l'objet varStatus. --%>
             
-           		 <c:forEach items="${listdderechavalider}" var="mapDde" varStatus="boucle">
+           		 <c:forEach items="${listddeclasafinaliser}" var="mapDde" varStatus="boucle">
             	
             
                		 <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
@@ -78,13 +78,13 @@
 			
 			                    <td><c:out value="${ mapDde.datecreationDemande }"/></td>
 			
-			                    <td><c:out value="${ mapDde.autreBesoinDemande }"/></td> 
+			                    <td><c:out value="${ mapDde.besoinDemande.libelleBesoinDemande }"/></td> 
 			                    
 			                    
 			                    
 			                     <td class="statut">
 			                     
-			                		<a href="<c:url value="/validationdemanderech"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
+			                		<a href="<c:url value="/finalisationdemandeclas"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
 			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Valider" /> 
 			                        </a>
 			
@@ -95,7 +95,7 @@
 			
 			                    <td class="document">
 			
-			                            <a href="<c:url value="/afficherdemanderech"><c:param name="" value="" /></c:url>">
+			                            <a href="<c:url value="/afficherdemandeclas"><c:param name="" value="" /></c:url>">
 			
 			                            <img src="<c:url value="/ressources/pdf.png"/>" alt="" />
 			

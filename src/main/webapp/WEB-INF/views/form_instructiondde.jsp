@@ -78,10 +78,14 @@
 				       </p> 
 				       
 				       
+				       <!-- Si le type de besoin de la demande est different de "emploi pour renforcement"-->
+				        
+				        <c:if test="${demande.besoinDemande.id !='3'}">
+				       
 				        <fieldset >
 				      		 <legend>Agent à remplacer  </legend> <!-- Titre du fieldset --> 
 				       
-							        <div id="agent">
+							       
 							        
 							       <p> 
 							       <label for="nomagt">Nom et prenom Agent : <span class="affichage"><c:out value="${demande.nomAgentAremplacer}"/></span> </label>
@@ -94,16 +98,15 @@
 							 		</p> 
 							 		
 							 		<p> 
-							       <label for="motif">Motif disponibilité poste  :</label>
+							       <label for="motif">Motif disponibilité poste  :<span class="affichage"> <c:out value="${demande.motifDispoPoste }"/></span></label>
 							       
-							        <textarea name="motif" id="motif" rows="2" cols="40"  size="30" maxlength="30" disabled="disabled" ><c:out value="${demande.motifDispoPoste }"/>
-							         
-							       </textarea> 
+							        
 							       </p> 
 							       
-									</div>
+								
 						</fieldset>
 						
+						</c:if>
 						
 				   </fieldset>
 				   
@@ -175,26 +178,6 @@
 	</footer>
 	
 	
-	 <%-- Petite fonction jQuery permettant de masquer le bloc "agent a remplacer" en fonction du type de besoin. --%>
-        <script>
-        	$(document).ready(function(){
-        		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant aux clients existants */
-//         		$("div#ancienClient").hide();
-        		/* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le bloc d'éléments correspondant (nouveau ou ancien client) */
-                
-        		 $("div#agent").hide();
-        		 $("#nature").change(function() {
-                	
-                    
-                    if("#nature" != "3"){
-                    	
-                    	$("div#agent").show();
-                   }
-                    else  $("div#agent").hide();
-                });
-        		 
-            });
-        </script>
 
 </body>
 </html>

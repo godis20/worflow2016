@@ -31,7 +31,7 @@
 		<div class="content">
 		
 		
-			<jsp:include page="form_recherche.jsp"></jsp:include>
+			<jsp:include page="form_recherchedemanderech.jsp"></jsp:include>
 			
 			<fieldset>
 			

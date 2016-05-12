@@ -133,6 +133,31 @@ public class UtilisateurController {
 			 return new ModelAndView("form_utilisateur", "listutilisateurs", new ArrayList<Utilisateur>()); 
 		}
 	}
+	
+	
+	
+	/**
+	 * Contrôleur de l'affichage de la liste des utilisateurs existants dans la BD,
+	 * 
+	 */
+	@RequestMapping(value = "/deconnexionutilisateur", method = RequestMethod.GET)
+	public ModelAndView cont_deconnexionutilisateur(HttpServletRequest request)
+	{
+		
+		
+		try
+		
+		{
+			
+			request.getSession().invalidate();
+			return new ModelAndView ("redirect:/");
+			
+			
+		}catch(Exception e)
+		{
+			 return null; 
+		}
+	}
 
 }
  

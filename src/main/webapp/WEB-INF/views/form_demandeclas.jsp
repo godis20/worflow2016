@@ -103,10 +103,12 @@
 				       </p> 
 				       
 				       
+				       <div id="agent">
+				       
 				        <fieldset >
 				      		 <legend>Agent à remplacer  </legend> <!-- Titre du fieldset --> 
 				       
-							        <div id="agent">
+							        
 							        
 							       <p> 
 							       <label for="nomagt">Nom : <span class="requis">*</span> </label>
@@ -132,8 +134,8 @@
 							       </textarea> 
 							       </p> 
 							       
-									</div>
 						</fieldset>
+						</div>
 						
 						
 				   </fieldset>
@@ -162,11 +164,14 @@
 				       </select>
 				       </p> 
 				       
+				      
+				       
 				       <p> 
 				       <label for="fiche">Fiche de poste :<span class="requis">*</span> </label>
 				       <input type="file" name="fiche" id="fiche"  />
-				       <input type="submit" name="ajouter" value="Ajouter" />
+				      
 					  </p> 
+					 
 						 
 						 <p> 
 				       <label for="intitule">Intitule de la fonction :<span class="requis">*</span> </label>
@@ -231,7 +236,7 @@
         		 $("#nature").change(function() {
                 	
                     
-                    if($("#nature").val() != "3"){
+                    if(($("#nature").val()) != "3" && ($("#nature").val()!="-1")){
                     	
                     	$("div#agent").show();
                    }

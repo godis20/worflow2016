@@ -78,10 +78,15 @@
 				       </p> 
 				       
 				       
+				       
+				        <!-- Si le type de besoin de la demande est different de "emploi pour renforcement"-->
+				        
+				        <c:if test="${demande.besoinDemande.id !='3'}">
+				       
 				        <fieldset >
 				      		 <legend>Agent à remplacer  </legend> <!-- Titre du fieldset --> 
 				       
-							        <div id="agent">
+							       
 							        
 							       <p> 
 							       <label for="nomagt">Nom et prenom Agent : <span class="affichage"><c:out value="${demande.nomAgentAremplacer}"/></span> </label>
@@ -94,15 +99,15 @@
 							 		</p> 
 							 		
 							 		<p> 
-							       <label for="motif">Motif disponibilité poste  :</label>
+							       <label for="motif">Motif disponibilité poste  :<span class="affichage"> <c:out value="${demande.motifDispoPoste }"/></span></label>
 							       
-							        <textarea name="motif" id="motif" rows="2" cols="40"  size="30" maxlength="30" disabled="disabled" ><c:out value="${demande.motifDispoPoste }"/>
-							         
-							       </textarea> 
+							        
 							       </p> 
 							       
-									</div>
+								
 						</fieldset>
+						
+						</c:if>
 						
 						
 				   </fieldset>
@@ -170,9 +175,17 @@
 				</p>
 			
 				<p>
-				 
-				<input  type="radio" name="avis" value="oui" id="oui" checked/> <label for="oui">Oui</label>
-       			<input  type="radio" name="avis" value="non" id="non" /> <label for="non">Non</label>
+				
+				 <label for="obsValidation">Decision : <span class="requis">*</span></label>
+				<input  type="radio" name="avis" value="oui" id="oui" /> <label for="oui">Oui</label>
+       			<input  type="radio" name="avis" value="non" id="oui" /> <label for="non">Non</label>
+				
+				<div id="gestionnaire">
+				
+					<label for="gestionnaire">Gestionnaire de la demande : <span class="requis">*</span></label>
+					<input  type="text" name="gestionnaire"  id="gestionnaire" /> 
+				
+				</div>
 				
 				</p>
 			
@@ -197,26 +210,28 @@
 	</footer>
 	
 	
-	 <%-- Petite fonction jQuery permettant de masquer le bloc "agent a remplacer" en fonction du type de besoin. --%>
+	 <%-- Petite fonction jQuery permettant de masquer le bloc "Gestionnaire de la demande" de l'avis du validateur. --%>
         <script>
         	$(document).ready(function(){
-        		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant aux clients existants */
+        		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant au gestionnaire de la demande */
 //         		$("div#ancienClient").hide();
-        		/* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le bloc d'éléments correspondant (nouveau ou ancien client) */
+        		/* 2 - Au clic sur un des deux boutons radio "oui", on affiche le bloc d'éléments "gestionnaire" si la valeur est oui */
                 
-        		 $("div#agent").hide();
-        		 $("#nature").change(function() {
+        		 $("div#gestionnaire").hide();
+        		 $("#oui").change(function() {
                 	
                     
-                    if("#nature" != "3"){
+                    if($("#oui").val() == "oui"){
                     	
-                    	$("div#agent").show();
+                    	$("div#gestionnaire").show();
                    }
-                    else  $("div#agent").hide();
+                    else  $("div#gestionnaire").hide();
                 });
         		 
             });
         </script>
-
+	
+	
+	
 </body>
 </html>

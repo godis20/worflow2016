@@ -273,6 +273,33 @@ body artiche a:hover {
 a:active, a:focus {
  color: red;
 }
+
+
+
+/*  Mise en forme tableau d'affichage de la liste des demandes, utilisateurs...*/
+
+table
+{
+    border-collapse: collapse;
+    
+}
+
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+    border-width: 1px;
+}
+
+tr.pair{
+	background-color: #efefef;
+}
+
+tr.impair{
+	background-color: #c9c9c9;	
+}
+ 
+ 
+ 
  
 :/* required
 {

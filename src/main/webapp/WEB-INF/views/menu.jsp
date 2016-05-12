@@ -19,7 +19,7 @@
 					 </li>
 					
 					<li>
-					    <a href="">Finalisation Demande</a>
+					    <a href="listddeclasafinaliser">Finalisation Demande</a>
 					</li>
 					
 					<li>
@@ -35,7 +35,7 @@
 					</li>
 					
 					<li>
-					    <a href="listddeclasacloturer">Cloture Demande</a>
+					    <a href="listddeclasacloturer">Clôture Demande</a>
 					</li>
 					
 					
@@ -60,7 +60,7 @@
 					 </li>
 					
 					<li>
-					    <a href="">Finalisation Demande</a>
+					    <a href="listdderechafinaliser">Finalisation Demande</a>
 					</li>
 					
 					<li>
@@ -94,7 +94,7 @@
 					</li>
 					
 					 <li>
-					     <a href=""> Parametrage utilisateur </a>
+					     <a href="listutilisateurs"> Parametrage utilisateur </a>
 					 </li>
 					
 					

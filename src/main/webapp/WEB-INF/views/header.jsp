@@ -15,9 +15,9 @@
                 <nav id="others">
                     <ul>
                         <li>Vous etes connectés en tant que : <c:out value=""/> </li>
-                        <li><a href="menuPrincipal.jsp">Acceuil</a></li>
-                        <li><a href="deconnecter">Se deconnecter</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="listdemandeclas">Acceuil</a></li>
+                        <li><a href="deconnexionutilisateur">Se deconnecter</a></li>
+                        <li><a href="https://www.univ-rennes1.fr/">Contact</a></li>
                     </ul>
                 </nav>
                 

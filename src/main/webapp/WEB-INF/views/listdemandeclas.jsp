@@ -31,7 +31,7 @@
 		<div class="content">
 		
 		
-			<jsp:include page="form_recherche.jsp"></jsp:include>
+			<jsp:include page="form_recherchedemandeclas.jsp"></jsp:include>
 			
 			<fieldset>
 			
@@ -85,7 +85,7 @@
 			                     <td class="statut">
 			                     
 			                
-			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Image" /> 
+			                        <img src="<c:url value="/ressources/favicon.jpeg"/>" alt="" /> 
 			
 			
 			                     </td>

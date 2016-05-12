@@ -80,6 +80,8 @@ public class DemandeController {
 		}
 	}
 
+
+
 	
 	
 	
@@ -158,7 +160,11 @@ public class DemandeController {
 		
 			if(action.equals("Envoyer")){
 				newDde.setStatutEnvoiDemande(true);
+				newDde.setStatutEnCours(demandeService.getStatutDemandebyId(1));
 				
+			}
+			else{
+				newDde.setStatutEnCours(demandeService.getStatutDemandebyId(5));
 			}
 			BesoinDemande besoinDemande=demandeService.getBesoinDemandebyId(nature);
 			newDde.setBesoinDemande(besoinDemande);
@@ -263,7 +269,11 @@ public class DemandeController {
 			
 			if(action.equals("Envoyer")){
 				newDde.setStatutEnvoiDemande(true);
+				newDde.setStatutEnCours(demandeService.getStatutDemandebyId(1));
 				
+			}else{
+				
+				newDde.setStatutEnCours(demandeService.getStatutDemandebyId(5));
 			}
 			
 			newDde.setDemandeur((Utilisateur) request.getSession().getAttribute("user"));
@@ -670,7 +680,7 @@ public class DemandeController {
 	
 
 	/**
-	 * Contrôleur  de l'affichage des demandes classiques à cloturer
+	 * Contrôleur  de l'affichage des demandes classiques en attente de clôture
 	 *
 	 */
 	@RequestMapping(value = "/listddeclasacloturer", method = RequestMethod.GET)
@@ -812,6 +822,17 @@ public class DemandeController {
 						model.addObject("demande", demandeInitial);
 						model.addObject("error", "Erreur lors de la mise à jour de la demande");
 						return model; 
+						
+						
+			// si le clôtureur et le demandeur ne sont as identiques		
+			} else {
+				
+				Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+				
+				model.addObject("demande", demandeInitial);
+				model.addObject("error", "Vous n'avez pas le droit de cloturer cette demande car vous n'etes pas l'initialisateur");
+				return model; 
+				
 			}
 			
 		}catch(Exception e)
@@ -823,12 +844,60 @@ public class DemandeController {
 			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
 			return model; 
 		}
-		return null;
+		
 	}
 
 	
 	
 	
+
+	
+
+	/**
+	 * Contrôleur  de l'affichage des demandes classiques à finaliser
+	 *
+	 */
+	@RequestMapping(value = "/listddeclasafinaliser", method = RequestMethod.GET)
+	public ModelAndView cont_listddeclasafinaliser(
+			)
+	{	
+		
+		try
+		
+		{
+			
+			return new ModelAndView("listddeclasafinaliser", "listddeclasafinaliser", demandeService.getAllDdeclasAfinaliser());
+			
+			
+		}catch(Exception e)
+		{
+			return new ModelAndView("listddeclasafinaliser", "listddeclasafinaliser", new ArrayList<Demande>()); 
+		}
+	}
+	
+	
+	
+	/**
+	 * Contrôleur  de l'affichage des demandes recherches à finaliser
+	 *
+	 */
+	@RequestMapping(value = "/listdderechafinaliser", method = RequestMethod.GET)
+	public ModelAndView cont_listdderechafinaliser(
+			)
+	{	
+		
+		try
+		
+		{
+			
+			return new ModelAndView("listdderechafinaliser", "listdderechafinaliser", demandeService.getAllDderechAfinaliser());
+			
+			
+		}catch(Exception e)
+		{
+			return new ModelAndView("listdderechafinaliser", "listdderechafinaliser", new ArrayList<Demande>()); 
+		}
+	}
 }
 
 
