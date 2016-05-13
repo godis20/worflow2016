@@ -493,6 +493,144 @@ public class DemandeService {
 		}	
 	}
 	
+	
+	
+	
+	/**
+	 * Methodes qui recuperent toutes les demandes selon les elements donnés en paramètres
+	 * (type demande, statut de la demande, date creation...)
+	 */
+	
+	
+	
+	
+	
+	@Transactional
+	public List<Demande> getDdeclasByparamstat(int type, int statut ){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id =: type and  d.statutEnCours.id =: statut ")
+					.setParameter("type", type).setParameter("statut", statut)
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	
+/*
+	
+	
+	@Transactional
+	public List<Demande> getDdeclasByparamfin( String datefinliste){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and d.datecreationDemande <= datefinliste")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+
+	
+	
+	@Transactional
+	public List<Demande> getDdeclasByparamdeb(String datedebliste){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and  d.datecreationDemande >= datedebliste")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}*/
+	
+	
+	/*@Transactional
+	public List<Demande> getDdeclasByparamfinstat(int statut, String datefinliste){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and  d.statutEnCours.id = statut and d.datecreationDemande <= datefinliste")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	
+	
+	@Transactional
+	public List<Demande> getDdeclasByparamdebstat(int statut, String datedebliste){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and  d.statutEnCours.id = statut and d.datecreationDemande >= datedebliste")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	
+	
+	@Transactional
+	public List<Demande> getDdeclasByparam(String datedebliste, String datefinliste, int statut){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and  d.statutEnCours.id = statut and d.datecreationDemande >= datedebliste")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	*//**
+	 *Methode qui recupere toutes les demandes recherche selon les elements donnés en paramètre
+	 *
+	 *//*
+
+	@Transactional
+	public List<Demande> getDderechByparam(String datedebliste, String datefinliste, int statut, String typedemande){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '2' and d.statutEnCours.id = statut")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			
+			return null;
+		}	
+	}*/
 }	
 	
 

@@ -849,7 +849,6 @@ public class DemandeController {
 
 	
 	
-	
 
 	
 
@@ -877,6 +876,7 @@ public class DemandeController {
 	
 	
 	
+	
 	/**
 	 * Contrôleur  de l'affichage des demandes recherches à finaliser
 	 *
@@ -898,6 +898,178 @@ public class DemandeController {
 			return new ModelAndView("listdderechafinaliser", "listdderechafinaliser", new ArrayList<Demande>()); 
 		}
 	}
+	
+	
+	
+	
+	
+	/**
+	 * Contrôleur  de l'affichage des demandes selon des parametres dates, statut demande/ historiques
+	 *
+	 */
+	@RequestMapping(value = "/rechercher", method = RequestMethod.POST)
+	public ModelAndView cont_rechercher(
+			
+			@RequestParam("datedebliste") String datedebliste,
+			@RequestParam("datefinliste") String datefinliste,
+			@RequestParam("statut") int statut,
+			@RequestParam("typedemande") String typedemande // type de la demande ecrit en dur sur le formulaire de rechercheddeclas
+			
+			
+						
+			)
+	{
+		
+		
+			try{
+				
+				
+				
+				//le formulaire de recherche concerne les demandes classique
+				
+				if(typedemande.equals("classique")){
+					
+					
+					//Si le statut de la demande n'est pas selectionnée
+					
+					if(statut==0){
+						
+						
+									if (datedebliste.isEmpty() && datefinliste.isEmpty()){
+									
+									return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getAllDemandeclas());
+									
+									}
+									
+									/*else if (datedebliste.isEmpty() && !datefinliste.isEmpty()){
+										
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamfin(datefinliste));
+										
+									}
+									
+									else if(datefinliste.isEmpty()){
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdeb(datedebliste));
+										
+									}*/
+						
+									
+					// si le statut de la demande est selectionnée 	
+					} else{
+									int type=1; //ID type correspondant au demande classique
+								
+									if(datedebliste.isEmpty() && datefinliste.isEmpty() ){
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamstat(statut,type));
+										
+									}
+									
+									/*else if (datedebliste.isEmpty()){
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamfinstat(statut, datefinliste));
+										
+									}
+									
+									
+									else if (datefinliste.isEmpty()){
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdebstat(statut, datefinliste));
+										
+									}
+									else{
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparam(datedebliste, datefinliste ,statut));	
+									}
+									*/
+					}
+				
+				
+				
+				}
+				
+				
+				//Si la recherche concerne une demande recrutement recherche
+				else{
+					
+					    // si le statut de la demande recherche n'est pas selectionnée 
+						if(statut==0){
+						
+						
+									if (datedebliste.isEmpty() && datefinliste.isEmpty()){
+									
+									return new ModelAndView("listdemanderech","listdemanderech",  demandeService.getAllDemanderech());
+									
+									}
+									
+									/*else if (datedebliste.isEmpty() && !datefinliste.isEmpty()){
+										
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamfin(datefinliste));
+										
+									}
+									
+									else if(datefinliste.isEmpty()){
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdeb(datedebliste));
+										
+									}*/
+						
+					
+						// si le statut de la demande recherche est selectionnée 	
+						} else{
+						
+									int type=2; //ID type correspondant au demande  recherche
+					
+									if(datedebliste.isEmpty() && datefinliste.isEmpty() ){
+										
+										return new ModelAndView("listdemanderech","listdemanderech",  demandeService.getDdeclasByparamstat(statut, type));
+										
+									}
+									
+									/*else if (datedebliste.isEmpty()){
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamfinstat(statut, datefinliste));
+										
+									}
+									
+									
+									else if (datefinliste.isEmpty()){
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdebstat(statut, datefinliste));
+										
+									}
+									else{
+										
+										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparam(datedebliste, datefinliste ,statut));	
+									}
+									*/
+					}
+				
+				
+				
+				} 
+				
+			
+			
+			}catch (Exception e)
+			
+			{
+				return new ModelAndView("listdemanderech","error",  "Exeption rencontré");
+			}
+			
+			
+			
+			return null;
+	
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 
 

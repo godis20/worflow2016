@@ -30,6 +30,7 @@
 		
 		<div class="content">
 		
+			<span class="erreur"> <c:out value="${error}"/></span>
 		
 			<jsp:include page="form_recherchedemandeclas.jsp"></jsp:include>
 			
