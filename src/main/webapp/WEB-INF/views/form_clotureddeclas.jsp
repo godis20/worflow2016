@@ -186,12 +186,15 @@
 			<fieldset>
 				
 				<legend> Clôture de la demande </legend>
+				
+				
+					<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
 					<div id="agentrecrute">
 					
 					
 					<c:if test="${demande.avisValidation=='oui'}">
 				
-						<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
+						
 						<p> 
 				       <label for="nomAgent">Nom Agent : <span class="requis">*</span> </label>
 				       <input type="text" name="nomAgent" id="nomAgent" required/>
@@ -209,6 +212,20 @@
 				       </p>
 				       
 				     </c:if>
+				     
+				     
+				     <c:if test="${demande.avisValidation=='non'}">
+				     				   
+				       <input type="hidden" name="nomAgent" id="nomAgent" />
+				      
+				       <input type="hidden" name="prenomAgent" id="prenomAgent" />
+				  
+				       <input type="hidden" name="dateDebutAgent" id="dateDebutAgent" >
+				   
+				       <input type="hidden" name="dateFinAgent" id="dateFinAgent" >
+				       
+				      </c:if>
+				      
 				     
 				       <p> 
 				       <label for="obsCloture">Observations : <span class="requis">*</span> </label>

@@ -3,6 +3,7 @@ package com.univ.rennes.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,129 @@ public class DemandeService {
 		}
 		
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Methode qui met à jour une demande classique "acceptée" cloturee dans la BD 
+	 *
+	 */
+
+	@Transactional
+	public void setDemandeDelete(Demande demande){
+		
+		try{
+			
+			Session session=sessionFactory.getCurrentSession();
+			
+			session.delete(demande);
+			session.flush();
+	
+			
+		}catch (HibernateException e){
+		
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Methode qui recupere toutes les demandes classiques en attende de la finalisation  
+	 * de la procedure d'envoie. 
+	 *
+	 */
+
+	@Transactional
+	public List<Demande> getAllDdeclasAfinaliser(){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '1' and d.instructeur.id= null and d.statutEnvoiDemande=false")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	/**
+	 * Methode qui recupere toutes les demandes recherches en attende de la finalisation  
+	 * de la procedure d'envoie. 
+	 *
+	 */
+
+	@Transactional
+	public List<Demande> getAllDderechAfinaliser(){
+		
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			List<Demande> list = session.createQuery("select d from Demande d"
+					+ " where d.typeDemande.id = '2' and d.valideur.id= null and d.statutEnvoiDemande=false")
+					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
+	
+	
+	
+	
+
+	/**
+	 * Methode qui met à jour une demande classique "acceptée" cloturee dans la BD 
+	 *
+	 */
+
+	@Transactional
+	public Demande setDemandebyFinaliserclas(Demande demande){
+		
+		try{
+			
+			Session session=sessionFactory.getCurrentSession();
+			
+			demande.setDateDerniereModification(demande.getDatecreationDemande());
+			session.merge(demande);
+			session.flush();
+			
+			//Si le statut de la demande est passé a "true"
+			if(demande.isStatutEnvoiDemande()){
+				LigneStatut ligneStatut = new LigneStatut();
+				
+				ligneStatut.setId_demande(demande.getId());
+				ligneStatut.setDate(demande.getDatecreationDemande());
+				ligneStatut.setId_statut_demande(1);
+				
+				session.persist(ligneStatut);
+				session.flush();
+				
+				}
+			
+			
+			return demande;
+			
+		}catch (Exception e){
+			
+			return null;
+		}	
+	}
+	
+	
+	
 	
 	
 	/**
@@ -250,7 +374,6 @@ public class DemandeService {
 	 * Methode qui recupere toutes les demandes en attende de validation  de la BD
 	 *
 	 */
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Demande> getAllDdeclasAvalider(){
 		
@@ -450,21 +573,23 @@ public class DemandeService {
 	
 	
 	
+	
 	/**
-	 * Methode qui recupere toutes les demandes classiques en attende de la finalisation  
-	 * de la procedure d'envoie. 
+	 * Methode qui recupere toutes les demandes classiques cloturees qui peuvent etre renouvelles  de la BD
 	 *
 	 */
-
+	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Demande> getAllDdeclasAfinaliser(){
+	public List<Demande> getAllDdeclasArenouveller() {
 		
 		try{
 			Session session=sessionFactory.getCurrentSession();
 			
 			List<Demande> list = session.createQuery("select d from Demande d"
-					+ " where d.typeDemande.id = '1' and d.instructeur.id= null and d.statutEnvoiDemande=false")
-					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
+					+ " where d.typeDemande.id = '1' and d.statutEnvoiDemande=true"
+					+ " and d.statutEnCours.id = '4' and d.valideur.id is not null and d.clotureur.id is not null"
+					+ " and d.avisValidation ='oui' ")
+					.list();
 			return list;
 		}catch (Exception e){
 			return null;
@@ -472,26 +597,11 @@ public class DemandeService {
 	}
 	
 	
-	/**
-	 * Methode qui recupere toutes les demandes recherches en attende de la finalisation  
-	 * de la procedure d'envoie. 
-	 *
-	 */
 
-	@Transactional
-	public List<Demande> getAllDderechAfinaliser(){
-		
-		try{
-			Session session=sessionFactory.getCurrentSession();
-			
-			List<Demande> list = session.createQuery("select d from Demande d"
-					+ " where d.typeDemande.id = '2' and d.valideur.id= null and d.statutEnvoiDemande=false")
-					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
-			return list;
-		}catch (Exception e){
-			return null;
-		}	
-	}
+	
+	
+
+	
 	
 	
 	
@@ -520,6 +630,8 @@ public class DemandeService {
 			return null;
 		}	
 	}
+	
+	
 	
 	
 	
@@ -631,6 +743,13 @@ public class DemandeService {
 			return null;
 		}	
 	}*/
+	
+	
+	
+	
+	
+	
+	
 }	
 	
 

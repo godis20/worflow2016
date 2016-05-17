@@ -85,7 +85,7 @@
 			                     <td class="statut">
 			                     
 			                		<a href="<c:url value="/finalisationdemanderech"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
-			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Valider" /> 
+			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Finaliser" /> 
 			                        </a>
 			
 			

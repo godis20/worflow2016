@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Demandes classique à finaliser</title>
+        <title>Demandes à renouveller</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
@@ -35,7 +35,7 @@
 			
 			<fieldset>
 			
-			<legend>Demandes classique à finaliser </legend>
+			<legend>Demandes classique à renouveller </legend>
 		
 			<table>
         			<tr>
@@ -60,7 +60,7 @@
             
                 <%-- Parcours de la liste des clients en session, et utilisation de l'objet varStatus. --%>
             
-           		 <c:forEach items="${listddeclasafinaliser}" var="mapDde" varStatus="boucle">
+           		 <c:forEach items="${listddeclasarenouveller}" var="mapDde" varStatus="boucle">
             	
             
                		 <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
@@ -78,14 +78,14 @@
 			
 			                    <td><c:out value="${ mapDde.datecreationDemande }"/></td>
 			
-			                    <td><c:out value="${ mapDde.besoinDemande.libelleBesoinDemande }"/></td> 
+			                    <td><c:out value="${ mapDde.autreBesoinDemande}"/></td> 
 			                    
 			                    
 			                    
 			                     <td class="statut">
 			                     
-			                		<a href="<c:url value="/finalisationdemandeclas"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
-			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Finaliser" /> 
+			                		<a href="<c:url value="/renouvellementdemandeclas"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
+			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Renouveller" /> 
 			                        </a>
 			
 			

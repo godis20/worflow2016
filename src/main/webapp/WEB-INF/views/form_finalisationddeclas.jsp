@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Creation demande classique</title>
+        <title>Instruction demande classique</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
@@ -29,26 +29,30 @@
 		</div>
 		
 		<div class="content">
-
-				<form method="post" action="ajoutdemandeclas"  enctype="multipart/form-data">>
-				<fieldset class="pere">
+		
+			<form method="post" action="finalisationdemandeclas">
+			
+			
+			<fieldset class="pere">
+				 
+				 	<span> <c:out value="${error}"/></span>
 				 
 				   <fieldset>
 				       <legend>Emetteur de la demande </legend> <!-- Titre du fieldset --> 
 				       
-					   <p> 
+					 <p> 
 				       <label for="composante">Composante demandeuse :</label>
-				       <input type="text" name="composante" id="composante" value="<c:out value="${nomComposante}"/>" size="30" maxlength="30" disabled="disabled" />
+				       <input type="text" name="composante" id="composante" value="<c:out value="${demande.demandeur.composante.libelle_composante}"/>" size="30" maxlength="30" disabled="disabled" />
 				       </p>
 				       
 				       <p> 
 				       <label for="nom">Nom demandeur :</label>
-				       <input type="text" name="nom" id="nom" value="<c:out value="${user.nom}"/>" size="30" maxlength="30" disabled="disabled" />
+				       <input type="text" name="nom" id="nom" value="<c:out value="${demande.demandeur.nom}"/>" size="30" maxlength="30" disabled="disabled" />
 						</p>
 						
 						<p> 
 				       <label for="prenom">Prenom demandeur :</label>
-				       <input type="text" name="prenom" id="prenom" value="<c:out value="${user.prenom}"/>" size="30" maxlength="30" disabled="disabled" />
+				       <input type="text" name="prenom" id="prenom" value="<c:out value="${demande.demandeur.prenom}"/>" size="30" maxlength="30" disabled="disabled" />
 				       </p> 
 				       
 				       <p> 
@@ -58,17 +62,22 @@
 				 		
 				 		<p> 
 				       <label for="email">Adresse email * :</label>
-				       <input type="email" name="email" id="email" value="<c:out value="${user.email}"/>" size="30" maxlength="30" disabled="disabled" />
+				       <input type="email" name="email" id="email" value="<c:out value="${demande.demandeur.email}"/>" size="30" maxlength="30" disabled="disabled" />
 				       </p> 
-				
+			
 				   </fieldset>
+				   
 				   
 				 
 				   <fieldset>
-				       <legend>Détermination du besoin</legend> <!-- Titre du fieldset -->
+				   
+				   
+				   		<legend>Détermination du besoin</legend> <!-- Titre du fieldset -->
 				       <p> 
-				       <label for="nature">Nature de la demande : </label>
-				       <select name="nature" id="nature" required autofocus  >
+				       <label for="nature">Nature de la demande : <span class="requis">*</span> </label>
+				       <select name="nature" id="nature" value="<c:out value="${demande.besoinDemande.id}"/>" >
+				       
+				       	   <option value="<c:out value="${demande.besoinDemande.id}"/>"> <c:out value="${demande.besoinDemande.libelleBesoinDemande}"/> </option>
 				       	   <option value="-1">Choisissez une option </option>
 				           <option value="1">Emploi vacant</option>
 				           <option value="2">Emploi temporaire</option>
@@ -79,85 +88,88 @@
 				       
 				     
 				       <p> 
-				       <label for="dateDeb">Date de prise de fonctions souhaitée* : </label>
-				       <input type="date" name="dateDeb" id="dateDeb" required>
+				       <label for="dateDeb">Date de prise de fonctions souhaitée :<span class="requis">*</span> </label>
+				       <input type="date" name="dateDeb" id="dateDeb"   value="<c:out value="${demande.dateDebSouhaite}"/>"    required>
 				       </p>
 				        
 				       <p> 
-				       <label for="dateFin">Date de fin de fonctions souhaitée* : </label>
-				       <input type="date" name="dateFin" id="dateFin" required>
+				       <label for="dateFin">Date de fin de fonctions souhaitée :<span class="requis">*</span> </label>
+				       <input type="date" name="dateFin" id="dateFin" value="<c:out value="${demande.dateFinSouhaite}"/>" required>
 				       </p> 
 				       
 				      
 				       
 						<p> 
-				       <label for="quotite">Quotité de temps de travail* : </label>
-				        <select name="quotite" id="quotite" required>
-				           <option value="none">Choisissez une option </option>
-				           <option value="100%">100 %</option>
-				           <option value="75%">75 %</option>
-				           <option value="50%">50 %</option>
-				           <option value="25%">25 %</option>
+				       <label for="quotite">Quotité de temps de travail :<span class="requis">*</span> </label>
+				        <select name="quotite" id="quotite"    required> 
+				           <option value="<c:out value="${demande.quotite}"/>"><c:out value="${demande.quotite}"/> </option>
+				           <option value="100%">100%</option>
+				           <option value="75%">75%</option>
+				           <option value="50%">50%</option>
+				           <option value="25%">25%</option>
 				          
 				       </select>
 				       </p> 
 				       
 				       
+				       
+				       
 				       <div id="agent">
 				       
+				     
+				      
 				        <fieldset >
+				        
 				      		 <legend>Agent à remplacer  </legend> <!-- Titre du fieldset --> 
-				       
-							        
+				        
 							        
 							       <p> 
 							       <label for="nomagt">Nom : <span class="requis">*</span> </label>
-							       <input type="text" name="nomagt" id="nomagt" value="<c:out value=""/>" size="30" maxlength="30" onblur="verifNom(this)"/>
+							       <input type="text" name="nomagt" id="nomagt" value="<c:out value="${demande.nomAgentAremplacer}"/>"  onblur="verifNom(this)"/>
 							       <span id="erreurnom" class="erreur"></span>
 									</p>
 									
 									<p> 
-							       <label for="prenomagt">Prénom :</label>
-							       <input type="text" name="prenomagt" id="prenomagt" />
+							       <label for="prenomagt">Prénom :<span class="requis">*</span> </label>
+							       <input type="text" name="prenomagt" id="prenomagt" value="<c:out value="${demande.nomAgentAremplacer}"/>"/>
 							       </p> 
 							       
 							       <p> 
-							       <label for="dateagt">Date fin de service* :</label>
-							       <input type="date" name="dateagt" id="dateagt" rvalue="<c:out value=""/>" size="30" maxlength="30" onblur="verifDateFin(this)"/>
+							       <label for="dateagt">Date fin de service :<span class="requis">*</span> </label>
+							       <input type="date" name="dateagt" id="dateagt" value="<c:out value="${demande.dateFinService }"/>" onblur="verifDateFin(this)"/>
 							 		</p> 
 							 		
 							 		<p> 
-							       <label for="motif">Motif disponibilité poste * :</label>
+							       <label for="motif">Motif disponibilité poste :<span class="requis">*</span></label>
 							       
-							        <textarea name="motif" id="motif" rows="2" cols="40" value="<c:out value=""/>" size="30" maxlength="30" onblur="verifMotif(this)">
-							          Ex: décéde, congé maternité...
+							        <textarea name="motif" id="motif" rows="2" cols="40"  onblur="verifMotif(this)"><c:out value="${demande.motifDispoPoste }"/>
+							   	
 							       </textarea> 
 							       </p> 
 							       
 						</fieldset>
+						
 						</div>
 						
-						
-				   </fieldset>
-				   
-				
-				   
-				   
+				  	 </fieldset>
+				  	 
+				  	 
+				  	  
 				    <fieldset>
 				       <legend>Eléments constitutifs de la demande </legend> <!-- Titre du fieldset --> 
 						<p> 
 				       <label for="fonction">Type de fonction :<span class="requis">*</span> </label>
-				       <input type="text" name="fonction" id="fonction" required/>
+				       <input type="text" name="fonction" id="fonction" value="<c:out value="${demande.foncAgentArecrute}"/>" required/>
 				       </p> 
 				       <p> 
 				       <label for="branche">Branche d'activité :<span class="requis">*</span> </label>
-				       <input type="text" name="branche" id="branche" required/>
+				       <input type="text" name="branche" id="branche" value="<c:out value="${demande.branchAgentArecruter}"/>" required/>
 						</p> 
 						
 						<p> 
 				       <label for="categorie">Catégorie poste :<span class="requis">*</span> </label>
 				        <select name="categorie" id="categorie" >
-				           <option value="none">Choisissez une option </option>
+				           <option value="<c:out value="${demande.catAgentArecruter}"/>"><c:out value="${demande.catAgentArecruter}"/> </option>
 				           <option value="A">A </option>
 				           <option value="B">B </option>
 				           <option value="C">C </option>
@@ -167,24 +179,21 @@
 				      
 				       
 				       <p> 
-				       <input type="hidden" name="MAX_FILE_SIZE" value="12345" />
-				       
-				       <label for="file">Fiche de poste :<span class="requis">*</span> </label>
-				       <input type="file" name="file" id="file"  />
-				       <input type="submit" value="Ajouter" name="action">
+				       <label for="fiche">Fiche de poste :<span class="requis">*</span> </label>
+				       <input type="file" name="fiche" id="fiche"  />
 				      
 					  </p> 
 					 
 						 
 						 <p> 
 				       <label for="intitule">Intitule de la fonction :<span class="requis">*</span> </label>
-				       <input type="text" name="intitule" id="intitule" required/>
+				       <input type="text" name="intitule" id="intitule" value="<c:out value="${demande.intfoncAgentArecruter}"/>"  required/>
 				       </p> 
 				       
 				       <p> 
 				       <label for="niveau">Niveau diplôme  :<span class="requis">*</span> </label>
-				        <select name="niveau" id="niveau"  required>
-				           <option value="none">Choisissez une option </option>
+				        <select name="niveau" id="niveau"   required>
+				           <option value="<c:out value="${demande.diplomAgentArecruter}"/>"><c:out value="${demande.diplomAgentArecruter}"/> </option>
 				           <option value="BAC">BAC </option>
 				           <option value="BAC + 1">BAC + 1</option>
 				           <option value="BAC + 2">BAC + 2</option>
@@ -200,34 +209,36 @@
 				       
 				      <p>
 				       <label for="argumentaire"> Argumentaires :<span class="requis">*</span> </label>
-				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" required>
-				       Votre argumentaire par rapport à la demande
+				       <textarea name="argumentaire" id="argumentaire" rows="4" cols="50" required> <c:out value="${demande.argumentaires}"/>
 				       </textarea>       
 				       </p>
 				
 				   </fieldset>
 				   
 				   <c:out value="${error}"></c:out>
-				   
+				   <input type="hidden" value="<c:out value="${demande.id}"/>" name="iddemande" >
 				   <input type="reset" value="Annuler" >
 				   <input type="submit" value="Enregistrer" name="action">
 				   <input type="submit" value="Envoyer" name="action">
+				   <input type="submit" value="Suprimmer" name="action">
 				   
 				   
 				  </fieldset> 
-				   
-				   
-				</form>
-			</div>
+				      	
 		
-		 </section>
-     
-     	<footer >
+			</form>
+		
+		
+		</div>
+		
+	</section>
+	
+	<footer >
 		<jsp:include page="footer.jsp"></jsp:include>
-		</footer>
-
-
-
+	</footer>
+	
+	
+	
 	 <%-- Petite fonction jQuery permettant de masquer le bloc "agent a remplacer" en fonction du type de besoin. --%>
         <script>
         	$(document).ready(function(){
@@ -249,9 +260,7 @@
             });
         </script>
 
+	
 
 </body>
-
-
-
 </html>

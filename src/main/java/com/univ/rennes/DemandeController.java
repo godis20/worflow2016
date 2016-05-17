@@ -1,5 +1,9 @@
 package com.univ.rennes;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.univ.rennes.model.BesoinDemande;
@@ -88,8 +93,9 @@ public class DemandeController {
 	/**
 	 * Contrôleur de traitement du formulaire de creation de demande de recrutement
 	 * classique
+	 * @throws IOException 
 	 */
-	@SuppressWarnings("unused")
+	@SuppressWarnings({ "unused", "deprecation" })
 	@RequestMapping(value = "/ajoutdemandeclas", method = RequestMethod.POST)
 	public ModelAndView cont_ajoutdemandeclas(
 
@@ -112,12 +118,17 @@ public class DemandeController {
 						@RequestParam("branche") String branche,
 						@RequestParam("categorie") String categorie, 
 						@RequestParam("intitule") String intitule,
-						@RequestParam("fiche") String fiche,
+						@RequestParam("file") MultipartFile file,
 						@RequestParam("niveau") String niveau,
 						@RequestParam("argumentaire") String argumentaire,
 						@RequestParam("action") String action
 		
-			){
+			) throws IOException{
+		
+			
+		
+		 //String fileName="";
+		 
 		
 		
 		Demande newDde= new Demande();
@@ -146,7 +157,7 @@ public class DemandeController {
 		newDde.setFoncAgentArecrute(fonction);
 		newDde.setBranchAgentArecruter(branche);
 		newDde.setCatAgentArecruter(categorie);
-		newDde.setFicheposte(fiche);
+		
 		newDde.setIntfoncAgentArecruter(intitule);
 		newDde.setDiplomAgentArecruter(niveau);
 		newDde.setArgumentaires(argumentaire);
@@ -156,8 +167,26 @@ public class DemandeController {
 		
 		try
 		{
+			
+			/*if (!file.isEmpty()) {
+			
+			 
+			 InputStream inputStream =  fiche.getInputStream();
+			 
+		     fileName= request.getRealPath("") +"/images/"+ fiche.getOriginalFilename();
+		     OutputStream outputStream = new FileOutputStream(fileName);
+		     
+		     int readBytes = 0;
+	         byte[] buffer = new byte[10000];
+	         while ((readBytes = inputStream.read(buffer, 0, 10000)) != -1) {
+	                outputStream.write(buffer, 0, readBytes);
+	          }
+	         outputStream.close();
+	         inputStream.close();
 		
-		
+			}*/
+			
+			
 			if(action.equals("Envoyer")){
 				newDde.setStatutEnvoiDemande(true);
 				newDde.setStatutEnCours(demandeService.getStatutDemandebyId(1));
@@ -188,6 +217,7 @@ public class DemandeController {
 		} catch(Exception e)
 		
 		{
+			 e.printStackTrace();
 			model.addObject("utilisateur", request.getSession().getAttribute("user"));
 			model.addObject("error", "Erreur lors de la formation de l'objet demande");
 			return model;
@@ -784,7 +814,7 @@ public class DemandeController {
 						demande.setClotureur(clotureur);
 				
 			
-						// met à jour le statut de la demande "validée" qui correspond à 4 dans la BD
+						// met à jour le statut de la demande "cloturee" qui correspond à 4 dans la BD
 						demande.setStatutEnCours(demandeService.getStatutDemandebyId(4)); 
 						
 						//Si la demande avais été accepté par le validateur, 
@@ -896,6 +926,264 @@ public class DemandeController {
 		}catch(Exception e)
 		{
 			return new ModelAndView("listdderechafinaliser", "listdderechafinaliser", new ArrayList<Demande>()); 
+		}
+	}
+	
+	
+	
+
+		
+		
+	
+	
+
+	/**
+	 * Contrôleur l'affichage d'une demande classique pour finalisation
+	 * 
+	 *
+	 */
+	@RequestMapping(value = "/finalisationdemandeclas", method = RequestMethod.GET)
+	public ModelAndView cont_form_finalisationddeclas(
+			@RequestParam ("idDde") int idDde)
+	{	
+		
+		ModelAndView model = new ModelAndView("form_finalisationddeclas");
+		try
+		{
+			
+			Demande demande = demandeService.getDemandebyId(idDde);
+			
+			if(demande != null){
+			
+			model.addObject("demande", demande);
+			
+			return model; 
+			}
+			
+			model.addObject("error", "La demande n'existe pas ");
+			return model;
+			
+			
+		} catch(Exception e)
+		{	
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
+		}
+	}
+		
+
+
+
+
+	
+	
+	
+	
+	/**
+	 * Contrôleur l'affichage d'une demande recherche pour finalisation
+	 * 
+	 *
+	 */
+	@RequestMapping(value = "/finalisationdemanderech", method = RequestMethod.GET)
+	public ModelAndView cont_form_finalisationdderech(
+			@RequestParam ("idDde") int idDde)
+	{	
+		
+		ModelAndView model = new ModelAndView("form_finalisationdderech");
+		try
+		{
+			
+			Demande demande = demandeService.getDemandebyId(idDde);
+			
+			if(demande != null){
+			
+			model.addObject("demande", demande);
+			
+			return model; 
+			}
+			
+			model.addObject("error", "La demande n'existe pas ");
+			return model;
+			
+			
+		} catch(Exception e)
+		{	
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
+		}
+	}
+	
+	
+	
+	
+
+	
+
+	
+	
+	
+	/**
+	 * Contrôleur l'affichage d'une demande classique pour finalisation
+	 * 
+	 *
+	 */
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/finalisationdemandeclas", method = RequestMethod.POST)
+	public ModelAndView cont_form_finalisationddeclas(
+			@RequestParam ("iddemande") int iddemande,
+	
+			@RequestParam("telephone") String telephone,
+			
+			@RequestParam("nature") int nature,// type de besoin de la demande
+			
+			
+			@RequestParam("dateDeb") String dateDeb, //date debut du contrat souhaitée
+			@RequestParam("dateFin") String dateFin,
+			@RequestParam("dateFin") String duree,
+			@RequestParam("quotite") String quotite,//quotite de travail
+			@RequestParam("nomagt") String nomagt,
+			@RequestParam("prenomagt") String prenomagt,
+			@RequestParam("dateagt") String dateagt, //date fin de service de l'agent à remplacer
+			@RequestParam("motif") String motif, 
+			@RequestParam("fonction") String fonction,
+			@RequestParam("branche") String branche,
+			@RequestParam("categorie") String categorie, 
+			@RequestParam("intitule") String intitule,
+			@RequestParam("fiche") String fiche,
+			@RequestParam("niveau") String niveau,
+			@RequestParam("argumentaire") String argumentaire,
+			@RequestParam("action") String action
+			
+			)
+	
+	{	
+		
+		ModelAndView model = new ModelAndView("form_finalisationddeclas");
+		
+		try
+		{
+			
+			Demande demande = demandeService.getDemandebyId(iddemande);
+			
+			if(demande != null){
+				
+			
+
+				if(action.equals("Envoyer")){
+					
+					demande.setStatutEnvoiDemande(true);
+					demande.setStatutEnCours(demandeService.getStatutDemandebyId(1));
+
+				}
+				
+				else if(action.equals("Enregistrer")) {
+					
+					demande.setStatutEnCours(demandeService.getStatutDemandebyId(5));
+				
+				}
+				
+				else {
+					
+					demandeService.setDemandeDelete(demande);
+					return new ModelAndView("redirect:/listdemandeclas");
+					
+				}	
+				
+				Date date = new Date(); 
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+				//DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
+
+				String formattedDate = dateFormat.format(date);
+
+				demande.setDatecreationDemande(formattedDate);
+
+
+
+				demande.setNomAgentAremplacer(nomagt);
+				demande.setDateDebSouhaite(dateDeb);
+				demande.setDateFinSouhaite(dateFin);
+				demande.setQuotite(quotite);
+
+				//String nometprenomAgent= nomagt +"   "+ prenomagt;
+				demande.setNomAgentAremplacer(nomagt);
+				demande.setDateFinService(dateagt);
+				demande.setMotifDispoPoste(motif);
+
+				demande.setFoncAgentArecrute(fonction);
+				demande.setBranchAgentArecruter(branche);
+				demande.setCatAgentArecruter(categorie);
+				demande.setFicheposte(fiche);
+				demande.setIntfoncAgentArecruter(intitule);
+				demande.setDiplomAgentArecruter(niveau);
+				demande.setArgumentaires(argumentaire);
+				
+
+				
+				BesoinDemande besoinDemande=demandeService.getBesoinDemandebyId(nature);
+				demande.setBesoinDemande(besoinDemande);
+				demande.setTypeDemande(besoinDemande.getTypeDemande());
+
+				demandeService.setDemandebyFinaliserclas(demande);
+
+				if(demande!=null){
+
+				return new ModelAndView("redirect:/listdemandeclas");
+
+				}
+				
+				Demande demandeInitial = demandeService.getDemandebyId(iddemande);
+				
+				model.addObject("demande", demandeInitial);
+				model.addObject("error", "Erreur lors de la mise à jour de la demande dans la base de donnée");
+				return model;
+				
+				
+				} else{
+					
+				
+					model.addObject("error", "La demande n'existe pas dans la BD");
+					return model;
+				}
+			
+			
+			
+			
+		} catch(Exception e)
+		{	
+			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			return model; 
+		}
+		
+		
+	}	
+	
+	
+	
+	
+	
+
+	
+
+	/**
+	 * Contrôleur  de l'affichage des demandes cloturer à renouveller
+	 *
+	 */
+	@RequestMapping(value = "/listddeclasarenouveller", method = RequestMethod.GET)
+	public ModelAndView cont_listddeclasarenouveller(
+			)
+	{	
+		
+		try
+		
+		{
+			
+			return new ModelAndView("listddeclasarenouveller", "listddeclasarenouveller", demandeService.getAllDdeclasArenouveller());
+			
+			
+		}catch(Exception e)
+		{
+			return new ModelAndView("listddeclasarenouveller", "listddeclasarenouveller", new ArrayList<Demande>()); 
 		}
 	}
 	
