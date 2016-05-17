@@ -118,7 +118,7 @@ public class DemandeController {
 						@RequestParam("branche") String branche,
 						@RequestParam("categorie") String categorie, 
 						@RequestParam("intitule") String intitule,
-						@RequestParam("file") MultipartFile file,
+						@RequestParam("ficheposte") String ficheposte,
 						@RequestParam("niveau") String niveau,
 						@RequestParam("argumentaire") String argumentaire,
 						@RequestParam("action") String action
@@ -143,7 +143,7 @@ public class DemandeController {
 		newDde.setDatecreationDemande(formattedDate);
 		
 		
-		
+		newDde.setFicheposte(ficheposte);
 		newDde.setNomAgentAremplacer(nomagt);
 		newDde.setDateDebSouhaite(dateDeb);
 		newDde.setDateFinSouhaite(dateFin);
@@ -217,7 +217,7 @@ public class DemandeController {
 		} catch(Exception e)
 		
 		{
-			 e.printStackTrace();
+			
 			model.addObject("utilisateur", request.getSession().getAttribute("user"));
 			model.addObject("error", "Erreur lors de la formation de l'objet demande");
 			return model;

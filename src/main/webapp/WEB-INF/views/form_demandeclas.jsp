@@ -30,7 +30,7 @@
 		
 		<div class="content">
 
-				<form method="post" action="ajoutdemandeclas"  enctype="multipart/form-data">>
+				<form method="post" action="ajoutdemandeclas"  >
 				<fieldset class="pere">
 				 
 				   <fieldset>
@@ -167,10 +167,10 @@
 				      
 				       
 				       <p> 
-				       <input type="hidden" name="MAX_FILE_SIZE" value="12345" />
 				       
-				       <label for="file">Fiche de poste :<span class="requis">*</span> </label>
-				       <input type="file" name="file" id="file"  />
+				       
+				       <label for="ficheposte">Fiche de poste :<span class="requis">*</span> </label>
+				       <input type="file" name="ficheposte" id="ficheposte"  />
 				       <input type="submit" value="Ajouter" name="action">
 				      
 					  </p> 
