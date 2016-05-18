@@ -32,6 +32,13 @@
 
 				<form method="post" action="ajoutdemandeclas"  >
 				<fieldset class="pere">
+				
+				  <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
 				 
 				   <fieldset>
 				       <legend>Emetteur de la demande </legend> <!-- Titre du fieldset --> 
@@ -207,9 +214,12 @@
 				
 				   </fieldset>
 				   
-				   <p>
-				   <span class="error"><c:out value="${error}"></c:out></span>
-				   </p>
+				   <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
 				   
 				   <input type="reset" value="Annuler" >
 				   <input type="submit" value="Enregistrer" name="action">

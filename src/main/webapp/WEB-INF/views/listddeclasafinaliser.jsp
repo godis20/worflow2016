@@ -37,7 +37,13 @@
 			
 			<legend>Demandes classique à finaliser </legend>
 			<p>
-			<span class="error"> <c:out value="${error}"/> </span>
+			 <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+			</span>
+			
 			<span class="succes"> <c:out value=" ${succes}"/> </span>
 			</p>
 			<table>

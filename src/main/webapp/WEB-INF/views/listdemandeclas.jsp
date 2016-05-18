@@ -126,7 +126,7 @@
 			
 			<p>
 			<img src="<c:url value="/resources/envoyer.jpg"/>" alt="" />   <label> Demande envoyée/ en attente d'instruction    </label>
-			<img src="<c:url value="/resources/instruite.jpg"/>" alt="" /> <label> Demande instruite/ en attente de validation    </label><br/>
+			<img src="<c:url value="/resources/instruite.jpg"/>" alt=""/> <label> Demande instruite/ en attente de validation    </label><br/>
 			<img src="<c:url value="/resources/valider.jpg"/>" alt="" />   <label> Demande validée/ en attente de clôture    </label>
 			<img src="<c:url value="/resources/cloture.jpg"/>" alt="" />   <label> Demande clôturée    </label>
 			

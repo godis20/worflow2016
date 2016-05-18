@@ -203,10 +203,15 @@ public class DemandeController {
 			
 			demandeService.ajoutDemande(newDde);
 			
-			if(newDde!=null){
+			if(newDde!=null && newDde.isStatutEnvoiDemande()){
 			
-			return new ModelAndView("redirect:/listdemandeclas");
+				return new ModelAndView("redirect:/listdemandeclas");
 			
+			}
+			
+			//Si la demande a été envoyée pour instruction retourner sur la liste des ddes
+			else if(newDde!=null && !newDde.isStatutEnvoiDemande()){
+				return new ModelAndView("redirect:/listddeclasafinaliser");
 			}
 			
 			
@@ -262,7 +267,7 @@ public class DemandeController {
 		Demande newDde= new Demande();
 		
 		Date date = new Date(); 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		
 	
 		String formattedDate = dateFormat.format(date);
@@ -310,10 +315,17 @@ public class DemandeController {
 			
 			demandeService.ajoutDemande(newDde);
 			
-			if(newDde!=null){
+			//Si la demande a été envoyée pour instruction retourner sur la liste des ddes
+			if(newDde!=null && newDde.isStatutEnvoiDemande()){
 			
 			return new ModelAndView("redirect:/listdemanderech");
 			
+			} 
+			
+			//Si la demande a été enregistrée retourner sur la liste des ddes a finaliser
+			else if (newDde!=null && !newDde.isStatutEnvoiDemande()){
+				
+				return new ModelAndView("redirect:/listdderechafinaliser");
 			}
 			
 			
@@ -451,15 +463,24 @@ public class DemandeController {
 		try
 		{
 			Date date = new Date(); 
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 			
 			
 			String dateInstruction = dateFormat.format(date);
 			
 			Utilisateur instructeur =(Utilisateur) request.getSession().getAttribute("user");
 			
-			
 			Demande demande = demandeService.getDemandebyId(iddemande);
+			
+			if (instructeur.getId()==demande.getDemandeur().getId()){
+				
+				Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+				
+				model.addObject("demande", demandeInitial);
+				model.addObject("error", "Vous êtes l'emetteur de cette demande");
+				return model;
+			}
+			
 			demande.setObsInstruction(observation);
 			demande.setInstructeur(instructeur);
 			
@@ -634,7 +655,7 @@ public class DemandeController {
 		try
 		{
 			Date date = new Date(); 
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 			
 			
 			String dateValidation = dateFormat.format(date);
@@ -645,6 +666,14 @@ public class DemandeController {
 			//recuperation de la demande à mettre a jour dans la BD
 			Demande demande = demandeService.getDemandebyId(iddemande);
 			
+			if(validateur.getId()==demande.getDemandeur().getId()){
+				
+				Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+				
+				model.addObject("demande", demandeInitial);
+				model.addObject("error", "Vous êtes l'emetteur de cette demande");
+				return model;
+			}
 			
 			demande.setValideur(validateur);
 			
@@ -796,7 +825,7 @@ public class DemandeController {
 		try
 		{
 			Date date = new Date(); 
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 			
 			
 			String dateCloture = dateFormat.format(date);
@@ -854,13 +883,13 @@ public class DemandeController {
 						return model; 
 						
 						
-			// si le clôtureur et le demandeur ne sont as identiques		
+			// si le clôtureur et le demandeur ne sont pas identiques		
 			} else {
 				
 				Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 				
 				model.addObject("demande", demandeInitial);
-				model.addObject("error", "Vous n'avez pas le droit de cloturer cette demande car vous n'etes pas l'initialisateur");
+				model.addObject("error", "Vous n'avez pas le droit de cloturer cette demande car vous n'etes pas l'emetteur");
 				return model; 
 				
 			}
@@ -928,7 +957,6 @@ public class DemandeController {
 			return new ModelAndView("listdderechafinaliser", "listdderechafinaliser", new ArrayList<Demande>()); 
 		}
 	}
-	
 	
 	
 
@@ -1090,7 +1118,7 @@ public class DemandeController {
 				}	
 				
 				Date date = new Date(); 
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
 				//DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
 
@@ -1184,15 +1212,18 @@ public class DemandeController {
 				 if (demande!=null){
 				 
 				 demandeService.setDemandeDelete(demande);
+				 model.addObject("listddeclasafinaliser", demandeService.getAllDdeclasArenouveller());
 				 model.addObject("succes", "Demande supprimmée avec succès");
 				 return model;
 				 }
 				
+				 model.addObject("listddeclasafinaliser", demandeService.getAllDdeclasArenouveller());
 				 model.addObject("error", "Aunne demande n'a été trouvé sur la BD");
 				 return model;
 				
 		}catch (Exception e){
 			
+			model.addObject("listddeclasafinaliser", demandeService.getAllDdeclasArenouveller());
 			model.addObject("error", "Erreur lors de la recuperation de la demande ");
 			return model;
 			
@@ -1216,6 +1247,7 @@ public class DemandeController {
 	
 		ModelAndView model = new ModelAndView("listdderechafinaliser");
 		
+		
 		try{
 			
 		
@@ -1225,15 +1257,16 @@ public class DemandeController {
 				if(demande!=null){
 							
 						    demandeService.setDemandeDelete(demande);
+						    model.addObject("listdderechafinaliser", demandeService.getAllDderechAfinaliser());
 						    model.addObject("succes", "Demande supprimmée avec succès");
 							return model;
 				}
-				
+				model.addObject("listdderechafinaliser", demandeService.getAllDderechAfinaliser());
 				model.addObject("error", "Aucunne demande n'a été trouvé sur la BD");
 				return model;
 				
 		}catch (Exception e){
-			
+			model.addObject("listdderechafinaliser", demandeService.getAllDderechAfinaliser());
 			model.addObject("error", "Erreur lors de la recuperation de la demande ");
 			return model;
 			
