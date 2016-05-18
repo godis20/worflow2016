@@ -61,7 +61,7 @@
             
                 <%-- Parcours de la liste des clients en session, et utilisation de l'objet varStatus. --%>
             
-           		 <c:forEach items="${listdemandeclas}" var="mapClients" varStatus="boucle">
+           		 <c:forEach items="${listdemandeclas}" var="mapDde" varStatus="boucle">
             	
             
                		 <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
@@ -71,33 +71,47 @@
 
 			                    <%-- Affichage des propriétés du bean demande, qui est stocké en tant que valeur de l'entrée courante de la list --%>
 			
-			                    <td><c:out value="${ mapClients.id }"/></td>
+			                    <td><c:out value="${ mapDde.id }"/></td>
 			
-			                    <td><c:out value="${ mapClients.demandeur.nom }  ${ mapClients.demandeur.prenom }"/></td>
+			                    <td><c:out value="${ mapDde.demandeur.nom } ${ mapDde.demandeur.prenom}"/></td>
 			
-			                    <td><c:out value="${ mapClients.demandeur.composante.libelle_composante }"/></td> 
+			                    <td><c:out value="${ mapDde.demandeur.composante.libelle_composante }"/></td> 
 			
-			                    <td><c:out value="${ mapClients.datecreationDemande }"/></td>
+			                    <td><c:out value="${ mapDde.datecreationDemande }"/></td>
 			
-			                    <td><c:out value="${ mapClients.besoinDemande.libelleBesoinDemande }"/></td> 
+			                    <td><c:out value="${ mapDde.besoinDemande.libelleBesoinDemande }"/></td> 
 			                    
 			                    
 			                    
-			                     <td class="statut">
+			                     <td class="statut"  align="center">
 			                     
-			                
-			                        <img src="<c:url value="/ressources/favicon.jpeg"/>" alt="" /> 
+			                     	<c:if test="${mapDde.statutEnCours.id==1 }">
+			                     		<img src="<c:url value="/resources/envoyer.jpg"/>" alt="" /> 
+			                     	</c:if>
+			                     	
+			                     	<c:if test="${mapDde.statutEnCours.id==2 }">
+			                     		<img src="<c:url value="/resources/instruite.jpg"/>" alt="" /> 
+			                     	</c:if>
+			                     	
+			                     	<c:if test="${mapDde.statutEnCours.id==3 }">
+			                     		<img src="<c:url value="/resources/valider.jpg"/>" alt="" /> 
+			                     	</c:if>
+			                     
+			                		<c:if test="${mapDde.statutEnCours.id==4 }">
+			                     		<img src="<c:url value="/resources/cloture.jpg"/>" alt="" /> 
+			                     	</c:if>
+			                      
 			
 			
 			                     </td>
 			
 			                    <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
 			
-			                    <td class="document">
+			                    <td class="document"  align="center">
 			
-			                            <a href="<c:url value="/afficherdemandeclass"><c:param name="" value="" /></c:url>">
+			                            <a   href="<c:url value="/afficherdemandeclass"><c:param name="iddemande" value="${mapDde.id }" /></c:url>" >
 			
-			                            <img src="<c:url value="/ressources/pdf.png"/>" alt="" />
+			                       		<img src="<c:url value="/resources/pdf.jpg"/>" alt="" />
 			
 			                       		 </a> 
 			
@@ -110,6 +124,13 @@
             
 			</table>
 			
+			<p>
+			<img src="<c:url value="/resources/envoyer.jpg"/>" alt="" />   <label> Demande envoyée/ en attente d'instruction    </label>
+			<img src="<c:url value="/resources/instruite.jpg"/>" alt="" /> <label> Demande instruite/ en attente de validation    </label><br/>
+			<img src="<c:url value="/resources/valider.jpg"/>" alt="" />   <label> Demande validée/ en attente de clôture    </label>
+			<img src="<c:url value="/resources/cloture.jpg"/>" alt="" />   <label> Demande clôturée    </label>
+			
+			</p>
 			</fieldset>
 		
 		</div>

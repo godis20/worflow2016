@@ -50,7 +50,7 @@
 
                     <th>Nature demande</th>
                     
-                    <th class="statut">Statut</th> 
+                    <th class="statut">Renouvel.</th> 
 
                     <th class="document">Demande</th>                    
 
@@ -78,14 +78,14 @@
 			
 			                    <td><c:out value="${ mapDde.datecreationDemande }"/></td>
 			
-			                    <td><c:out value="${ mapDde.autreBesoinDemande}"/></td> 
+			                    <td><c:out value="${ mapDde.besoinDemande.libelleBesoinDemande}"/></td> 
 			                    
 			                    
 			                    
-			                     <td class="statut">
+			                     <td class="action" align="center">
 			                     
 			                		<a href="<c:url value="/renouvellementdemandeclas"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
-			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Renouveller" /> 
+			                        <img src="<c:url value="/resources/modifier.jpg"/>" alt="Renouveller" /> 
 			                        </a>
 			
 			
@@ -93,11 +93,11 @@
 			
 			                    <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
 			
-			                    <td class="document">
+			                    <td class="document" align="center">
 			
-			                            <a href="<c:url value="/afficherdemandeclas"><c:param name="" value="" /></c:url>">
+			                            <a href="<c:url value="/afficherdemandeclas"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
 			
-			                            <img src="<c:url value="/ressources/pdf.png"/>" alt="" />
+			                            <img src="<c:url value="/resources/pdf.jpg"/>" alt="" />
 			
 			                       		 </a> 
 			

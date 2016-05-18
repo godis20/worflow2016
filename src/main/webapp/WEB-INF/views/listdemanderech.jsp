@@ -60,7 +60,7 @@
             
                 <%-- Parcours de la liste des clients en session, et utilisation de l'objet varStatus. --%>
             
-           		 <c:forEach items="${listdemanderech}" var="mapClients" varStatus="boucle">
+           		 <c:forEach items="${listdemanderech}" var="mapDde" varStatus="boucle">
             	
             
                		 <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
@@ -70,33 +70,47 @@
 
 			                    <%-- Affichage des propriétés du bean demande, qui est stocké en tant que valeur de l'entrée courante de la list --%>
 			
-			                    <td><c:out value="${ mapClients.id }"/></td>
+			                    <td><c:out value="${ mapDde.id }"/></td>
 			
-			                    <td><c:out value="${ mapClients.demandeur.nom }  ${ mapClients.demandeur.prenom }"/></td>
+			                    <td><c:out value="${ mapDde.demandeur.nom }  ${ mapDde.demandeur.prenom }"/></td>
 			
-			                    <td><c:out value="${ mapClients.demandeur.composante.libelle_composante }"/></td> 
+			                    <td><c:out value="${ mapDde.demandeur.composante.libelle_composante }"/></td> 
 			
-			                    <td><c:out value="${ mapClients.datecreationDemande }"/></td>
+			                    <td><c:out value="${ mapDde.datecreationDemande }"/></td>
 			
-			                    <td><c:out value="${ mapClients.autreBesoinDemande }"/></td> 
+			                    <td><c:out value="${ mapDde.autreBesoinDemande }"/></td> 
 			                    
 			                    
 			                    
-			                     <td class="statut">
+			                     <td class="statut"  align="center">
+			                     
+			                     	<c:if test="${mapDde.statutEnCours.id==1 }">
+			                     		<img src="<c:url value="/resources/envoyer.jpg"/>" alt="" /> 
+			                     	</c:if>
+			                     	
+			                     
+			                     	
+			                     	<c:if test="${mapDde.statutEnCours.id==3 }">
+			                     		<img src="<c:url value="/resources/valider.jpg"/>" alt="" /> 
+			                     	</c:if>
+			                     
+			                		<c:if test="${mapDde.statutEnCours.id==4 }">
+			                     		<img src="<c:url value="/resources/cloture.jpg"/>" alt="" /> 
+			                     	</c:if>
 			                     
 			                
-			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Image" /> 
+			                      
 			
 			
 			                     </td>
 			
 			                    <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
 			
-			                    <td class="document">
+			                    <td class="document" align="center">
 			
-			                            <a href="<c:url value="/afficherdemanderech"><c:param name="" value="" /></c:url>">
+			                            <a href="<c:url value="/afficherdemanderech"><c:param name="iddemande" value="${ mapDde.id }" /></c:url>">
 			
-			                            <img src="<c:url value="/ressources/pdf.png"/>" alt="" />
+			                            <img src="<c:url value="/resources/pdf.jpg"/>" alt="" />
 			
 			                       		 </a> 
 			
@@ -108,6 +122,15 @@
             		</c:forEach>
             
 			</table>
+			
+			
+			<p>
+			<img src="<c:url value="/resources/envoyer.jpg"/>" alt="" />   <label> Demande envoyée/ en attente de validation    </label>
+			
+			<img src="<c:url value="/resources/valider.jpg"/>" alt="" />   <label> Demande validée/ en attente de clôture    </label><br/>
+			<img src="<c:url value="/resources/cloture.jpg"/>" alt="" />   <label> Demande clôturée    </label>
+			
+			</p>
 			
 			</fieldset>
 		

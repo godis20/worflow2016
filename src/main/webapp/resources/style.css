@@ -21,8 +21,10 @@ html, body {
 
     background-color: #A9C7CB;
 	border-bottom: 1px solid #e6e6e6;
-	padding: 27px 0;
-	height: 20px;
+	padding: 27px ;
+	height: 27px;
+	color: white;
+	
  }
  
 
@@ -42,6 +44,7 @@ html, body {
 .header{
 	display: flex;
 	justify-content: flex-end;
+	
 }
  
 body section{
@@ -62,6 +65,7 @@ body section{
 	float: left; 
 	width:25%; 
 	overflow:hidden;
+	
 	
 }
 
@@ -219,6 +223,19 @@ fieldset.pere{
  	font-weight:normal;
  }
  
+ span.error{
+ 	
+ 	font-weight: bold;
+ 	color: red;
+ }
+ 
+ span.succes{
+ 	
+ 	font-weight: bold;
+ 	color: blue;
+ 	
+ }
+ 
  
 input[type=radio]{
 
@@ -260,12 +277,14 @@ body header a:hover {
  text-decoration: none;
 }
 
+
+
 body footer a:hover {
  color: #0489B1;
  text-decoration: none;
 }
 
-body artiche a:hover {
+body article a:hover {
  color: #800000;
  text-decoration: none;
 }
@@ -299,7 +318,14 @@ tr.impair{
 }
  
  
- 
+
+#logoAppli, #logoUniv{
+	 width: 10px;
+    height: 10px;
+  
+}
+
+
  
 :/* required
 {
@@ -469,8 +495,7 @@ header img
 
 {  
 	
-    width: 180px;
-    height: 70px;
+  
      
 }
 
@@ -496,17 +521,6 @@ body header #others a
 }
 
 
-#logoUniv{
-	
-  
-	float: left;
-}
-
-#logoAppli{
-	float: right;
-  
-   
-}
 
 
  */

@@ -15,7 +15,7 @@
 
     <body>
     
-    <header>
+    <header >
     	<jsp:include page="header.jsp"></jsp:include>
     
     </header>
@@ -207,7 +207,9 @@
 				
 				   </fieldset>
 				   
-				   <c:out value="${error}"></c:out>
+				   <p>
+				   <span class="error"><c:out value="${error}"></c:out></span>
+				   </p>
 				   
 				   <input type="reset" value="Annuler" >
 				   <input type="submit" value="Enregistrer" name="action">

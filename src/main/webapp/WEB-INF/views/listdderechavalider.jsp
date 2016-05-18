@@ -50,7 +50,7 @@
 
                     <th>Nature demande</th>
                     
-                    <th class="statut">Statut</th> 
+                    <th class="action">Validation</th> 
 
                     <th class="document">Demande</th>                    
 
@@ -82,10 +82,10 @@
 			                    
 			                    
 			                    
-			                     <td class="statut">
+			                     <td class="action" align="center">
 			                     
 			                		<a href="<c:url value="/validationdemanderech"><c:param name="idDde" value="${mapDde.id }" /></c:url>">
-			                        <img src="<c:url value="/ressources/statut.png"/>" alt="Valider" /> 
+			                        <img src="<c:url value="/resources/modifier.jpg"/>" alt="" /> 
 			                        </a>
 			
 			
@@ -93,11 +93,11 @@
 			
 			                    <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
 			
-			                    <td class="document">
+			                    <td class="document"  align="center">
 			
 			                            <a href="<c:url value="/afficherdemanderech"><c:param name="" value="" /></c:url>">
 			
-			                            <img src="<c:url value="/ressources/pdf.png"/>" alt="" />
+			                            <img src="<c:url value="/resources/pdf.jpg"/>" alt="" />
 			
 			                       		 </a> 
 			

@@ -240,7 +240,7 @@ public class DemandeService {
 		try{
 			Session session=sessionFactory.getCurrentSession();
 			List<Demande> list = session.createQuery("select d from Demande d"
-					+ " where d.typeDemande.id = '1'")
+					+ " where d.typeDemande.id = '1' and d.statutEnCours < '5' ")
 					.list();//  recuperer la liste des demandes recherches  de la BD
 			return list;
 		}catch (Exception e){
@@ -260,7 +260,7 @@ public class DemandeService {
 		try{
 			Session session=sessionFactory.getCurrentSession();
 			List<Demande> list = session.createQuery("select d from Demande d"
-					+ " where d.typeDemande.id = '2'")
+					+ " where d.typeDemande.id = '2'and d.statutEnCours < '5'")
 					.list();//  recuperer la liste des demandes recherches  de la BD
 			return list;
 		}catch (Exception e){

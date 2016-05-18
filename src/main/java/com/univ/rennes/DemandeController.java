@@ -16,16 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.univ.rennes.model.BesoinDemande;
 import com.univ.rennes.model.Composante;
 import com.univ.rennes.model.Demande;
-import com.univ.rennes.model.LigneStatut;
+
 import com.univ.rennes.model.Utilisateur;
 import com.univ.rennes.service.DemandeService;
-import com.univ.rennes.service.UtilisateurService;
+
 
 @Controller
 public class DemandeController {
@@ -134,7 +134,7 @@ public class DemandeController {
 		Demande newDde= new Demande();
 		
 		Date date = new Date(); 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 		
 		//DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
 		
@@ -1160,11 +1160,88 @@ public class DemandeController {
 	
 	
 	
+	/**
+	 * Contrôleur de la suppression d'une demande classique enregistrée
+	 * 
+	 *
+	 */
+
+	@RequestMapping(value = "/suppressionddeclas", method = RequestMethod.GET)
+	public ModelAndView cont_suppressiondde(
+			@RequestParam ("idDde") int idDde
+	){
+		
+		
+		
+		ModelAndView model = new ModelAndView("listddeclasafinaliser");
+		
+		
+		try{
+			
+		
+				 Demande demande = demandeService.getDemandebyId(idDde);
+				 
+				 if (demande!=null){
+				 
+				 demandeService.setDemandeDelete(demande);
+				 model.addObject("succes", "Demande supprimmée avec succès");
+				 return model;
+				 }
+				
+				 model.addObject("error", "Aunne demande n'a été trouvé sur la BD");
+				 return model;
+				
+		}catch (Exception e){
+			
+			model.addObject("error", "Erreur lors de la recuperation de la demande ");
+			return model;
+			
+		}
+	}
+			
+
 	
+	
+	/**
+	 * Contrôleur de la suppression d'une demande recherche enregistrée
+	 * 
+	 *
+	 */
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/suppressiondderech", method = RequestMethod.GET)
+	public ModelAndView cont_suppressiondderech(
+			@RequestParam ("idDde") int idDde
+	){
+		
+	
+		ModelAndView model = new ModelAndView("listdderechafinaliser");
+		
+		try{
+			
+		
+				Demande demande = demandeService.getDemandebyId(idDde);
+				
+			
+				if(demande!=null){
+							
+						    demandeService.setDemandeDelete(demande);
+						    model.addObject("succes", "Demande supprimmée avec succès");
+							return model;
+				}
+				
+				model.addObject("error", "Aucunne demande n'a été trouvé sur la BD");
+				return model;
+				
+		}catch (Exception e){
+			
+			model.addObject("error", "Erreur lors de la recuperation de la demande ");
+			return model;
+			
+		}
+	}
 	
 
 	
-
 	/**
 	 * Contrôleur  de l'affichage des demandes cloturer à renouveller
 	 *
