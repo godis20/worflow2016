@@ -226,13 +226,20 @@ fieldset.pere{
  span.error{
  	
  	font-weight: bold;
- 	color: red;
+ 	color: #c42622;
  }
  
  span.succes{
  	
  	font-weight: bold;
- 	color: blue;
+ 	color: #1c5971;
+ 	
+ }
+ 
+ span.requis{
+ 	
+ 	font-weight: bold;
+ 	color: #ff0606;
  	
  }
  

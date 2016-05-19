@@ -35,6 +35,13 @@
 			<fieldset class="pere">
 			 
 			   <fieldset>
+			   
+			   		<span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
 			       <legend>Emetteur de la demande </legend> <!-- Titre du fieldset --> 
 			       
 				   <p> 
@@ -91,7 +98,7 @@
 			       
 			       <p> 
 			       <label for="duree">Duree : </label>
-			       <input type="text" name="duree" id="duree" value="<c:out value="${duree}"/>" size="30" maxlength="30">
+			       <input type="text" name="duree" id="duree" value="<c:out value="${duree}"/>" size="30" maxlength="30" disabled="disabled">
 			       </p> 
 			       
 			       <p> 
@@ -107,19 +114,18 @@
 			        
 			        <p>
 			        <label for="inm">INM :<span class="requis">*</span></label>
-			        <input type="text" name="inm" id="inm" required>
+			        <input type="text" name="inm" id="inm">
 			      	</p>
 			          
 			     
 			       <p> 
 			       <label for="objet">Objet de la demande : <span class="requis">*</span></label>
-			       <input type="text" name="objet" id="objet" required>
+			       <input type="text" name="objet" id="objet">
 			       </p>
 			       
 			       <p>
 			       <label for="missions"> Missions : <span class="requis">*</span></label>
-			       <textarea name="missions" id="missions" rows="6" cols="50" required>
-			       Principales missions
+			       <textarea name="missions" id="missions" rows="6" cols="50" >Principales missions
 			       </textarea>       
 			       </p>
 			        
@@ -134,12 +140,12 @@
 			       
 			        <p> 
 			       <label for="cf">CF : <span class="requis">*</span></label>
-			       <input type="text" name="cf" id="cf" required/>
+			       <input type="text" name="cf" id="cf" />
 			       </p>
 			       
 			       <p> 
 			       <label for="eotp">EOTP : <span class="requis">*</span></label>
-			       <input type="text" name="eotp" id="eotp" required/>
+			       <input type="text" name="eotp" id="eotp" />
 			       </p>
 			       
 					<p> 
@@ -150,13 +156,19 @@
 			      
 			       
 			       <p>
-			       <label for="argumentaire"> Argumentaires : <span class="requis">*</span></label>
-			       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" required>
-			       Votre argumentaire par rapport à la demande
+			       <label for="argumentaire">Argumentaires : <span class="requis">*</span></label>
+			       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" >Votre argumentaire par rapport à la demande
 			       </textarea>       
 			       </p>
 			
 			   </fieldset>
+			   
+			   		<span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
 			   
 			       <input type="reset" value="Annuler" >
 				   <input type="submit" value="Enregistrer" name="action">

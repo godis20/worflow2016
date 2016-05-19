@@ -164,7 +164,8 @@ public class DemandeController {
 		newDde.setStatutEnCours(demandeService.getStatutDemandebyId(1));
 		
 		ModelAndView model = new ModelAndView("form_demandeclas");
-		
+		ModelAndView modelist = new ModelAndView("listdemandeclas");
+		ModelAndView modelistfinaliser = new ModelAndView("listddeclasafinaliser");
 		try
 		{
 			
@@ -204,14 +205,20 @@ public class DemandeController {
 			demandeService.ajoutDemande(newDde);
 			
 			if(newDde!=null && newDde.isStatutEnvoiDemande()){
-			
-				return new ModelAndView("redirect:/listdemandeclas");
+				
+				modelist.addObject("succes", "demande envoyée pour instruction avec succes");
+				modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
+				return modelist;
 			
 			}
 			
 			//Si la demande a été envoyée pour instruction retourner sur la liste des ddes
 			else if(newDde!=null && !newDde.isStatutEnvoiDemande()){
-				return new ModelAndView("redirect:/listddeclasafinaliser");
+				
+				modelistfinaliser.addObject("succes", "demande enregistrée avec succes");
+				modelistfinaliser.addObject("listddeclasafinaliser", demandeService.getAllDdeclasAfinaliser());
+				return modelistfinaliser;
+				
 			}
 			
 			
@@ -291,7 +298,11 @@ public class DemandeController {
 		newDde.setDomainefonctionnel(domaine);
 		newDde.setArgumentaires(argumentaire);
 		newDde.setStatutEnCours(demandeService.getStatutDemandebyId(1));
+		
+		
 		ModelAndView model = new ModelAndView("form_demanderech");
+		ModelAndView modelist = new ModelAndView("listdemanderech");
+		ModelAndView modelistfinaliser = new ModelAndView("listdderechafinaliser");
 		
 		try
 		{
@@ -318,14 +329,18 @@ public class DemandeController {
 			//Si la demande a été envoyée pour instruction retourner sur la liste des ddes
 			if(newDde!=null && newDde.isStatutEnvoiDemande()){
 			
-			return new ModelAndView("redirect:/listdemanderech");
+				modelist.addObject("succes", "demande envoyée pour instruction avec succes");
+				modelist.addObject("listdemanderech", demandeService.getAllDemanderech());
+				return modelist;
 			
 			} 
 			
 			//Si la demande a été enregistrée retourner sur la liste des ddes a finaliser
 			else if (newDde!=null && !newDde.isStatutEnvoiDemande()){
 				
-				return new ModelAndView("redirect:/listdderechafinaliser");
+				modelistfinaliser.addObject("succes", "demande enregistrée avec succes");
+				modelistfinaliser.addObject("listdderechafinaliser", demandeService.getAllDderechAfinaliser());
+				return modelistfinaliser;
 			}
 			
 			
@@ -460,6 +475,8 @@ public class DemandeController {
 	{	
 		
 		ModelAndView model = new ModelAndView("form_instructiondde");
+		ModelAndView modelist = new ModelAndView("listdemandeclas");
+		
 		try
 		{
 			Date date = new Date(); 
@@ -492,8 +509,13 @@ public class DemandeController {
 			demande = demandeService.setDemandebyInstruction(dateInstruction, demande);
 			
 			if(demande!=null){
+				
+				modelist.addObject("succes", "demande instruite avec succès");
+				modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
+				
+				return modelist;
 		
-			return new ModelAndView("redirect:/listdemandeclas");
+			
 			}
 			
 	
@@ -652,6 +674,7 @@ public class DemandeController {
 	{	
 		
 		ModelAndView model = new ModelAndView("form_validationddeclas");
+		ModelAndView modelist = new ModelAndView("listdemandeclas");
 		try
 		{
 			Date date = new Date(); 
@@ -709,8 +732,11 @@ public class DemandeController {
 			
 			//si l'operation de mise à jour s'est bien effectuée
 			if(demande!=null){
+				
+				modelist.addObject("succes", "Demande validée avec succès");
+				modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
 		
-			return new ModelAndView("redirect:/listdemandeclas");
+				return modelist;
 			}
 			
 	
@@ -822,6 +848,8 @@ public class DemandeController {
 	{	
 		
 		ModelAndView model = new ModelAndView("form_clotureddeclas");
+		ModelAndView modelist = new ModelAndView("listdemandeclas");
+		
 		try
 		{
 			Date date = new Date(); 
@@ -871,8 +899,11 @@ public class DemandeController {
 						
 						//si l'operation de mise à jour s'est bien effectuée
 						if(demande!=null){
+							
+							modelist.addObject("succes", "Demande clôturée avec succes");
+							modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
 					
-						return new ModelAndView("redirect:/listdemandeclas");
+							return modelist;
 						}
 						
 				
@@ -889,7 +920,7 @@ public class DemandeController {
 				Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 				
 				model.addObject("demande", demandeInitial);
-				model.addObject("error", "Vous n'avez pas le droit de cloturer cette demande car vous n'etes pas l'emetteur");
+				model.addObject("error", "Vous n'avez pas le droit de clôturer cette demande car vous n'êtes pas l'émetteur");
 				return model; 
 				
 			}
@@ -900,7 +931,7 @@ public class DemandeController {
 			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 			
 			model.addObject("demande", demandeInitial);
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors de la recuperation de la demande ");
 			return model; 
 		}
 		
@@ -994,7 +1025,7 @@ public class DemandeController {
 			
 		} catch(Exception e)
 		{	
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors de la recuperation de la demande ");
 			return model; 
 		}
 	}
@@ -1036,7 +1067,7 @@ public class DemandeController {
 			
 		} catch(Exception e)
 		{	
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors de la recuperation de la demande ");
 			return model; 
 		}
 	}
@@ -1087,6 +1118,8 @@ public class DemandeController {
 	{	
 		
 		ModelAndView model = new ModelAndView("form_finalisationddeclas");
+		ModelAndView modelist = new ModelAndView("listdemandeclas");
+		ModelAndView modelistfinaliser = new ModelAndView("listddeclasafinaliser");
 		
 		try
 		{
@@ -1113,7 +1146,10 @@ public class DemandeController {
 				else {
 					
 					demandeService.setDemandeDelete(demande);
-					return new ModelAndView("redirect:/listdemandeclas");
+					modelistfinaliser.addObject("listddeclasafinaliser", demandeService.getAllDdeclasAfinaliser());
+					modelistfinaliser.addObject("succes", "Demande supprimée avec succès");
+					return modelistfinaliser;
+				
 					
 				}	
 				
@@ -1154,10 +1190,21 @@ public class DemandeController {
 
 				demandeService.setDemandebyFinaliserclas(demande);
 
-				if(demande!=null){
+				if(demande!=null && demande.isStatutEnvoiDemande()){
+					
+					modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
+					modelist.addObject("succes", "Demande envoyée pour instruction avec succès");
+					return modelist;
 
-				return new ModelAndView("redirect:/listdemandeclas");
 
+				} 
+				
+				else if(demande!=null && !demande.isStatutEnvoiDemande()){
+					
+					modelistfinaliser.addObject("listddeclasafinaliser", demandeService.getAllDdeclasAfinaliser());
+					modelistfinaliser.addObject("succes", "Demande enregistrée avec succès");
+					return modelistfinaliser;
+					
 				}
 				
 				Demande demandeInitial = demandeService.getDemandebyId(iddemande);
@@ -1179,7 +1226,7 @@ public class DemandeController {
 			
 		} catch(Exception e)
 		{	
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors de la recuperation de la demande ");
 			return model; 
 		}
 		
@@ -1215,6 +1262,7 @@ public class DemandeController {
 				 model.addObject("listddeclasafinaliser", demandeService.getAllDdeclasArenouveller());
 				 model.addObject("succes", "Demande supprimmée avec succès");
 				 return model;
+				 
 				 }
 				
 				 model.addObject("listddeclasafinaliser", demandeService.getAllDdeclasArenouveller());
@@ -1261,6 +1309,7 @@ public class DemandeController {
 						    model.addObject("succes", "Demande supprimmée avec succès");
 							return model;
 				}
+				
 				model.addObject("listdderechafinaliser", demandeService.getAllDderechAfinaliser());
 				model.addObject("error", "Aucunne demande n'a été trouvé sur la BD");
 				return model;

@@ -35,7 +35,12 @@
 			
 			<fieldset class="pere">
 				 
-				 	<span class="erreur"> <c:out value="${error}"/></span>
+				 	<span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
 				 	
 				 
 				    <fieldset>
@@ -152,7 +157,12 @@
 			
 					</fieldset>
 					
-			
+				   <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
 					<input type="reset" value="Annuler" >
 				 
 				    <input type="submit" value="Valider" name="action">

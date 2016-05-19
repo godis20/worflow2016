@@ -34,8 +34,16 @@
 			
 			
 			<fieldset class="pere">
+				
+				<p>
 				 
-				 	<span> <c:out value="${error}"/></span>
+				  <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+				 </p>
 				 
 				   <fieldset>
 				       <legend>Emetteur de la demande </legend> <!-- Titre du fieldset --> 
@@ -158,6 +166,14 @@
 			
 			
 			</fieldset>
+					<p>
+					<span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+				   </p>
 			
 					<input type="reset" value="Annuler" >
 				 

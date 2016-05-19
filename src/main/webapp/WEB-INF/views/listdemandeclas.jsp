@@ -30,11 +30,27 @@
 		
 		<div class="content">
 		
-			<span class="erreur"> <c:out value="${error}"/></span>
+			
 		
 			<jsp:include page="form_recherchedemandeclas.jsp"></jsp:include>
 			
 			<fieldset>
+			
+			<p>
+				  <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+				   
+				    <span class="succes">
+				   		<c:if test="${succes!=null}">
+				   			<img src="<c:url value="/resources/succes.jpg"/>" alt="" />
+				   			<c:out value="${succes}"/>
+				   		</c:if>
+				   </span>
+			</p>
 			
 			<legend>Liste demandes classiques du système </legend>
 		

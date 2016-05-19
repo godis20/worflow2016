@@ -34,6 +34,21 @@
 			<jsp:include page="form_recherchedemanderech.jsp"></jsp:include>
 			
 			<fieldset>
+			<p>
+			  <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+				   
+				    <span class="succes">
+				   		<c:if test="${succes!=null}">
+				   			<img src="<c:url value="/resources/succes.jpg"/>" alt="" />
+				   			<c:out value="${succes}"/>
+				   		</c:if>
+				   </span>
+			</p>
 			
 			<legend>Liste demandes recherches du système </legend>
 		

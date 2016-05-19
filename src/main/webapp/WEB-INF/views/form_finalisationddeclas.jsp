@@ -34,8 +34,17 @@
 			
 			
 			<fieldset class="pere">
+			
+				<p>
 				 
-				 	<span> <c:out value="${error}"/></span>
+				  <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+				   
+				 </p>
 				 
 				   <fieldset>
 				       <legend>Emetteur de la demande </legend> <!-- Titre du fieldset --> 
@@ -214,8 +223,15 @@
 				       </p>
 				
 				   </fieldset>
+				   <p>
+				   <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+				   </p>
 				   
-				   <c:out value="${error}"></c:out>
 				   <input type="hidden" value="<c:out value="${demande.id}"/>" name="iddemande" >
 				   <input type="reset" value="Annuler" >
 				   <input type="submit" value="Enregistrer" name="action">

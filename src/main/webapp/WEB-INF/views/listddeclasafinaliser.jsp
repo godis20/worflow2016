@@ -44,7 +44,13 @@
 				   		</c:if>
 			</span>
 			
-			<span class="succes"> <c:out value=" ${succes}"/> </span>
+			<span class="succes">
+				   		<c:if test="${succes!=null}">
+				   			<img src="<c:url value="/resources/succes.jpg"/>" alt="" />
+				   			<c:out value="${succes}"/>
+				   		</c:if>
+			</span>
+		
 			</p>
 			<table>
         			<tr>

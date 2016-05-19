@@ -35,6 +35,13 @@
 			
 			<fieldset>
 			
+			 <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+			 </span>
+			
 			<legend>Demandes en attente de validation </legend>
 		
 			<table>

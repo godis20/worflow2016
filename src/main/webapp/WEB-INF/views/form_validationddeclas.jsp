@@ -35,7 +35,14 @@
 			
 			<fieldset class="pere">
 				 
-				 	<span class="erreur"> <c:out value="${error}"/></span>
+				 <p>
+				 	<span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+				 </p>
 				 
 				   <fieldset>
 				       <legend>Emetteur de la demande </legend> <!-- Titre du fieldset --> 
@@ -177,20 +184,29 @@
 				<p>
 				
 				 <label for="obsValidation">Decision : <span class="requis">*</span></label>
-				<input  type="radio" name="avis" value="oui" id="oui" /> <label for="oui">Oui</label>
-       			<input  type="radio" name="avis" value="non" id="oui" /> <label for="non">Non</label>
+				<input  type="radio" name="avis" value="oui" id="oui" required /> <label for="oui">Oui</label>
+       			<input  type="radio" name="avis" value="non" id="oui" required /> <label for="non">Non</label>
 				
 				<div id="gestionnaire">
 				
 					<label for="gestionnaire">Gestionnaire de la demande : <span class="requis">*</span></label>
-					<input  type="text" name="gestionnaire"  id="gestionnaire" /> 
+					<input  type="text" name="gestionnaire"  id="gestionnaire" required/> 
 				
 				</div>
 				
 				</p>
 			
 			</fieldset>
+					<p>
 			
+					<span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+					</p>
+					
 					<input type="reset" value="Annuler" >
 				 
 				    <input type="submit" value="Valider" name="action">

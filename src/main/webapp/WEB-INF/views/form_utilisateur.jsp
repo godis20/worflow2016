@@ -38,56 +38,62 @@
             <form method="post" action="<c:url value="/ajoututilisateur"/>"  onsubmit="return validerform()"  onreset="return confirm('Voulez vous vraiment reinitialiser  ?');">
 
                <fieldset>
+               	  <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
 
                     <legend>Informations utilisateur</legend>
 						
 						<p>
 						<label for="nom">Nom :<span class="requis">*</span></label>
 						
-						<input type="text" id="nom" name="nom" value="<c:out value=""/>" size="30" maxlength="30" onblur="verifNom(this)" />
+						<input type="text" id="nom" name="nom" size="30" maxlength="30" onblur="verifNom(this)" />
 						
-						<span id="erreurnom" class="erreurnom"></span>
+						<span id="erreurnom" class="error"> <c:out value="${erreurnom}"/></span>
 						
 						</p>
 						
 						<p>
 						<label for="prenom">Prénom : </label>
 						
-						<input type="text" id="prenom" name="prenom" value="<c:out value=""/>" size="30" maxlength="30" />
+						<input type="text" id="prenom" name="prenom"  size="30" maxlength="30" />
 						</p>
 						
 						<p>
 						<label for="email">Adresse email :</label><span class="requis">*</span></label>
 						
-						<input type="email" id="email" name="email" value="" size="30" maxlength="60"  onblur="verifMail(this)" />
+						<input type="email" id="email" name="email"  size="30" maxlength="60"  onblur="verifMail(this)" />
 						
-						<span id="erreuremail"></span>
+						<span id="erreuremail" class="error"><c:out value="${erreuremail}"/></span>
 						</p>
 						
 						<p>
 						<label for="password">Mot de passe : <span class="requis">*</span></label>
 						
-						<input type="password" id="password" name="password" value="" size="30" maxlength="60" onblur="verifPassword(this)"/>
+						<input type="password" id="password" name="password"  size="30" maxlength="60" onblur="verifPassword(this)"/>
 						
-						<span id="erreurpass"></span>
+						<span id="erreurpass" class="error"><c:out value="${erreurpass}"/></span>
 						
 						</p>
 						
 						<p>
 						<label for="password1">Confirmer Mot de passe : <span class="requis">*</span></label>
 						
-						<input type="password" id="password1" name="password1" value="" size="30" maxlength="60" onblur="verifPassword1(this)"/>
+						<input type="password" id="password1" name="password1"  size="30" maxlength="60" onblur="verifPassword1(this)"/>
 						
-						<span id="erreurpass1"></span>
+						<span id="erreurpass1" class="error"><c:out value="${erreurpass1}"/></span>
 						
 						</p>
 						
 						<p>
 						<label for="poste">Poste : <span class="requis">*</span></label>
 						
-						<input type="text" id="poste" name="poste" value="" size="30" maxlength="30" onblur="verifPoste(this)"/>
+						<input type="text" id="poste" name="poste" size="30" maxlength="30" onblur="verifPoste(this)"/>
 						
-						<span id="erreurposte"></span>
+						<span id="erreurposte" class="error"><c:out value="${erreurposte}"/></span>
 						
 						</p>
 						
@@ -102,18 +108,23 @@
 						   </c:forEach>
 						</select>
 						
-						<span id="erreurcompo"></span>
+						<span id="erreurcompo" class="error"><c:out value="${erreurcompo}"/></span>
 						
 						</p>
 						
-						<span> <c:out value="${error}"/></span>
+					
                       
 
                 </fieldset>
 
                 
                 <span id="formulaire"></span>
-                
+                  <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
 				
                 <input type="submit" value="Valider"  />
 
@@ -222,7 +233,7 @@
 		     
 		        
 		        function verifPassword1(champ){	
-		        	if(champ!=document.getElementById("password").value){
+		        	if(champ!=document.getElementById("password").value && champ.value !=""){
 		        		
 		        		surligne(champ, true);
 		        		document.getElementById('erreurpass1').innerHTML = "Veuillez entrer un mot de passe identique au precedent ";
