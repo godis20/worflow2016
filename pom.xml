@@ -37,6 +37,25 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		
+		<!-- Spring security-->	
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-web</artifactId>
+	        <version>4.1.0.RELEASE</version>
+	    </dependency>
+	    
+	    
+	    
+		<!-- Spring LDAP-->	
+	   <!--  <dependency>
+        <groupId>org.springframework.ldap</groupId>
+        <artifactId>spring-ldap-core</artifactId>
+        <version>2.1.0.RELEASE</version>
+    	</dependency>   -->
+		
+   
 				
 		<!-- AspectJ -->
 		<dependency>
@@ -204,3 +223,11 @@
         </plugins>
     </build>
 </project>
+
+<!-- Le compte applicatif pour l'accès au serveur LDAP de Test est  : recrute_test 
+
+Pour la connexion au serveur, il faut utiliser les informations :
+serveur : ldap-test.univ-rennes1.fr 
+port : 389 
+compte : cn=recrute_test,ou=applications,dc=univ-rennes1,dc=fr 
+Mot de passe : **********(à communiquer par téléphone ou message sécurisé) -->

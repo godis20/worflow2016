@@ -22,6 +22,8 @@ import com.univ.rennes.model.Utilisateur;
 import com.univ.rennes.service.DemandeService;
 import com.univ.rennes.service.UtilisateurService;
 
+
+
 /**
  * Handles requests for the application home page.
  */
@@ -100,8 +102,11 @@ public class HomeController {
 			Utilisateur user = utilisateurService.Connect(login,password);
 			if( user != null)
 			{
+				
+			
 				request.getSession().setAttribute("user", user);
 				return new ModelAndView ("redirect:/listdemandeclas");
+				
 			}
 			
 			
@@ -110,7 +115,7 @@ public class HomeController {
 			
 		} catch (Exception e){
 			
-			model.addObject("error", "erreur lors de la tentative de connexion");
+			model.addObject("error", "Erreur lors de la tentative de connexion");
 			return model;
 			
 			
