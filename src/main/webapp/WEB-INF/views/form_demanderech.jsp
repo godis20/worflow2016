@@ -125,7 +125,7 @@
 			       
 			       <p>
 			       <label for="missions"> Missions : <span class="requis">*</span></label>
-			       <textarea name="missions" id="missions" rows="6" cols="50" >Principales missions
+			       <textarea name="missions" id="missions" rows="6" cols="50" placeholder="Principales missions">
 			       </textarea>       
 			       </p>
 			        
@@ -157,7 +157,7 @@
 			       
 			       <p>
 			       <label for="argumentaire">Argumentaires : <span class="requis">*</span></label>
-			       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" >Votre argumentaire par rapport à la demande
+			       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" placeholder="Votre argumentaire par rapport à la demande">
 			       </textarea>       
 			       </p>
 			

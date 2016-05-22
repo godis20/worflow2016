@@ -184,8 +184,8 @@
 				<p>
 				
 				 <label for="obsValidation">Decision : <span class="requis">*</span></label>
-				<input  type="radio" name="avis" value="oui" id="oui" required /> <label for="oui">Oui</label>
-       			<input  type="radio" name="avis" value="non" id="oui" required /> <label for="non">Non</label>
+				<input  type="radio" class="avis" name="avis" value="oui" id="oui" required /> <label for="oui">Oui</label>
+       			<input  type="radio" class="avis"  name="avis" value="non" id="oui" required /> <label for="non">Non</label>
 				
 				<div id="gestionnaire">
 				

@@ -149,9 +149,9 @@
 					
 						<p>
 						 
-						<input  type="radio" name="avis" value="oui" id="oui" checked/> <label for="oui">Oui</label>
-		       			<input  type="radio" name="avis" value="non" id="non" /> <label for="non">Non</label>
-						<input  type="radio" name="avis" value="non" id="nonmais" /> <label for="non">Non, mais ...</label>
+						<input  type="radio" class="avis" name="avis" value="oui" id="oui" checked/> <label for="oui">Oui</label>
+		       			<input  type="radio" class="avis" name="avis" value="non" id="non" /> <label for="non">Non</label>
+						<input  type="radio" class="avis" name="avis" value="non" id="nonmais" /> <label for="non">Non, mais ...</label>
 						
 						</p>
 			

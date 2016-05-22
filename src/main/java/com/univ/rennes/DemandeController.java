@@ -1,13 +1,10 @@
 package com.univ.rennes;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -123,7 +120,7 @@ public class DemandeController {
 						@RequestParam("argumentaire") String argumentaire,
 						@RequestParam("action") String action
 		
-			) throws IOException{
+			){
 		
 			
 		
@@ -1382,35 +1379,63 @@ public class DemandeController {
 					if(statut==0){
 						
 						
-									if (datedebliste.isEmpty() && datefinliste.isEmpty()){
+						if (datedebliste.isEmpty() && datefinliste.isEmpty()){
 									
-									return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getAllDemandeclas());
+							return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getAllDemandeclas());
 									
-									}
+						}
+						
 									
-									/*else if (datedebliste.isEmpty() && !datefinliste.isEmpty()){
+						else if (datedebliste.isEmpty() && !datefinliste.isEmpty()){
+							
+								List<Demande> list=demandeService.getAllDemandeclas();
+								
+										
+								if(list!=null){
+											
+									List<Demande> newList= new ArrayList<Demande>();
+										
+										for(int i=0; i< list.size();i++){
+													
+											switch (list.get(i).getDatecreationDemande().compareTo(datefinliste)){
+													
+													
+													case 1:
+															newList.add(list.get(i));
+															
+															break;
+													case 0:
+															
+															newList.add(list.get(i));
+															break;
+											}
+													
+										 }
 										
 										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamfin(datefinliste));
+									  return new ModelAndView("listdemandeclas","listdemandeclas",  newList);
 										
-									}
+								   }
 									
-									else if(datefinliste.isEmpty()){
+							}
+									
+									/*else if(datefinliste.isEmpty()){
 										
 										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdeb(datedebliste));
 										
 									}*/
 						
 									
-					// si le statut de la demande est selectionnée 	
-					} else{
-									int type=1; //ID type correspondant au demande classique
+						// si le statut de la demande est selectionnée 	
+						} else{
+							
+							   int type=1; //ID type correspondant au demande classique
 								
-									if(datedebliste.isEmpty() && datefinliste.isEmpty() ){
+							   if(datedebliste.isEmpty() && datefinliste.isEmpty() ){
 										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamstat(statut,type));
+									return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamstat(type,statut));
 										
-									}
+								}
 									
 									/*else if (datedebliste.isEmpty()){
 										
@@ -1439,15 +1464,15 @@ public class DemandeController {
 				//Si la recherche concerne une demande recrutement recherche
 				else{
 					
-					    // si le statut de la demande recherche n'est pas selectionnée 
-						if(statut==0){
+					 // si le statut de la demande recherche n'est pas selectionnée 
+				     if(statut==0){
 						
 						
-									if (datedebliste.isEmpty() && datefinliste.isEmpty()){
+						if (datedebliste.isEmpty() && datefinliste.isEmpty()){
 									
-									return new ModelAndView("listdemanderech","listdemanderech",  demandeService.getAllDemanderech());
+							return new ModelAndView("listdemanderech","listdemanderech",  demandeService.getAllDemanderech());
 									
-									}
+						}
 									
 									/*else if (datedebliste.isEmpty() && !datefinliste.isEmpty()){
 										
@@ -1466,13 +1491,13 @@ public class DemandeController {
 						// si le statut de la demande recherche est selectionnée 	
 						} else{
 						
-									int type=2; //ID type correspondant au demande  recherche
+								int type=2; //ID type correspondant au demande  recherche
 					
-									if(datedebliste.isEmpty() && datefinliste.isEmpty() ){
+								if(datedebliste.isEmpty() && datefinliste.isEmpty() ){
 										
-										return new ModelAndView("listdemanderech","listdemanderech",  demandeService.getDdeclasByparamstat(statut, type));
+									return new ModelAndView("listdemanderech","listdemanderech",  demandeService.getDdeclasByparamstat(type, statut));
 										
-									}
+								}
 									
 									/*else if (datedebliste.isEmpty()){
 										

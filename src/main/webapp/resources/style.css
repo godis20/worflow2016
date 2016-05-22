@@ -54,6 +54,12 @@ body section{
 	display: flex;
 }
 
+.privilege{
+	
+	display: flex;
+	
+	
+}
 
 
 .menu{
@@ -244,12 +250,12 @@ fieldset.pere{
  }
  
  
-input[type=radio]{
+input[type=radio] {
 
- margin-left:30px;
+ margin-left:15px;
  width:20px;
 
- }
+ } 
  
  
 input[type=submit], input[type=reset],input[type=button] {
@@ -332,6 +338,32 @@ tr.impair{
   
 }
 
+
+#privilege
+{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+ 
+}
+
+.role{
+	
+	width:160px;
+	height:170px;
+	background-color:#b9dddd;
+	border-radius:5px;
+	
+	
+}
+#clas{
+	
+	width:160px;
+	background-color:#0489B1;
+	color:white;
+	
+	
+}
 
  
 :/* required

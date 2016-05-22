@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.univ.rennes.model.BesoinDemande;
-import com.univ.rennes.model.Composante;
 import com.univ.rennes.model.Demande;
 import com.univ.rennes.model.LigneStatut;
 import com.univ.rennes.model.Recrutement;
@@ -622,7 +621,7 @@ public class DemandeService {
 			Session session=sessionFactory.getCurrentSession();
 			
 			List<Demande> list = session.createQuery("select d from Demande d"
-					+ " where d.typeDemande.id =: type and  d.statutEnCours.id =: statut ")
+					+ " where d.typeDemande.id =:type and  d.statutEnCours.id =:statut ")
 					.setParameter("type", type).setParameter("statut", statut)
 					.list();//  recuperer la liste des demandes classique non finalisées  de la BD
 			return list;
@@ -635,10 +634,10 @@ public class DemandeService {
 	
 	
 	
-/*
+
 	
 	
-	@Transactional
+/*	@Transactional
 	public List<Demande> getDdeclasByparamfin( String datefinliste){
 		
 		try{
@@ -651,9 +650,9 @@ public class DemandeService {
 		}catch (Exception e){
 			return null;
 		}	
-	}
+	}*/
 
-	
+	/*
 	
 	@Transactional
 	public List<Demande> getDdeclasByparamdeb(String datedebliste){

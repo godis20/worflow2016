@@ -142,7 +142,7 @@
 							 		<p> 
 							       <label for="motif">Motif disponibilité poste  :<span class="requis">*</span> </label>
 							       
-							        <textarea name="motif" id="motif" rows="2" cols="40" size="30" maxlength="30">Ex: décéde, congé maternité...
+							        <textarea name="motif" id="motif" rows="2" cols="40"  placeholder="Ex: décéde, congé maternité...">
 							       </textarea> 
 							       </p> 
 							       
@@ -212,7 +212,7 @@
 				       
 				      <p>
 				       <label for="argumentaire"> Argumentaires :<span class="requis">*</span> </label>
-				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" >Votre argumentaire par rapport à la demande
+				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" placeholder="Votre argumentaire par rapport à la demande">
 				       </textarea>       
 				       </p>
 				

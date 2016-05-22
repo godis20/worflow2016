@@ -44,6 +44,8 @@
 				   			<c:out value="${error}"/>
 				   		</c:if>
 				   </span>
+				   
+				   <fieldset>
 
                     <legend>Informations utilisateur</legend>
 						
@@ -111,6 +113,61 @@
 						<span id="erreurcompo" class="error"><c:out value="${erreurcompo}"/></span>
 						
 						</p>
+						
+						<p>
+						<label for="etatuser">Etat User : <span class="requis">*</span></label>
+							
+							
+							<input type="radio" name="etatuser" id="actif" value="1"><label>Activé </label>
+							<input type="radio" name="etatuser" id="nonactif" value="0" checked><label>Desactivé </label>
+							
+						
+						<span id="erreuretat" class="error"><c:out value="${erreuretat}"/></span>
+						
+						</p>
+						
+						</fieldset>
+						
+						<fieldset>
+						
+								<legend>Privileges utilisateur</legend>
+								
+									
+								<div id="privilege">
+								
+								<div class="role" id="classique">
+									<label id="clas"> Classique :</label>
+									<p><input type="radio" name="classique" id="ddeurclas" value="1"><label> Demandeur </label></p>
+									<p><input type="radio" name="classique" id="instructeur" value="2"><label> Instructeur </label></p>
+									<p><input type="radio" name="classique" id="valclas" value="3"><label> Validateur </label></p>
+									<p><input type="radio" name="classique" id="gestionnaire" value="4"><label> Gestionnaire </label></p>
+								</div>
+								
+								
+								<div class="role" id="recherche">
+									<label id="clas"> Recherche :</label>
+									<p><input type="radio" name="recherche" id="ddeurech" value="5"><label> Demandeur </label></p>
+									<p><input type="radio" name="recherche" id="valrech" value="6"><label> Validateur </label></p>
+									<p><input type="radio" name="recherche" id="clotureur" value="7"><label> Clôtureur </label></p>
+									
+								</div>
+								
+								<div class="role" id="administrateur">
+									<label id="clas"> Clas. & Rech. :</label>
+									<p><input type="radio" name="administrateur" id="admin" value="8"><label> Gestion user</label></p>
+									
+									
+								</div>
+						
+								<div class="role" id="superadmin">
+									<label id="clas"> Clas. & Rech. :</label>
+									<p><input type="radio" name="superadmin" id="superadmin" value="9"><label> Gestion appli.</label></p>
+									
+									
+								</div>
+								
+								</div>
+						</fieldset>
 						
 					
                       
