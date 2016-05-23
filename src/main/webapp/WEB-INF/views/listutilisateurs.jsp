@@ -35,7 +35,7 @@
 			
 			<fieldset>
 			
-			<legend>Liste demandes classiques du système </legend>
+			<legend>Liste utilisateurs du système </legend>
 		
 			<table>
         			<tr>
@@ -47,8 +47,8 @@
                     <th>Date creation</th>
                     
                     <th>Login</th>
-
-                    <th>Password</th>
+                    
+                    <th>Rôle</th>
                    
                     <th class="action">Modifier</th> 
 
@@ -84,23 +84,25 @@
 			                    
 			                    
 			                    
-			                     <td class="action">
+			                     <td class="action" align="center">
 			                     
-			                		<a href="<c:url value="/modifierutilisateur"><c:param name="" value="" /></c:url>">
-			                        <img src="<c:url value="/resources/modifier.jpg"/>" alt="Modifier" /> 
-			
+			                		<a href="<c:url value="/modifierutilisateur"><c:param name="iduser" value="${ mapUser.id}" /></c:url>">
+			                        <img src="<c:url value="/resources/modifier.jpg"/>" alt="" /> 
+									</a>
 			
 			                     </td>
 			
 			                    <%-- Lien vers la servlet de suppression, avec passage du nom du client - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
 			
-			                    <td class="document">
-			
-			                            <a href="<c:url value="/etatcompte"><c:param name="" value="" /></c:url>">
-			
-			                            <img src="<c:url value="/resources/etat.png"/>" alt="Actif" />
-			
-			                       		 </a> 
+			                    <td class="etatuser" align="center">
+			                    
+										<c:if test="${mapUser.etat_utilisateur==true }">
+			                            <img src="<c:url value="/resources/actif.jpg"/>" alt="" />
+										</c:if>
+										
+										<c:if test="${mapUser.etat_utilisateur==false }">
+										<img src="<c:url value="/resources/nonactif.jpg"/>" alt="" />
+										</c:if>
 			
 			                    </td>
 			    
