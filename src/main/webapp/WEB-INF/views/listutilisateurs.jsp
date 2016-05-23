@@ -87,7 +87,7 @@
 			                     <td class="action">
 			                     
 			                		<a href="<c:url value="/modifierutilisateur"><c:param name="" value="" /></c:url>">
-			                        <img src="<c:url value="/ressources/modifier.png"/>" alt="Modifier" /> 
+			                        <img src="<c:url value="/resources/modifier.jpg"/>" alt="Modifier" /> 
 			
 			
 			                     </td>
@@ -98,7 +98,7 @@
 			
 			                            <a href="<c:url value="/etatcompte"><c:param name="" value="" /></c:url>">
 			
-			                            <img src="<c:url value="/ressources/etat.png"/>" alt="Actif" />
+			                            <img src="<c:url value="/resources/etat.png"/>" alt="Actif" />
 			
 			                       		 </a> 
 			

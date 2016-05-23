@@ -1,8 +1,14 @@
-<form action="rechercher" method="post">
+<%@ page pageEncoding="UTF-8" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
+<form action="rechercheutilisateur" method="post">
 
 <fieldset>
 
-			<legend>Critère de recherche </legend> <!-- Titre du fieldset --> 
+			<legend>CritÃ¨re de recherche </legend> <!-- Titre du fieldset --> 
+			
 				       
 		    <p> 
 		    <label for="datedebliste">Du :</label>
@@ -15,14 +21,14 @@
 		    <label for="composante">Composante :</label>
 		    <input type="text" name="composante" id="composante" />
 		    
-		    <label for="statut">Rôle utilisateur :</label>
-		     <select name="statut" id="statut" required>
-		     				<option value="1"> Choisissez une option</option>
-				           <option value="1">Emetteur demande </option>
-				           <option value="2">Instructeur demande</option>
-				           <option value="3">Validateur demande</option>
-				           <option value="4">Clôture demande</option>
-				          
+		    <label for="role">RÃ´le utilisateur :</label>
+		     <select name="role" id="role" >
+		     
+		     	<option value="" > Choisissez un rÃ´le </option>
+				 <c:forEach items = "${privilege}" var = "privilege">
+						   <option value="${privilege.id}" > <c:out value="${privilege.libellePrivilege}"></c:out> </option>
+				 </c:forEach>
+		     								          
 			</select>
 		    
 		    </p>

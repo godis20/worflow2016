@@ -78,7 +78,7 @@
 			       
 			       <p> 
 			       <label for="nomAgent">Nom de l'élément à recruter : <span class="requis">*</span></label>
-			       <input type="text" name="nomAgent" id="nomAgent" required/>
+			       <input type="text" name="nomAgent" id="nomAgent" required autofocus/>
 			       </p>
 			       
 			       <p> 

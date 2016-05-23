@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.univ.rennes.model.Composante;
+import com.univ.rennes.model.Privilege;
 import com.univ.rennes.model.Utilisateur;
 
 @Repository
@@ -91,6 +92,27 @@ public class UtilisateurService {
 			return null;
 		}	
 	}
+	
+	
+	
+	
+	/**
+	 * methode qui recupere tous les privileges  de la BD
+	 *
+	 */
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Privilege> getAllPrivilege(){
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			List<Privilege> list = session.createQuery("select p from Privilege p").list();//  recuperer la liste des utilisateurs de la BD
+			return list;
+		}catch (Exception e){
+			return null;
+		}	
+	}
+	
 	
 	
 	

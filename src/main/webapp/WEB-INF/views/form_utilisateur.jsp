@@ -38,12 +38,14 @@
             <form method="post" action="<c:url value="/ajoututilisateur"/>"  onsubmit="return validerform()"  onreset="return confirm('Voulez vous vraiment reinitialiser  ?');">
 
                <fieldset>
+               	<p>
                	  <span class="error">
 				   		<c:if test="${error!=null}">
 				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
 				   			<c:out value="${error}"/>
 				   		</c:if>
 				   </span>
+				 </p>
 				   
 				   <fieldset>
 

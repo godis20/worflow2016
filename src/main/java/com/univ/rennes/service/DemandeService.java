@@ -239,7 +239,7 @@ public class DemandeService {
 		try{
 			Session session=sessionFactory.getCurrentSession();
 			List<Demande> list = session.createQuery("select d from Demande d"
-					+ " where d.typeDemande.id = '1' and d.statutEnCours < '5' ")
+					+ " where d.typeDemande.id = '1' and d.statutEnCours < '5' order by d.id")
 					.list();//  recuperer la liste des demandes recherches  de la BD
 			return list;
 		}catch (Exception e){
@@ -259,7 +259,7 @@ public class DemandeService {
 		try{
 			Session session=sessionFactory.getCurrentSession();
 			List<Demande> list = session.createQuery("select d from Demande d"
-					+ " where d.typeDemande.id = '2'and d.statutEnCours < '5'")
+					+ " where d.typeDemande.id = '2'and d.statutEnCours < '5'order by d.id")
 					.list();//  recuperer la liste des demandes recherches  de la BD
 			return list;
 		}catch (Exception e){
@@ -280,7 +280,7 @@ public class DemandeService {
 			Session session=sessionFactory.getCurrentSession();
 			
 			List<Demande> list = session.createQuery("select d from Demande d"
-					+ " where d.typeDemande.id = '1' and d.instructeur.id= null and d.statutEnvoiDemande=true")
+					+ " where d.typeDemande.id = '1' and d.instructeur.id= null and d.statutEnvoiDemande=true order by d.id")
 					.list();//  recuperer la liste des demandes recherches  de la BD
 			return list;
 		}catch (Exception e){

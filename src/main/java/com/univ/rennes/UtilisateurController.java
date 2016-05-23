@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.univ.rennes.model.Composante;
+import com.univ.rennes.model.Privilege;
 import com.univ.rennes.model.Utilisateur;
 import com.univ.rennes.service.UtilisateurService;
 
@@ -158,6 +159,10 @@ public class UtilisateurController {
 			 return null; 
 		}
 	}
+	
+	
+	
+	
 
 }
  

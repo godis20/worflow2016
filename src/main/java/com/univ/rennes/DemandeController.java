@@ -41,18 +41,31 @@ public class DemandeController {
 	{	
 		
 		ModelAndView model = new ModelAndView("form_demandeclas");
+		ModelAndView modelcon = new ModelAndView("form_connexionutilisateur");
+		
 		try
 		{
 			
 			Utilisateur user=(Utilisateur) request.getSession().getAttribute("user");
-			Composante composante=user.getComposante();
-			String nomComposante=composante.getLibelle_composante();
-			model.addObject("nomComposante", nomComposante);
-			model.addObject("user", user);
+			if(user!=null){
+				
+				Composante composante=user.getComposante();
+				String nomComposante=composante.getLibelle_composante();
+				model.addObject("nomComposante", nomComposante);
+				model.addObject("user", user);
+				
 			return model;
+			
+			}
+			
+			
+			modelcon.addObject("error", "Bien vouloir vous connecter!!!");
+			return modelcon;
+			
 		}catch(Exception e)
 		{
-			return model; 
+			model.addObject("error", "Une erreur a été rencontré lors du traitement de votre requête");
+			return model;
 		}
 	}
 	
@@ -67,18 +80,29 @@ public class DemandeController {
 	{
 		
 		ModelAndView model = new ModelAndView("form_demanderech");
+		ModelAndView modelcon = new ModelAndView("form_connexionutilisateur");
 		
 		try
 		{
 			Utilisateur user=(Utilisateur) request.getSession().getAttribute("user");
-			Composante composante=user.getComposante();
-			String nomComposante=composante.getLibelle_composante();
-			model.addObject("nomComposante", nomComposante);
-			model.addObject("user", user);
+			if(user!=null){
+				
+				Composante composante=user.getComposante();
+				String nomComposante=composante.getLibelle_composante();
+				model.addObject("nomComposante", nomComposante);
+				model.addObject("user", user);
+				
 			return model;
+			}
+			
+			modelcon.addObject("error", "Bien vouloir vous connecter!!!");
+			return modelcon;
+			
+			
 		}catch(Exception e)
 		{
-			return model; 
+			model.addObject("error", "Une erreur a été rencontré lors du traitement de votre requête");
+			return model;
 		}
 	}
 
@@ -427,20 +451,34 @@ public class DemandeController {
 	 */
 	@RequestMapping(value = "/instructiondemande", method = RequestMethod.GET)
 	public ModelAndView cont_form_instruiredde(
+			HttpServletRequest request,
 			@RequestParam ("idDde") int idDde)
 	{	
 		
 		ModelAndView model = new ModelAndView("form_instructiondde");
+		ModelAndView modelcon = new ModelAndView("form_connexionutilisateur");
+		
 		try
 		{
 			
-			Demande demande = demandeService.getDemandebyId(idDde);
+			if(request.getSession().getAttribute("user")!=null){
+				
+				Demande demande = demandeService.getDemandebyId(idDde);
+				
+				if(demande != null){
+				
+				model.addObject("demande", demande);
+				
+				return model; 
+				}
+				
+			}
 			
-			if(demande != null){
-			
-			model.addObject("demande", demande);
-			
-			return model; 
+			else{
+				
+				modelcon.addObject("error", "Bien vouloir vous connecter!!!");
+				return modelcon;
+				
 			}
 			
 			model.addObject("error", "La demande n'existe pas ");
@@ -449,10 +487,11 @@ public class DemandeController {
 			
 		} catch(Exception e)
 		{	
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors du traitement de votre requête");
 			return model; 
 		}
 	}
+	
 	
 	
 	/**
@@ -491,7 +530,7 @@ public class DemandeController {
 				Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 				
 				model.addObject("demande", demandeInitial);
-				model.addObject("error", "Vous êtes l'emetteur de cette demande");
+				model.addObject("error", "Vous êtes l'emetteur de cette demande!!!");
 				return model;
 			}
 			
@@ -519,7 +558,7 @@ public class DemandeController {
 			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 		
 			model.addObject("demande", demandeInitial);
-			model.addObject("error", "Erreur lors de la mise à jour de la demande");
+			model.addObject("error", "Erreur lors de la mise à jour de la demande dans la BD");
 			return model; 
 			
 		}catch(Exception e)
@@ -527,7 +566,7 @@ public class DemandeController {
 			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 			
 			model.addObject("demande", demandeInitial);
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors du traitement de votre requête");
 			return model; 
 		}
 	}
@@ -588,20 +627,35 @@ public class DemandeController {
 	 */
 	@RequestMapping(value = "/validationdemandeclas", method = RequestMethod.GET)
 	public ModelAndView cont_form_validationddeclas(
+			
+			HttpServletRequest request,
 			@RequestParam ("idDde") int idDde)
 	{	
 		
 		ModelAndView model = new ModelAndView("form_validationddeclas");
+		ModelAndView modelcon = new ModelAndView("form_connexionutilisateur");
+		
 		try
 		{
 			
-			Demande demande = demandeService.getDemandebyId(idDde);
+			if(request.getSession().getAttribute("user")!=null){
+				
 			
-			if(demande != null){
+				Demande demande = demandeService.getDemandebyId(idDde);
+				
+				if(demande != null){
+				
+				model.addObject("demande", demande);
+				
+				return model; 
+				}
+			}
 			
-			model.addObject("demande", demande);
-			
-			return model; 
+			else{
+				
+				modelcon.addObject("error", "Bien vouloir vous connecter!!! ");
+				return modelcon;
+				
 			}
 			
 			model.addObject("error", "La demande n'existe pas ");
@@ -610,7 +664,7 @@ public class DemandeController {
 			
 		} catch(Exception e)
 		{	
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors du traitement de votre requête");
 			return model; 
 		}
 	}
@@ -623,20 +677,33 @@ public class DemandeController {
 	 */
 	@RequestMapping(value = "/validationdemanderech", method = RequestMethod.GET)
 	public ModelAndView cont_form_validationdderech(
+			HttpServletRequest request,
 			@RequestParam ("idDde") int idDde)
 	{	
 		
 		ModelAndView model = new ModelAndView("form_validationdderech");
+		ModelAndView modelcon = new ModelAndView("form_connexionutilisateur");
 		try
 		{
 			
-			Demande demande = demandeService.getDemandebyId(idDde);
+			if(request.getSession().getAttribute("user")!=null){
+				
+				
+				Demande demande = demandeService.getDemandebyId(idDde);
+				
+				if(demande != null){
+				
+				model.addObject("demande", demande);
+				
+				return model; 
+				}
+			}
 			
-			if(demande != null){
-			
-			model.addObject("demande", demande);
-			
-			return model; 
+			else{
+				
+				modelcon.addObject("error", "Bien vouloir vous connecter!!! ");
+				return modelcon;
+				
 			}
 			
 			model.addObject("error", "La demande n'existe pas ");
@@ -645,7 +712,7 @@ public class DemandeController {
 			
 		} catch(Exception e)
 		{	
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors du traitement de votre requête");
 			return model; 
 		}
 	}
@@ -674,69 +741,75 @@ public class DemandeController {
 		ModelAndView modelist = new ModelAndView("listdemandeclas");
 		try
 		{
-			Date date = new Date(); 
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-			
-			
-			String dateValidation = dateFormat.format(date);
-			
-			//recuperation de le l'objet "Validateur", celui qui valide la demande
-			Utilisateur validateur =(Utilisateur) request.getSession().getAttribute("user");
-			
-			//recuperation de la demande à mettre a jour dans la BD
-			Demande demande = demandeService.getDemandebyId(iddemande);
-			
-			if(validateur.getId()==demande.getDemandeur().getId()){
-				
-				Demande demandeInitial=demandeService.getDemandebyId(iddemande);
-				
-				model.addObject("demande", demandeInitial);
-				model.addObject("error", "Vous êtes l'emetteur de cette demande");
-				return model;
-			}
-			
-			demande.setValideur(validateur);
-			
-			// met à jour le statut de la demande "validée" qui correspond à 3 dans la BD
-			demande.setStatutEnCours(demandeService.getStatutDemandebyId(3)); 
-			
-			//Si la demande a été accepté, 
-			if(avis.equals("oui")){
-				
-				//Construction du message du validateur
-				obsValidation= "Demande acceptée. Autres: "+ obsValidation;
-
-				//Passer l'avis dans la BD à oui
-				demande.setAvisValidation("oui");	
-				
-			} else {
-				
-				//Construction du message du validateur
-				obsValidation= "Demande refusée. Autres: "+ obsValidation;
-				
-
-				//Passer l'avis dans la BD à oui
-				demande.setAvisValidation("non");
-					
-			}
-			
-
-			demande.setObsValidation(obsValidation);
-			
-			//appel de la methode qui procède à la MAJ de la demande dans la BD
-			demande = demandeService.setDemandebyValidationclas(dateValidation, demande);
-			
-			
-			//si l'operation de mise à jour s'est bien effectuée
-			if(demande!=null){
-				
-				modelist.addObject("succes", "Demande validée avec succès");
-				modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
-		
-				return modelist;
-			}
 			
 	
+			
+					Date date = new Date(); 
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+					
+					
+					String dateValidation = dateFormat.format(date);
+					
+					//recuperation de le l'objet "Validateur", celui qui valide la demande
+					Utilisateur validateur =(Utilisateur) request.getSession().getAttribute("user");
+					
+					//recuperation de la demande à mettre a jour dans la BD
+					Demande demande = demandeService.getDemandebyId(iddemande);
+					
+					if(validateur.getId()==demande.getDemandeur().getId()){
+						
+						Demande demandeInitial=demandeService.getDemandebyId(iddemande);
+						
+						model.addObject("demande", demandeInitial);
+						model.addObject("error", "Vous êtes l'emetteur de cette demande!!!");
+						return model;
+					}
+					
+					demande.setValideur(validateur);
+					
+					// met à jour le statut de la demande "validée" qui correspond à 3 dans la BD
+					demande.setStatutEnCours(demandeService.getStatutDemandebyId(3)); 
+					
+					//Si la demande a été accepté, 
+					if(avis.equals("oui")){
+						
+						//Construction du message du validateur
+						obsValidation= "Demande acceptée. Autres: "+ obsValidation;
+		
+						//Passer l'avis dans la BD à oui
+						demande.setAvisValidation("oui");	
+						
+					} else {
+						
+						//Construction du message du validateur
+						obsValidation= "Demande refusée. Autres: "+ obsValidation;
+						
+		
+						//Passer l'avis dans la BD à oui
+						demande.setAvisValidation("non");
+							
+					}
+					
+		
+					demande.setObsValidation(obsValidation);
+					
+					//appel de la methode qui procède à la MAJ de la demande dans la BD
+					demande = demandeService.setDemandebyValidationclas(dateValidation, demande);
+					
+					
+					//si l'operation de mise à jour s'est bien effectuée
+					if(demande!=null){
+						
+						modelist.addObject("succes", "Demande validée avec succès");
+						modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
+				
+						return modelist;
+					}
+					
+			
+			
+			
+			
 			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 		
 			model.addObject("demande", demandeInitial);
@@ -749,7 +822,7 @@ public class DemandeController {
 			Demande demandeInitial=demandeService.getDemandebyId(iddemande);
 			
 			model.addObject("demande", demandeInitial);
-			model.addObject("error", "Erreur lors de la recuperation de la demande initial");
+			model.addObject("error", "Erreur lors du traitement de votre requête");
 			return model; 
 		}
 	}
@@ -1321,6 +1394,7 @@ public class DemandeController {
 	
 
 	
+	
 	/**
 	 * Contrôleur  de l'affichage des demandes cloturer à renouveller
 	 *
@@ -1347,6 +1421,13 @@ public class DemandeController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Contrôleur  de l'affichage des demandes selon des parametres dates, statut demande/ historiques
 	 *
@@ -1365,9 +1446,10 @@ public class DemandeController {
 	{
 		
 		
+		
 			try{
 				
-				
+		
 				
 				//le formulaire de recherche concerne les demandes classique
 				
@@ -1391,26 +1473,19 @@ public class DemandeController {
 								List<Demande> list=demandeService.getAllDemandeclas();
 								
 										
-								if(list!=null){
+								if(list!=null || !list.isEmpty()){
 											
 									List<Demande> newList= new ArrayList<Demande>();
 										
 										for(int i=0; i< list.size();i++){
 													
-											switch (list.get(i).getDatecreationDemande().compareTo(datefinliste)){
+											if (list.get(i).getDatecreationDemande().compareTo(datefinliste)<= 0  ){
 													
-													
-													case 1:
+												
 															newList.add(list.get(i));
-															
-															break;
-													case 0:
-															
-															newList.add(list.get(i));
-															break;
+										
 											}
-													
-										 }
+										}
 										
 										
 									  return new ModelAndView("listdemandeclas","listdemandeclas",  newList);
@@ -1419,15 +1494,62 @@ public class DemandeController {
 									
 							}
 									
-									/*else if(datefinliste.isEmpty()){
-										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdeb(datedebliste));
-										
-									}*/
-						
+							else if(datefinliste.isEmpty()&& !datedebliste.isEmpty()){
+								
+							
+								
+									List<Demande> list=demandeService.getAllDemandeclas();
 									
+									
+									if(list!=null || !list.isEmpty()){
+												
+										List<Demande> newList= new ArrayList<Demande>();
+											
+											for(int i=0; i< list.size();i++){
+														
+												if (list.get(i).getDatecreationDemande().compareTo(datedebliste)>= 0  ){
+														
+													
+																newList.add(list.get(i));
+											
+												}
+											}
+											
+											return new ModelAndView("listdemandeclas","listdemandeclas",  newList);
+										
+									}
+						
+								}
+						
+							else{
+								
+									List <Demande> list= demandeService.getAllDemandeclas();
+									
+									
+									if(list!=null || !list.isEmpty()){
+										
+										List<Demande> newList= new ArrayList<Demande>();
+										
+										for(int i=0; i< list.size();i++){
+													
+											if (list.get(i).getDatecreationDemande().compareTo(datedebliste)>= 0  && 
+													list.get(i).getDatecreationDemande().compareTo(datefinliste)<= 0 ){
+													
+												
+															newList.add(list.get(i));
+										
+											}
+										}
+									
+										return new ModelAndView("listdemandeclas","listdemandeclas",  newList);
+							
+											
+									}
+							}
+						}
+						
 						// si le statut de la demande est selectionnée 	
-						} else{
+						else {
 							
 							   int type=1; //ID type correspondant au demande classique
 								
@@ -1437,28 +1559,91 @@ public class DemandeController {
 										
 								}
 									
-									/*else if (datedebliste.isEmpty()){
-										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamfinstat(statut, datefinliste));
-										
-									}
+								else if (datedebliste.isEmpty() && !datefinliste.isEmpty() ){
+									
+
+										List <Demande> list= demandeService.getDdeclasByparamstat(type, statut);
 									
 									
-									else if (datefinliste.isEmpty()){
+										if(list!=null || !list.isEmpty()){
+												
+											List<Demande> newList= new ArrayList<Demande>();
+											
+											for(int i=0; i< list.size();i++){
+														
+												if (list.get(i).getDatecreationDemande().compareTo(datefinliste)<= 0  ){
+														
+													
+																newList.add(list.get(i));
+											
+												}
+											}
 										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdebstat(statut, datefinliste));
+											return new ModelAndView("listdemandeclas","listdemandeclas",  newList);
 										
+								
+										}
+								}
+									
+									
+								else if (datefinliste.isEmpty() && !datedebliste.isEmpty()){
+										
+
+										List <Demande> list= demandeService.getDdeclasByparamstat(type, statut);
+								
+								
+										if(list!=null || !list.isEmpty()){
+											
+										List<Demande> newList= new ArrayList<Demande>();
+										
+										for(int i=0; i< list.size();i++){
+													
+											if (list.get(i).getDatecreationDemande().compareTo(datedebliste)>= 0  ){
+													
+												
+															newList.add(list.get(i));
+										
+											}
+										}
+									
+										return new ModelAndView("listdemandeclas","listdemandeclas",  newList);
+									
+										
+										}
+								}
+										
+								else{
+									
+
+									List <Demande> list= demandeService.getDdeclasByparamstat(type, statut);
+							
+							
+									if(list!=null || !list.isEmpty()){
+										
+										List<Demande> newList= new ArrayList<Demande>();
+										
+										for(int i=0; i< list.size();i++){
+													
+											if (list.get(i).getDatecreationDemande().compareTo(datedebliste)>= 0  && 
+													list.get(i).getDatecreationDemande().compareTo(datefinliste)<= 0 ){
+													
+												
+															newList.add(list.get(i));
+										
+											}
+										}
+									
+										return new ModelAndView("listdemandeclas","listdemandeclas",  newList);
+							
+											
 									}
-									else{
-										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparam(datedebliste, datefinliste ,statut));	
-									}
-									*/
-					}
+							
+								}
 				
 				
+						}
 				
-				}
+				}//Fin si la demande est classique
 				
 				
 				//Si la recherche concerne une demande recrutement recherche
@@ -1473,23 +1658,93 @@ public class DemandeController {
 							return new ModelAndView("listdemanderech","listdemanderech",  demandeService.getAllDemanderech());
 									
 						}
+						
+						else if (datedebliste.isEmpty() && !datefinliste.isEmpty()){
+							
+							List<Demande> list=demandeService.getAllDemanderech();
+							
 									
-									/*else if (datedebliste.isEmpty() && !datefinliste.isEmpty()){
+							if(list!=null || !list.isEmpty()){
 										
-										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamfin(datefinliste));
-										
+								List<Demande> newList= new ArrayList<Demande>();
+									
+									for(int i=0; i< list.size();i++){
+												
+										if (list.get(i).getDatecreationDemande().compareTo(datefinliste)<= 0  ){
+												
+											
+														newList.add(list.get(i));
+									
+										}
 									}
 									
-									else if(datefinliste.isEmpty()){
+									
+								  return new ModelAndView("listdemanderech","listdemanderech",  newList);
+									
+							   }
+								
+						}
+								
+						else if(datefinliste.isEmpty()&& !datedebliste.isEmpty()){
+							
+						
+							
+								List<Demande> list=demandeService.getAllDemanderech();
+								
+								
+								if(list!=null || !list.isEmpty()){
+											
+									List<Demande> newList= new ArrayList<Demande>();
 										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdeb(datedebliste));
+										for(int i=0; i< list.size();i++){
+													
+											if (list.get(i).getDatecreationDemande().compareTo(datedebliste)>= 0  ){
+													
+												
+															newList.add(list.get(i));
 										
-									}*/
+											}
+										}
+										
+										return new ModelAndView("listdemanderech","listdemanderech",  newList);
+									
+								}
+					
+							}
+						
+						else{
+							List <Demande> list= demandeService.getAllDemanderech();
+							
+							
+							if(list!=null || !list.isEmpty()){
+								
+								List<Demande> newList= new ArrayList<Demande>();
+								
+								for(int i=0; i< list.size();i++){
+											
+									if (list.get(i).getDatecreationDemande().compareTo(datedebliste)>= 0  && 
+											list.get(i).getDatecreationDemande().compareTo(datefinliste)<= 0 ){
+											
+										
+													newList.add(list.get(i));
+								
+									}
+								}
+							
+								return new ModelAndView("listdemanderech","listdemanderech",  newList);
+					
+									
+							}
+						}
+									
+								
 						
 					
-						// si le statut de la demande recherche est selectionnée 	
-						} else{
+							
+						}//fin si statut demande recherche non selectionnée
+				     	
+				     	// si le statut de la demande recherche est selectionnée 
+				     	else{
 						
 								int type=2; //ID type correspondant au demande  recherche
 					
@@ -1498,43 +1753,110 @@ public class DemandeController {
 									return new ModelAndView("listdemanderech","listdemanderech",  demandeService.getDdeclasByparamstat(type, statut));
 										
 								}
+								
+								
+								else if (datedebliste.isEmpty() && !datefinliste.isEmpty() ){
 									
-									/*else if (datedebliste.isEmpty()){
+
+									List <Demande> list= demandeService.getDdeclasByparamstat(type, statut);
+								
+								
+									if(list!=null || !list.isEmpty()){
+											
+										List<Demande> newList= new ArrayList<Demande>();
 										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamfinstat(statut, datefinliste));
+										for(int i=0; i< list.size();i++){
+													
+											if (list.get(i).getDatecreationDemande().compareTo(datefinliste)<= 0  ){
+													
+												
+															newList.add(list.get(i));
 										
+											}
+										}
+									
+										return new ModelAndView("listdemanderech","listdemanderech",  newList);
+									
+							
+									}
+							     }
+								
+								
+									else if (datefinliste.isEmpty() && !datedebliste.isEmpty()){
+											
+		
+											List <Demande> list= demandeService.getDdeclasByparamstat(type, statut);
+									
+									
+											if(list!=null || !list.isEmpty()){
+												
+											List<Demande> newList= new ArrayList<Demande>();
+											
+											for(int i=0; i< list.size();i++){
+														
+												if (list.get(i).getDatecreationDemande().compareTo(datedebliste)>= 0  ){
+														
+													
+																newList.add(list.get(i));
+											
+												}
+											}
+										
+											return new ModelAndView("listdemanderech","listdemanderech",  newList);
+										
+											
+											}
 									}
 									
-									
-									else if (datefinliste.isEmpty()){
-										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparamdebstat(statut, datefinliste));
-										
-									}
 									else{
 										
-										return new ModelAndView("listdemandeclas","listdemandeclas",  demandeService.getDdeclasByparam(datedebliste, datefinliste ,statut));	
-									}
-									*/
-					}
-				
-				
-				
-				} 
-				
+		
+										List <Demande> list= demandeService.getDdeclasByparamstat(type, statut);
+								
+								
+										if(list!=null || !list.isEmpty()){
+											
+											List<Demande> newList= new ArrayList<Demande>();
+											
+											for(int i=0; i< list.size();i++){
+														
+												if (list.get(i).getDatecreationDemande().compareTo(datedebliste)>= 0  && 
+														list.get(i).getDatecreationDemande().compareTo(datefinliste)<= 0 ){
+														
+													
+																newList.add(list.get(i));
+											
+												}
+											}
+										
+											return new ModelAndView("listdemanderech","listdemanderech",  newList);
+								
+												
+										}
+								
+									 }//fin else
 			
 			
-			}catch (Exception e)
+								
+					}// fin else statut demande recherche selectionnée
+				
+				
+				
+				} // fin else demande de type recherche
+				
+				return new ModelAndView("listdemanderech","error",  "le type de demande est inconnu");
+			
+			}
+			
+			
+			catch (Exception e)
 			
 			{
 				return new ModelAndView("listdemanderech","error",  "Exeption rencontré");
 			}
-			
-			
-			
-			return null;
-	
+
 	}
+	
 	
 	
 	
