@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Demandes recherche à finaliser</title>
+        <title>Liste demande classique à finaliser</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 

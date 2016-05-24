@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Instruction demande classique</title>
+        <title>Finalisation demande classique</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
@@ -274,6 +274,10 @@
                 });
         		 
             });
+        	
+        	
+        
+        	
         </script>
 
 	

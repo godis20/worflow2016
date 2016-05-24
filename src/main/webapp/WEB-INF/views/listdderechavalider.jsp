@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Demandes recherches en attente de validation</title>
+        <title>Liste demande recherche à valider</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 

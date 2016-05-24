@@ -250,7 +250,7 @@ fieldset.pere{
  }
  
  
-input[type=radio] {
+input[type=radio],input[type=checkbox] {
 
  margin-left:15px;
  width:20px;
@@ -266,6 +266,8 @@ input[type=submit], input[type=reset],input[type=button] {
  cursor:pointer;
  }
 
+
+ 
  
  input, textarea, select {
  padding:2px;
@@ -350,7 +352,7 @@ tr.impair{
 .role{
 	
 	width:160px;
-	height:170px;
+	height:200px;
 	background-color:#b9dddd;
 	border-radius:5px;
 	

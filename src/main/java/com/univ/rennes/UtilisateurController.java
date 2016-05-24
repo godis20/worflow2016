@@ -43,7 +43,12 @@ public class UtilisateurController {
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
 			@RequestParam("poste") String poste,
-			@RequestParam("id_composante") int id_composante
+			@RequestParam("id_composante") int id_composante,
+			@RequestParam("classique") int classique,
+			@RequestParam("recherche") int recherche,
+			@RequestParam("admin") int admin,
+			@RequestParam("superadmin") int superadmin,
+			@RequestParam("etatuser") int etatuser
 	)
 	{
 		
@@ -56,34 +61,48 @@ public class UtilisateurController {
 		newUser.setPoste(poste);
 		
 		ModelAndView model = new ModelAndView("form_utilisateur");
-		
+		ModelAndView modelist = new ModelAndView("listutilisateurs");
 		try{
 			
+			if(etatuser==1){
+				newUser.setEtat_utilisateur(true);
+			}else newUser.setEtat_utilisateur(false);
+			
+			
+			Privilege privClassique= utilisateurService.getPrivilegebyId(classique);
+			Privilege privRecherche= utilisateurService.getPrivilegebyId(recherche);
+			Privilege privAdmin= utilisateurService.getPrivilegebyId(admin);
+			Privilege privSuperadmin= utilisateurService.getPrivilegebyId(superadmin);
 			
 			Utilisateur user=(Utilisateur) request.getSession().getAttribute("user");		
 			newUser.setCreateur(user);
 			
 			Date date = new Date(); 
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 			
-		
 			String formattedDate = dateFormat.format(date);
-			
+
 			newUser.setDateCreationUtilisateur(formattedDate);
 			
-		newUser.setComposante(utilisateurService.getComposantebyId(id_composante));//recuperer la composante co
-		
-		utilisateurService.ajoutUtilisateur(newUser);
-		
-		if (newUser!= null){
-	
 			
-			return  new ModelAndView("redirect:/listutilisateurs");	    
-		}
-
-		model.addObject("composantes", utilisateurService.getAllComposante());
-		model.addObject("error", "Erreur lors de l'ajout de l'utilisateur");
-		return model;
+			newUser.setComposante(utilisateurService.getComposantebyId(id_composante));//recuperer la composante co
+			
+			utilisateurService.ajoutUtilisateur(newUser, privClassique,privRecherche,privAdmin,privSuperadmin);
+			
+			
+			if (newUser!= null){
+				
+				modelist.addObject("succes", "Utilisateur crée avec succes");
+				modelist.addObject("listdemandeclas", utilisateurService.getAllUtilisateur());
+				return modelist;
+		
+				  
+			}
+	
+			model.addObject("composantes", utilisateurService.getAllComposante());
+			model.addObject("error", "Erreur lors de l'ajout de l'utilisateur");
+			return model;
+			
 		} catch (Exception e){
 	
 			model.addObject("composantes", utilisateurService.getAllComposante());
@@ -110,6 +129,29 @@ public class UtilisateurController {
 			 return new ModelAndView("form_utilisateur", "composantes", new ArrayList<Composante>()); 
 		}
 	}
+	
+	
+	
+
+	/**
+	 * Contrôleur de l'affichage du formulaire de creation d'un utilisateur,
+	 * et du stockage dans la BD
+	 */
+	@RequestMapping(value = "/modifierutilisateur", method = RequestMethod.GET)
+	public ModelAndView cont_form_modifierutilisateur(
+			
+			@RequestParam("iduser") int iduser
+			)
+	{
+		try
+		{
+			return new ModelAndView("form_modifierutilisateur", "utilisateur", utilisateurService.getUtilisateurbyId(iduser));
+		}catch(Exception e)
+		{
+			 return new ModelAndView("form_modifierutilisateur", "utilisateur", new ArrayList<Composante>()); 
+		}
+	}
+	
 	
 	
 	

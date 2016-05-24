@@ -139,6 +139,7 @@
 								
 								<div class="role" id="classique">
 									<label id="clas"> Classique :</label>
+									<p><input type="radio" name="classique" id="none" value="0" checked><label> Aucun </label></p>
 									<p><input type="radio" name="classique" id="ddeurclas" value="1"><label> Demandeur </label></p>
 									<p><input type="radio" name="classique" id="instructeur" value="2"><label> Instructeur </label></p>
 									<p><input type="radio" name="classique" id="valclas" value="3"><label> Validateur </label></p>
@@ -148,6 +149,7 @@
 								
 								<div class="role" id="recherche">
 									<label id="clas"> Recherche :</label>
+									<p><input type="radio" name="recherche" id="none" value="0" checked><label> Aucun </label></p>
 									<p><input type="radio" name="recherche" id="ddeurech" value="5"><label> Demandeur </label></p>
 									<p><input type="radio" name="recherche" id="valrech" value="6"><label> Validateur </label></p>
 									<p><input type="radio" name="recherche" id="clotureur" value="7"><label> Clôtureur </label></p>
@@ -156,13 +158,15 @@
 								
 								<div class="role" id="administrateur">
 									<label id="clas"> Clas. & Rech. :</label>
-									<p><input type="radio" name="administrateur" id="admin" value="8"><label> Gestion user</label></p>
+									<p><input type="radio" name="admin" id="none" value="0" checked><label> Aucun </label></p>
+									<p><input type="radio" name="admin" id="admin" value="8"><label> Gestion user</label></p>
 									
 									
 								</div>
 						
 								<div class="role" id="superadmin">
 									<label id="clas"> Clas. & Rech. :</label>
+									<p><input type="radio" name="superadmin" id="none" value="0" checked><label> Aucun </label></p>
 									<p><input type="radio" name="superadmin" id="superadmin" value="9"><label> Gestion appli.</label></p>
 									
 									

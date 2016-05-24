@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.univ.rennes.model.Composante;
 import com.univ.rennes.model.Privilege;
+import com.univ.rennes.model.UserTypeDemande;
 import com.univ.rennes.model.Utilisateur;
 
 @Repository
@@ -25,12 +26,71 @@ public class UtilisateurService {
 	 *
 	 */
 	@Transactional
-	public Utilisateur ajoutUtilisateur(Utilisateur utilisateur){
+	public Utilisateur ajoutUtilisateur(Utilisateur utilisateur, Privilege privClassique, Privilege privRecherche, Privilege privAdmin, Privilege privSuperadmin){
 		
 		try{
 			Session session=sessionFactory.getCurrentSession();
 			session.persist(utilisateur); //methode hibernate pour faire un ajout dans la session
 			session.flush(); // methode hibernate pour sauvegarder l'ajout dans la BD
+			
+			if(utilisateur!=null){
+				
+				UserTypeDemande userTypeDemande=new UserTypeDemande();
+				
+				if (privClassique!= null){
+					
+					userTypeDemande.setId_typeDemande(1);
+					userTypeDemande.setId_utilisateur(utilisateur.getId());
+					userTypeDemande.setPrivilege(privClassique);
+					
+					session.persist(userTypeDemande);
+					session.flush();
+					
+					
+				}
+				
+				
+				if (privRecherche!= null){
+					
+					userTypeDemande.setId_typeDemande(2);
+					userTypeDemande.setId_utilisateur(utilisateur.getId());
+					userTypeDemande.setPrivilege(privRecherche);
+					
+					session.persist(userTypeDemande);
+					session.flush();
+					
+					
+				}
+				
+				
+				if (privAdmin!= null){
+					
+					userTypeDemande.setId_typeDemande(1);
+					userTypeDemande.setId_utilisateur(utilisateur.getId());
+					userTypeDemande.setPrivilege(privAdmin);
+					
+					session.persist(userTypeDemande);
+					session.flush();
+					
+					
+				}
+				
+				
+				if (privSuperadmin!= null){
+					
+					userTypeDemande.setId_typeDemande(1);
+					userTypeDemande.setId_utilisateur(utilisateur.getId());
+					userTypeDemande.setPrivilege(privSuperadmin);
+					
+					session.persist(userTypeDemande);
+					session.flush();
+					
+					
+				}
+			}
+			
+			
+			
 			return utilisateur; // retour de l'utilisateur cree
 			
 		}catch (Exception e){
@@ -68,6 +128,44 @@ public class UtilisateurService {
 			Session session=sessionFactory.getCurrentSession();
 			Composante composante =(Composante) session.get(Composante.class, id);// recuperer un objet à partir de sa cle primaire
 			return composante;
+		}catch (Exception e){
+			return null;
+		}
+		
+		
+	}
+	
+	
+	
+	
+	/**
+	 * methode qui recupere une utilisateur dans la BD avec l'ID de celle ci
+	 *
+	 */
+	@Transactional
+	public Utilisateur getUtilisateurbyId(int id){
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			Utilisateur utilisateur =(Utilisateur) session.get(Utilisateur.class, id);// recuperer un objet à partir de sa cle primaire
+			return utilisateur;
+		}catch (Exception e){
+			return null;
+		}
+		
+		
+	}
+	
+	
+	/**
+	 * methode qui recupere une utilisateur dans la BD avec l'ID de celle ci
+	 *
+	 */
+	@Transactional
+	public Privilege getPrivilegebyId(int id){
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			Privilege privilege =(Privilege) session.get(Privilege.class, id);// recuperer un objet à partir de sa cle primaire
+			return privilege;
 		}catch (Exception e){
 			return null;
 		}

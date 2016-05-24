@@ -177,7 +177,7 @@
 				
 				<p>
 				<label for="obsValidation">Remarques :</label>
-				<textarea name="obsValidation" id="obsValidation" rows="6" cols="50" required >Vos remarques</textarea>       
+				<textarea name="obsValidation" id="obsValidation" rows="6" cols="50" placeholder="Vos remarques par rapport à la decision prise"required ></textarea>       
 				<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
 				</p>
 			

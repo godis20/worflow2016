@@ -8,7 +8,7 @@
 <meta charset="utf-8" />
         <title>Liste utilisateurs</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
-       
+    <link rel="icon" type="image/png" href="<c:url value="/ressources/favicone.jpg"/>" />   
 
  </head>
 
@@ -34,6 +34,22 @@
 			<jsp:include page="form_rechercheutilisateurs.jsp"></jsp:include>
 			
 			<fieldset>
+			<p>
+			
+					 <span class="error">
+				   		<c:if test="${error!=null}">
+				   			<img src="<c:url value="/resources/warning.jpg"/>" alt="" />
+				   			<c:out value="${error}"/>
+				   		</c:if>
+				   </span>
+				   
+				    <span class="succes">
+				   		<c:if test="${succes!=null}">
+				   			<img src="<c:url value="/resources/succes.jpg"/>" alt="" />
+				   			<c:out value="${succes}"/>
+				   		</c:if>
+				   </span>
+			</p>
 			
 			<legend>Liste utilisateurs du système </legend>
 		

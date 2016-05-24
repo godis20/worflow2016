@@ -11,7 +11,7 @@
 
         <meta charset="utf-8" />
 
-        <title>Modifier utilisateur</title>
+        <title>Modifier parametres utilisateur</title>
 
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
@@ -106,9 +106,11 @@
 							
 							<c:if test="${utilisateur.etat_utilisateur==true }">
 							<input type="radio" name="etatuser" id="actif" value="1" checked><label>Activé </label>
+							<input type="radio" name="etatuser" id="nonactif" value="0" ><label>Desactivé </label>
 							</c:if>
 							
 							<c:if test="${utilisateur.etat_utilisateur==false }">
+							<input type="radio" name="etatuser" id="actif" value="1" ><label>Activé </label>
 							<input type="radio" name="etatuser" id="nonactif" value="0" checked><label>Desactivé </label>
 							</c:if>
 						
@@ -126,6 +128,7 @@
 								
 								<div class="role" id="classique">
 									<label id="clas"> Classique :</label>
+									<p><input type="radio" name="classique" id="none" value="0" checked><label> Aucun </label></p>
 									<p><input type="radio" name="classique" id="ddeurclas" value="1"><label> Demandeur </label></p>
 									<p><input type="radio" name="classique" id="instructeur" value="2"><label> Instructeur </label></p>
 									<p><input type="radio" name="classique" id="valclas" value="3"><label> Validateur </label></p>
@@ -135,6 +138,7 @@
 								
 								<div class="role" id="recherche">
 									<label id="clas"> Recherche :</label>
+									<p><input type="radio" name="recherche" id="none" value="0" checked><label> Aucun </label></p>
 									<p><input type="radio" name="recherche" id="ddeurech" value="5"><label> Demandeur </label></p>
 									<p><input type="radio" name="recherche" id="valrech" value="6"><label> Validateur </label></p>
 									<p><input type="radio" name="recherche" id="clotureur" value="7"><label> Clôtureur </label></p>
@@ -143,6 +147,7 @@
 								
 								<div class="role" id="administrateur">
 									<label id="clas"> Clas. & Rech. :</label>
+									<p><input type="radio" name="admin" id="none" value="0" checked><label> Aucun </label></p>
 									<p><input type="radio" name="administrateur" id="admin" value="8"><label> Gestion user</label></p>
 									
 									
@@ -150,6 +155,7 @@
 						
 								<div class="role" id="superadmin">
 									<label id="clas"> Clas. & Rech. :</label>
+									<p><input type="radio" name="superadmin" id="none" value="0" checked><label> Aucun </label></p>
 									<p><input type="radio" name="superadmin" id="superadmin" value="9"><label> Gestion appli.</label></p>
 									
 									
@@ -173,7 +179,7 @@
 				   		</c:if>
 				   </span>
 				
-                <input type="submit" value="Valider modification"  />
+                <input type="submit" value="Modifier"  />
 
                 <input type="reset" value="Remettre à zéro" /> <br />
 

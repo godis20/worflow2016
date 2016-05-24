@@ -20,20 +20,28 @@
 		    <p> 
 		    <label for="composante">Composante :</label>
 		    <input type="text" name="composante" id="composante" />
-		    
-		    <label for="role">Rôle utilisateur :</label>
+		  
+		  		  	
+		  	 <label for="role">Rôle utilisateur :</label>
 		     <select name="role" id="role" >
 		     
 		     	<option value="" > Choisissez un rôle </option>
-				 <c:forEach items = "${privilege}" var = "privilege">
-						   <option value="${privilege.id}" > <c:out value="${privilege.libellePrivilege}"></c:out> </option>
-				 </c:forEach>
-		     								          
-			</select>
+				<option value="1" > Demandeur classique </option>
+				<option value="2" > Instructeur classique </option>
+				<option value="3" > Validateur classique </option>
+				<option value="4" > Gestionnaire classique </option>
+				<option value="5" > Demandeur recherche </option>
+				<option value="6" > Validateur recherche </option>
+				<option value="7" > Clôture recherche </option>
+										          
+			 </select>
+		  	
+		    
+		    <input type="checkbox" name="admin" id="admin" value="5"><label> Admin ? </label>
 		    
 		    </p>
 		    
-		    <p> 
+		
 		  
 		    <input type="submit" value="Rechercher" name="action">
 		    

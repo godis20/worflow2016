@@ -145,9 +145,7 @@
 				       
 				      <p>
 				       <label for="argumentaire"> Argumentaires : </label>
-				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50"  disabled="disabled" ><c:out value="${demande.argumentaires }"/>
-				      
-				       </textarea>       
+				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50"  disabled="disabled" placeholder="Votre argumentaire!!!"><c:out value="${demande.argumentaires }"/></textarea>       
 				       </p>
 			
 		
@@ -159,7 +157,7 @@
 				
 				<p>
 				<label for="observation"> Observations :<span class="requis">*</span> </label>
-				<textarea name="observation" id="observation" rows="6" cols="50" required>Vos observations</textarea>       
+				<textarea name="observation" id="observation" rows="6" cols="50" placeholder="Vos observations" required></textarea>       
 				<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
 				</p>
 			

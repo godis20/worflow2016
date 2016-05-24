@@ -142,8 +142,7 @@
 							 		<p> 
 							       <label for="motif">Motif disponibilité poste  :<span class="requis">*</span> </label>
 							       
-							        <textarea name="motif" id="motif" rows="2" cols="40"  placeholder="Ex: décéde, congé maternité...">
-							       </textarea> 
+							        <textarea name="motif" id="motif" rows="2" cols="40"  placeholder="Ex: congé de maternité, arrêt maladie..."></textarea> 
 							       </p> 
 							       
 						</fieldset>
@@ -210,11 +209,12 @@
 				       </select>
 				       </p> 
 				       
-				      <p>
+				     	<p>
 				       <label for="argumentaire"> Argumentaires :<span class="requis">*</span> </label>
-				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" placeholder="Votre argumentaire par rapport à la demande">
-				       </textarea>       
+				       
+				       <textarea name="argumentaire" id="argumentaire" cols="40" placeholder="Votre argumentaire!!!"></textarea>    
 				       </p>
+				     
 				
 				   </fieldset>
 				   <p>
@@ -247,6 +247,10 @@
 
 	 <%-- Petite fonction jQuery permettant de masquer le bloc "agent a remplacer" en fonction du type de besoin. --%>
 	 
+	 
+	 	<script src="/js/jquery.min.js"></script>
+       
+        
 	    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
    
         <script type="text/javascript">
@@ -256,7 +260,7 @@
         		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant aux clients existants */
 //         		$("div#ancienClient").hide();
         		/* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le bloc d'éléments correspondant (nouveau ou ancien client) */
-                
+                	
         		 $("div#agent").hide();
         		 $("#nature").change(function() {
                 	

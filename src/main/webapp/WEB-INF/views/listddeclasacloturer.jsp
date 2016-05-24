@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Demandes en attente de validation</title>
+        <title>Liste demande classique à clôturer</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 

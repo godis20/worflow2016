@@ -11,7 +11,7 @@
 				<ul id="myul">
 				
 					<li>
-					  <a href="listdemandeclas">Liste demande</a>
+					  <a href="listdemandeclas">Liste demandes</a>
 					</li>
 					
 					 <li>
@@ -52,7 +52,7 @@
 				<ul id="myul">
 				
 					<li>
-					  <a href="listdemanderech">Liste demande</a>
+					  <a href="listdemanderech">Liste demandes</a>
 					</li>
 					
 					 <li>
@@ -94,7 +94,7 @@
 					</li>
 					
 					 <li>
-					     <a href="listutilisateurs"> Parametrage utilisateur </a>
+					     <a href="listutilisateurs"> Liste utilisateurs </a>
 					 </li>
 					
 					

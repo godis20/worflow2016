@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Page demande de recrutement recherche</title>
+        <title>Creation demande recherche</title>
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
@@ -125,8 +125,7 @@
 			       
 			       <p>
 			       <label for="missions"> Missions : <span class="requis">*</span></label>
-			       <textarea name="missions" id="missions" rows="6" cols="50" placeholder="Principales missions">
-			       </textarea>       
+			       <textarea name="missions" id="missions" rows="6" cols="50" placeholder="Principales missions!!!"></textarea>       
 			       </p>
 			        
 			       
@@ -157,8 +156,7 @@
 			       
 			       <p>
 			       <label for="argumentaire">Argumentaires : <span class="requis">*</span></label>
-			       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" placeholder="Votre argumentaire par rapport à la demande">
-			       </textarea>       
+			       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" placeholder="Votre argumentaire!!!"></textarea>       
 			       </p>
 			
 			   </fieldset>

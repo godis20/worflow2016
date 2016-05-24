@@ -6,7 +6,7 @@
 <head>
 
 <meta charset="utf-8" />
-        <title>Demandes à renouveller</title>
+        <title>Liste demandes classique à renouveller</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
        
 
