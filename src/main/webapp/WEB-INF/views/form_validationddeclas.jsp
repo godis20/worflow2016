@@ -184,8 +184,9 @@
 				<p>
 				
 				 <label for="obsValidation">Decision : <span class="requis">*</span></label>
-				<input  type="radio"  name="avis" value="oui" id="oui"  required/> <label for="oui">Oui</label>
-       			<input  type="radio"  name="avis" value="non" id="oui"  required/> <label for="non">Non</label>
+				<input  type="radio"  name="avis" value="oui" id="avis"  required/> <label for="avis">Oui</label>
+       			<input  type="radio"  name="avis" value="non" id="avis"  required/> <label for="avis">Non</label>
+				</p>
 				
 				<div id="gestionnaire">
 				
@@ -194,7 +195,7 @@
 				
 				</div>
 				
-				</p>
+				
 			
 			</fieldset>
 					<p>
@@ -227,19 +228,27 @@
 	
 	
 	 <%-- Petite fonction jQuery permettant de masquer le bloc "Gestionnaire de la demande" de l'avis du validateur. --%>
-        <script>
+        <script src="/js/jquery.min.js"></script>
+       
+        
+	   <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+        
+        
+        <script type="text/javascript">
         	$(document).ready(function(){
         		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant au gestionnaire de la demande */
 //         		$("div#ancienClient").hide();
         		/* 2 - Au clic sur un des deux boutons radio "oui", on affiche le bloc d'éléments "gestionnaire" si la valeur est oui */
                 
         		 $("div#gestionnaire").hide();
-        		 $("#oui").change(function() {
+        		
+        		 $("#avis").change(function() {
                 	
                     
-                    if($("#oui").val() == "oui"){
+                    if($("#avis").val() == "oui"){
                     	
-                    	$("div#gestionnaire").show();
+                    	$("div#gestionnaire").show("fast");
+                    	
                    }
                     else  $("div#gestionnaire").hide();
                 });

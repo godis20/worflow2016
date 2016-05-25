@@ -30,7 +30,7 @@
 		
 		<div class="content">
 
-				<form method="post" name="myForm" action="ajoutdemandeclas"   onsubmit="return validerform(this.myForm)"
+				<form method="post" name="myForm" action="ajoutdemandeclas"   
 				
 					  onreset="return confirm('Voulez vous vraiment reinitialiser  ?');">
 					  
@@ -81,14 +81,14 @@
 				       <legend>Détermination du besoin</legend> <!-- Titre du fieldset -->
 				       <p> 
 				       <label for="nature">Nature de la demande : <span class="requis">*</span> </label>
-				       <select name="nature" id="nature"  required autofocus>
-				       	   <option value="">Choisissez une option </option>
+				       <select name="nature" id="nature"  required autofocus >
+				       	   <option value="" >Choisissez une option </option>
 				           <option value="1">Emploi vacant</option>
 				           <option value="2">Emploi temporaire</option>
 				           <option value="3">Emploi pour renforcement</option>
 				           
 				        </select>  
-				        <span id="errornature" class="error"><c:out value="${errornature}"/></span>
+				        
 				       
 				     
 				       <p> 
@@ -106,13 +106,19 @@
 						<p> 
 				       <label for="quotite">Quotité de temps de travail : <span class="requis">*</span> </label>
 				        <select name="quotite" id="quotite" >
-				           <option value="none">Choisissez une option </option>
+				           <option value="0">Choisissez une option </option>
 				           <option value="100%">100 %</option>
-				           <option value="75%">75 %</option>
+				           <option value="90%">90 %</option>
+				           <option value="80%">80 %</option>
+				           <option value="70%">70 %</option>
+				           <option value="60%">60 %</option>
 				           <option value="50%">50 %</option>
-				           <option value="25%">25 %</option>
+				            <option value="40%">40 %</option>
+				           <option value="30%">30 %</option>
+				          
 				          
 				       </select>
+				       <span id="errorquotite" class="error">  <c:out value="${errorquotite}"/></span>
 				       </p> 
 				       
 				       
@@ -137,12 +143,14 @@
 							       <p> 
 							       <label for="dateagt">Date fin de service :<span class="requis">*</span> </label>
 							       <input type="date" name="dateagt" id="dateagt" size="30" maxlength="30" />
+							       <span id="errordateagt" class="error">  <c:out value="${errordateagt}"/></span>
 							 		</p> 
 							 		
 							 		<p> 
 							       <label for="motif">Motif disponibilité poste  :<span class="requis">*</span> </label>
 							       
-							        <textarea name="motif" id="motif" rows="2" cols="40"  placeholder="Ex: congé de maternité, arrêt maladie..."></textarea> 
+							        <textarea name="motif" id="motif" rows="2" cols="40"  placeholder="Ex: congé de maternité, arrêt maladie..."></textarea>
+							        <span id="errormotif" class="error">  <c:out value="${errormotif}"/></span> 
 							       </p> 
 							       
 						</fieldset>
@@ -167,12 +175,13 @@
 						
 						<p> 
 				       <label for="categorie">Catégorie poste :<span class="requis">*</span> </label>
-				        <select name="categorie" id="categorie" required autofocus>
-				           <option value="">Choisissez une option </option>
+				        <select name="categorie" id="categorie"  autofocus>
+				           <option value="0">Choisissez une option </option>
 				           <option value="A">A </option>
 				           <option value="B">B </option>
 				           <option value="C">C </option>
 				       </select>
+				        <span id="errorcategorie" class="error">  <c:out value="${errorcategorie}"/></span>
 				       </p> 
 				       
 				      
@@ -190,13 +199,16 @@
 						 <p> 
 				       <label for="intitule">Intitule de la fonction :<span class="requis">*</span> </label>
 				       <input type="text" name="intitule" id="intitule" />
+				       <span id="errorintitule" class="error">  <c:out value="${errorintitule}"/></span>
 				       </p> 
 				       
 				       <p> 
 				       <label for="niveau">Niveau diplôme  :<span class="requis">*</span> </label>
-				        <select name="niveau" id="niveau"  required autofocus>
-				           <option value="">Choisissez une option </option>
+				        <select name="niveau" id="niveau"  >
+				           <option value="0">Choisissez une option </option>
+				           <option value="ind">Indifferent</option>
 				           <option value="BAC">BAC </option>
+				           
 				           <option value="BAC + 1">BAC + 1</option>
 				           <option value="BAC + 2">BAC + 2</option>
 				           <option value="BAC + 3">BAC + 3</option>
@@ -207,12 +219,14 @@
 				           <option value="BAC + 8">BAC + 8</option>
 				           
 				       </select>
+				       <span id="errorniveau" class="error">  <c:out value="${errorniveau}"/></span>
 				       </p> 
 				       
 				     	<p>
 				       <label for="argumentaire"> Argumentaires :<span class="requis">*</span> </label>
 				       
-				       <textarea name="argumentaire" id="argumentaire" cols="40" placeholder="Votre argumentaire!!!"></textarea>    
+				       <textarea name="argumentaire" id="argumentaire" cols="50" placeholder="Votre argumentaire!!!"></textarea>  
+				       <span id="errorargumentaire" class="error">  <c:out value="${errorargumentaire}"/></span>  
 				       </p>
 				     
 				
@@ -227,8 +241,9 @@
 				   </p>
 				   
 				   <input type="reset" value="Annuler" >
-				   <input type="submit" value="Enregistrer" id="action" name="action">
-				   <input type="submit" value="Envoyer" id="action" name="action"    >
+				   
+				   <input type="submit" value="Enregistrer" id="action" name="action" >
+				   <input type="submit" value="Envoyer" id="action" name="action" onClick=" return verifForm()">
 				   
 				   
 				  </fieldset> 
@@ -251,14 +266,14 @@
 	 	<script src="/js/jquery.min.js"></script>
        
         
-	    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+	   <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
    
         <script type="text/javascript">
 	 
 	 
         	$(document).ready(function(){
         		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant aux clients existants */
-//         		$("div#ancienClient").hide();
+
         		/* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le bloc d'éléments correspondant (nouveau ou ancien client) */
                 	
         		 $("div#agent").hide();
@@ -267,7 +282,7 @@
                     
                     if(($("#nature").val()) != "3" && ($("#nature").val()!="")){
                     	
-                    	$("div#agent").show();
+                    	$("div#agent").show("fast");
                    }
                     else  $("div#agent").hide();
                 });
@@ -277,60 +292,122 @@
         	
         	
         	
+        	function surligne(champ, erreur)
         	
+        	{
+        	   if(erreur){
+        		
+        	      champ.style.borderColor = "#c42622";
+        	   	  champ.style.fontWeight= "bold";
+        	   }
         	
-        	function validerform(formulaire){
-        		
-  	
-        		
-        			
-        			var nature = formulaire.nature.value;
-        			var action = formulaire.action.value;
-         			var quotite= formulaire.quotite.value;
-         			var nomagt= formulaire.nomagt.value;
-         			var prenomagt= formulaire.prenomagt.value;
-         			var dateagt= formulaire.dateagt.value;
-         			var motif= formulaire.motif.value; 
-        			
-        			
+        	}
         	
-        			if(action.equals("Envoyer")){
+        
+        	
+        	function verifForm(){
+
+        				document.getElementById('nature').validationMessage;
+    					
+    					var nature = document.getElementById('nature').value;
+    					
+    					var nomagt = document.getElementById('nomagt').value;
+        				var prenomagt = document.getElementById('prenomagt').value;			
+        				var dateagt = document.getElementById('dateagt').value;
+        				var motif = document.getElementById('motif').value;
+        				var quotite = document.getElementById('quotite').value;
         				
+        				var categorie = document.getElementById('categorie').value;
+        				var intitule = document.getElementById('intitule').value;
+        				var niveau = document.getElementById('niveau').value;
+        				var argumentaire = document.getElementById('argumentaire').value;
+            			
+            			if(nature!=3 && nature!=""){
+            				
+            				
+            				
+            				if(nomagt=="" || nomagt.trim().length <3){
+            					
+            					surligne(document.getElementById('nomagt'),true);
+            					document.getElementById('errornomagt').innerHTML = "Le nom doit tenir au moins 3 positions!!";
+            					return false;
+            				} 
+            				
+    						if(prenomagt=="" || prenomagt.trim().length<3){
+    							
+    							surligne(document.getElementById('prenomagt'),true);
+            					document.getElementById('errorprenomagt').innerHTML = "Le prenom doit tenir au moins 3 positions!!";
+            					return false;
+            				}
+    						
+							if(dateagt=="" || dateagt==null){
+    							
+    							surligne(document.getElementById('dateagt'),true);
+            					document.getElementById('errordateagt').innerHTML = "La date doit être renseigné!!";
+            					return false;
+            				}
+							
+							if(motif=="" || motif.trim().length < 6){
+    							
+    							surligne(document.getElementById('motif'),true);
+            					document.getElementById('errormotif').innerHTML = "Le motif doit tenir au moins sur 6 positions!";
+            					return false;
+            				}
+            				
+            			}
+            			
+            			
+						if(quotite ==0){
+            				
+            				surligne(document.getElementById('quotite'),true);
+            				document.getElementById('errorquotite').innerHTML = "Veuillez choisir une option!!";
+        					return false;
+            				
+            			}
+            			
+            			
+						if(categorie ==0){
+            				
+            				surligne(document.getElementById('categorie'),true);
+            				document.getElementById('errorcategorie').innerHTML = "Veuillez choisir une option!!";
+        					return false;
+            				
+            			}
+            			
+            			if(intitule.trim().length < 6){
+            				
+            				surligne(document.getElementById('intitule'),true);
+            				document.getElementById('errorintitule').innerHTML = "Intitulé doit tenir au moins sur 6 positions!!";
+        					return false;
+            				
+            			}
+            			
+            			
+						if(niveau ==0){
+            				
+            				surligne(document.getElementById('niveau'),true);
+            				document.getElementById('errorniveau').innerHTML = "Veuillez choisir une option!!";
+        					return false;
+            				
+            			}
+    					
+						
+						if(argumentaire.trim().length < 3){
+            				
+            				surligne(document.getElementById('argumentaire'),true);
+            				document.getElementById('errorargumentaire').innerHTML = "Argumentaire tient au moins sur 3 positions!!";
+        					return false;
+            				
+            			}
+    					
+						
+    					return true;
+     
         			
         			
-        			if ( nature!='3'){
-        				
-        					
-        					
-        					if(nomagt.length <2){
-        						
-        						document.getElementById('errornomagt').innerHTML = "Le nom doit tenir au moins sur 02 positions!!! ";
-        						
-        						return false;
-        					}
-        					
-        					else if(prenomagt.length<2){
-        						document.getElementById('errorprenomagt').innerHTML = "Le prénom doit tenir au moins sur 02 positions!!! ";
-        						
-        						return false;
-        					} 
-        			
-        			}	//|| prenomagt.length==0 || dateagt.length < 10 ||motif.length < 10){
-        			
-        			
-        				
-        				return true;
-        			
-        			
-        			
-        		}
-        			return true;
-        		
         	}	
         		
-        	
-        	
-        	
+     	
         	
         	function envoyerform(){  
         		
@@ -339,8 +416,8 @@
         	    }
         	  }
         	
-        </script>
-
+        
+	</script>
 
 </body>
 

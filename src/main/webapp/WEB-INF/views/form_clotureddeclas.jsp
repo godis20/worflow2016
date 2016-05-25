@@ -237,7 +237,7 @@
 				       <p> 
 				       <label for="obsCloture">Observations : <span class="requis">*</span> </label>
 				      
-				       	<textarea name="obsCloture" id="obsCloture" rows="2" cols="50"  >Vos observations</textarea>   
+				       	<textarea name="obsCloture" id="obsCloture" rows="2" cols="50" placeholder="Vos observations!!!" ></textarea>   
 				       </p>
 				        
 				      </div> 
