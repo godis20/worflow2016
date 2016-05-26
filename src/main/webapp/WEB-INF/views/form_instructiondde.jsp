@@ -88,7 +88,7 @@
 				       
 				       <!-- Si le type de besoin de la demande est different de "emploi pour renforcement"-->
 				        
-				        <c:if test="${demande.besoinDemande.id !='3'}">
+				        <c:if test="${demande.besoinDemande.id != 3}">
 				       
 				        <fieldset >
 				      		 <legend>Agent à remplacer  </legend> <!-- Titre du fieldset --> 

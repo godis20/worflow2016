@@ -30,7 +30,7 @@
 		
 		<div class="content">
 
-				<form method="post" name="myForm" action="ajoutdemandeclas"   
+				<form method="post" name="form" action="ajoutdemandeclas"   onsubmit="return verifForm(this)"
 				
 					  onreset="return confirm('Voulez vous vraiment reinitialiser  ?');">
 					  
@@ -44,6 +44,7 @@
 				   			<c:out value="${error}"/>
 				   		</c:if>
 				   </span>
+				   <span id="errorform" class="error">  <c:out value="${errorform}"/></span> 
 				 </p>
 				 
 				   <fieldset>
@@ -105,8 +106,8 @@
 				       
 						<p> 
 				       <label for="quotite">Quotité de temps de travail : <span class="requis">*</span> </label>
-				        <select name="quotite" id="quotite" >
-				           <option value="0">Choisissez une option </option>
+				        <select name="quotite" id="quotite" onblur="verifQuotite(this)">
+				           <option value="">Choisissez une option </option>
 				           <option value="100%">100 %</option>
 				           <option value="90%">90 %</option>
 				           <option value="80%">80 %</option>
@@ -130,26 +131,26 @@
 							        
 							       <p> 
 							       <label for="nomagt">Nom : <span class="requis">*</span> </label>
-							       <input type="text" name="nomagt" id="nomagt"  size="30" maxlength="30" />
+							       <input type="text" name="nomagt" id="nomagt"  size="30" maxlength="30" onblur="verifNomagt(this)"/>
 							       <span id="errornomagt" class="error">  <c:out value="${errornomagt}"/></span>
 									</p>
 									
 									<p> 
 							       <label for="prenomagt">Prénom : <span class="requis">*</span> </label>
-							       <input type="text" name="prenomagt" id="prenomagt" />
+							       <input type="text" name="prenomagt" id="prenomagt" onblur="verifPrenomagt(this)"/>
 							       <span id="errorprenomagt" class="error">  <c:out value="${errorprenomagt}"/></span>
 							       </p> 
 							       
 							       <p> 
 							       <label for="dateagt">Date fin de service :<span class="requis">*</span> </label>
-							       <input type="date" name="dateagt" id="dateagt" size="30" maxlength="30" />
+							       <input type="date" name="dateagt" id="dateagt" size="30" maxlength="30" onblur="verifDateagt(this)"/>
 							       <span id="errordateagt" class="error">  <c:out value="${errordateagt}"/></span>
 							 		</p> 
 							 		
 							 		<p> 
 							       <label for="motif">Motif disponibilité poste  :<span class="requis">*</span> </label>
 							       
-							        <textarea name="motif" id="motif" rows="2" cols="40"  placeholder="Ex: congé de maternité, arrêt maladie..."></textarea>
+							        <textarea name="motif" id="motif" rows="2" cols="40" onblur="verifMotif(this)" placeholder="Ex: congé de maternité, arrêt maladie..."></textarea>
 							        <span id="errormotif" class="error">  <c:out value="${errormotif}"/></span> 
 							       </p> 
 							       
@@ -175,8 +176,8 @@
 						
 						<p> 
 				       <label for="categorie">Catégorie poste :<span class="requis">*</span> </label>
-				        <select name="categorie" id="categorie"  autofocus>
-				           <option value="0">Choisissez une option </option>
+				        <select name="categorie" id="categorie"  autofocus onblur="verifCategorie(this)">
+				           <option value="">Choisissez une option </option>
 				           <option value="A">A </option>
 				           <option value="B">B </option>
 				           <option value="C">C </option>
@@ -198,14 +199,14 @@
 						 
 						 <p> 
 				       <label for="intitule">Intitule de la fonction :<span class="requis">*</span> </label>
-				       <input type="text" name="intitule" id="intitule" />
+				       <input type="text" name="intitule" id="intitule" onblur="verifIntitule(this)"/>
 				       <span id="errorintitule" class="error">  <c:out value="${errorintitule}"/></span>
 				       </p> 
 				       
 				       <p> 
 				       <label for="niveau">Niveau diplôme  :<span class="requis">*</span> </label>
-				        <select name="niveau" id="niveau"  >
-				           <option value="0">Choisissez une option </option>
+				        <select name="niveau" id="niveau"  onblur="verifNiveau(this)">
+				           <option value="">Choisissez une option </option>
 				           <option value="ind">Indifferent</option>
 				           <option value="BAC">BAC </option>
 				           
@@ -225,7 +226,7 @@
 				     	<p>
 				       <label for="argumentaire"> Argumentaires :<span class="requis">*</span> </label>
 				       
-				       <textarea name="argumentaire" id="argumentaire" cols="50" placeholder="Votre argumentaire!!!"></textarea>  
+				       <textarea name="argumentaire" id="argumentaire" cols="50" placeholder="Votre argumentaire!!!" onblur="verifArgumentaire(this)"></textarea>  
 				       <span id="errorargumentaire" class="error">  <c:out value="${errorargumentaire}"/></span>  
 				       </p>
 				     
@@ -238,13 +239,19 @@
 				   			<c:out value="${error}"/>
 				   		</c:if>
 				   </span>
+				  
 				   </p>
+				
 				   
-				   <input type="reset" value="Annuler" >
+				   <input type="reset" value="Annuler" />
 				   
-				   <input type="submit" value="Enregistrer" id="action" name="action" >
-				   <input type="submit" value="Envoyer" id="action" name="action" onClick=" return verifForm()">
+<!-- 				   <input type="hidden" id="pushedbutton" value="1"/> -->
 				   
+				   <input type="submit" value="Enregistrer" id="action" name="action" />
+				   
+				   <input type="submit" value="Envoyer" id="action" name="action" />
+				   
+				
 				   
 				  </fieldset> 
 				   
@@ -299,116 +306,277 @@
         		
         	      champ.style.borderColor = "#c42622";
         	   	  champ.style.fontWeight= "bold";
+        	   }else{
+        		   
+        		   champ.style.borderColor = "";
+         	   	   champ.style.fontWeight= "";
         	   }
         	
         	}
         	
-        
         	
-        	function verifForm(){
+        	
+        	function verifNomagt(champ)
+        	{
+        		
+        		if(document.getElementById('nature').value!=3 && document.getElementById('nature').value!=""){
+        			
+        		
+		        	   if(champ.value.trim().length < 2 || champ.value.trim().length > 30)
+		        	   {
+		        	      document.getElementById('errornomagt').innerHTML="Le nom doit tenir sur 3 positions, max 30!!";
+		        		  surligne(champ, true);
+		        	      return false;
+		        	   }
+		        	   else
+		        	   {
+		        	      surligne(champ, false);
+		        		  document.getElementById('errornomagt').innerHTML="";
+		        	      return true;
+		        	   }
+        		}
+        	}
+        	
+        	
+        	
+        	function verifPrenomagt(champ)
+        	
+        	{
+        		
+        		if(document.getElementById('nature').value!=3 && document.getElementById('nature').value!=""){
+        		
+	        	   if(champ.value.trim().length < 2 || champ.value.trim().length > 30)
+	        	   {
+	        	      document.getElementById('errorprenomagt').innerHTML="Le prenom doit tenir sur 3 positions, max 30!!";
+	        		  surligne(champ, true);
+	        	      return false;
+	        	   }
+	        	   else
+	        	   {
+	        	      surligne(champ, false);
+	        		  document.getElementById('errorprenomagt').innerHTML="";
+	        	      return true;
+	        	   }
+        		}
+        	
+        	}
+        	
+        	
+        	
+        	function verifDateagt(champ)
+        	{
+        		if(document.getElementById('nature').value!=3 && document.getElementById('nature').value!=""){
+        			
+        		
+			        	   if(champ.value==null|| champ.value== "")
+			        	   {
+			        	      document.getElementById('errordateagt').innerHTML="La date doit être renseignée!!";
+			        		  surligne(champ, true);
+			        	      return false;
+			        	   }
+			        	   else
+			        	   {
+			        	      surligne(champ, false);
+			        		  document.getElementById('errordateagt').innerHTML="";
+			        	      return true;
+			        	   }
+        		}
+        	}
+        	
+        	
+        	
+        	function verifMotif(champ)
+        	{
+        		
+        		if(document.getElementById('nature').value!=3 && document.getElementById('nature').value!=""){
+        			
+        		
+			        	   if(champ.value.trim().length < 6)
+			        	   {
+			        		  document.getElementById('errormotif').innerHTML = "Le motif doit tenir au moins sur 6 positions!";
+			        		  surligne(champ, true);
+			        	      return false;
+			        	   }
+			        	   else
+			        	   {
+			        	      surligne(champ, false);
+			        		  document.getElementById('errormotif').innerHTML="";
+			        	      return true;
+			        	   }
+        		}
+        	}
+        	
+        	
 
-        				document.getElementById('nature').validationMessage;
+        	function verifQuotite(champ)
+        	{
+        	
+        		
+			        	   if(champ.value=="")
+			        	   {
+			        		  document.getElementById('errorquotite').innerHTML = "Veuillez choisir une option!!";
+			        		  surligne(champ, true);
+			        	      return false;
+			        	   }
+			        	   else
+			        	   {
+			        	      surligne(champ, false);
+			        		  document.getElementById('errorquotite').innerHTML="";
+			        	      return true;
+			        	   }
+        		
+        	}
+        	
+        	
+
+
+        	function verifCategorie(champ)
+        	{
+        	
+        		
+			        	   if(champ.value=="")
+			        	   {
+			        		  document.getElementById('errorcategorie').innerHTML = "Veuillez choisir une option!!";
+			        		  surligne(champ, true);
+			        	      return false;
+			        	   }
+			        	   else
+			        	   {
+			        	      surligne(champ, false);
+			        		  document.getElementById('errorcategorie').innerHTML="";
+			        	      return true;
+			        	   }
+        		
+        	}
+        	
+        	
+        	function verifIntitule(champ)
+        	{
+        	
+        		
+			        	   if(champ.value.trim().length < 6)
+			        	   {
+			        		  document.getElementById('errorintitule').innerHTML = "Intitulé doit tenir au moins sur 6 positions!!";
+			        		  surligne(champ, true);
+			        	      return false;
+			        	   }
+			        	   else
+			        	   {
+			        	      surligne(champ, false);
+			        		  document.getElementById('errorintitule').innerHTML="";
+			        	      return true;
+			        	   }
+        		
+        	}
+        	
+        	
+        	function verifNiveau(champ)
+        	{
+        	
+        		
+			        	   if(champ.value=="")
+			        	   {
+			        		  document.getElementById('errorniveau').innerHTML = "Veuillez choisir une option!!";
+			        		  surligne(champ, true);
+			        	      return false;
+			        	   }
+			        	   else
+			        	   {
+			        	      surligne(champ, false);
+			        		  document.getElementById('errorniveau').innerHTML="";
+			        	      return true;
+			        	   }
+        		
+        	}
+        	
+        	
+        	function verifArgumentaire(champ)
+        	{
+        	
+        		
+			        	   if(champ.value.trim().length < 3)
+			        	   {
+			        		  document.getElementById('errorargumentaire').innerHTML = "Argumentaire tient au moins sur 3 positions!!";
+			        		  surligne(champ, true);
+			        	      return false;
+			        	   }
+			        	   else
+			        	   {
+			        	      surligne(champ, false);
+			        		  document.getElementById('errorargumentaire').innerHTML="";
+			        	      return true;
+			        	   }
+        		
+        	}
+        	
+        	
+        	function verifForm(form)
+        	
+        	{
+
+        			
+        				//if(document.getElementById("pushedbutton").value == 1){return true;}
+        			
+        		
+    					var nature= document.getElementById("nature").value;
     					
-    					var nature = document.getElementById('nature').value;
-    					
-    					var nomagt = document.getElementById('nomagt').value;
-        				var prenomagt = document.getElementById('prenomagt').value;			
-        				var dateagt = document.getElementById('dateagt').value;
-        				var motif = document.getElementById('motif').value;
-        				var quotite = document.getElementById('quotite').value;
+    					var nomagt = verifNomagt(form.nomagt);
+        				var prenomagt = verifPrenomagt(form.prenomagt);		
+        				var dateagt = verifDateagt(form.dateagt);
+        				var motif = verifMotif(form.motif);
         				
-        				var categorie = document.getElementById('categorie').value;
-        				var intitule = document.getElementById('intitule').value;
-        				var niveau = document.getElementById('niveau').value;
-        				var argumentaire = document.getElementById('argumentaire').value;
+        				var quotite = verifQuotite(form.quotite);
+        			
+        				var categorie = verifCatgerorie(form.categorie);
+        				var intitule = verifIntitule(form.intitule);
+        				var niveau = verifNiveau(form.niveau);
+        				var argumentaire = verifArgumentaire(form.argumentaire);
+        				
+        				
+        				
             			
-            			if(nature!=3 && nature!=""){
+            		//	if(nature!=3 && nature!=""){
             				
             				
             				
-            				if(nomagt=="" || nomagt.trim().length <3){
+            				if(nomagt && prenomagt && dateagt && motif && quotite && categorie && intitule && niveau && argumentaire){
             					
-            					surligne(document.getElementById('nomagt'),true);
-            					document.getElementById('errornomagt').innerHTML = "Le nom doit tenir au moins 3 positions!!";
-            					return false;
+            					return true;
+            					
             				} 
             				
-    						if(prenomagt=="" || prenomagt.trim().length<3){
-    							
-    							surligne(document.getElementById('prenomagt'),true);
-            					document.getElementById('errorprenomagt').innerHTML = "Le prenom doit tenir au moins 3 positions!!";
+            				else{
+            					document.getElementById('errorform').innerHTML= "Le formulaire est mal rempli!!!";
             					return false;
+            					
             				}
+            				return false;
+            				
+          		}
+        //}
     						
-							if(dateagt=="" || dateagt==null){
-    							
-    							surligne(document.getElementById('dateagt'),true);
-            					document.getElementById('errordateagt').innerHTML = "La date doit être renseigné!!";
+           /*  			} else if (nature==3){
+            				
+
+            				if( quotite && categorie && intitule && niveau && argumentaire){
+            					
+            					return true;
+            					
+            				} 
+            				
+            				else{
+            					document.getElementById('errorform').innerHTML= "Le formulaire est mal remplibbbb!!!";
             					return false;
+            					
             				}
-							
-							if(motif=="" || motif.trim().length < 6){
-    							
-    							surligne(document.getElementById('motif'),true);
-            					document.getElementById('errormotif').innerHTML = "Le motif doit tenir au moins sur 6 positions!";
-            					return false;
-            				}
-            				
             			}
+        	} */
             			
             			
-						if(quotite ==0){
-            				
-            				surligne(document.getElementById('quotite'),true);
-            				document.getElementById('errorquotite').innerHTML = "Veuillez choisir une option!!";
-        					return false;
-            				
-            			}
-            			
-            			
-						if(categorie ==0){
-            				
-            				surligne(document.getElementById('categorie'),true);
-            				document.getElementById('errorcategorie').innerHTML = "Veuillez choisir une option!!";
-        					return false;
-            				
-            			}
-            			
-            			if(intitule.trim().length < 6){
-            				
-            				surligne(document.getElementById('intitule'),true);
-            				document.getElementById('errorintitule').innerHTML = "Intitulé doit tenir au moins sur 6 positions!!";
-        					return false;
-            				
-            			}
-            			
-            			
-						if(niveau ==0){
-            				
-            				surligne(document.getElementById('niveau'),true);
-            				document.getElementById('errorniveau').innerHTML = "Veuillez choisir une option!!";
-        					return false;
-            				
-            			}
-    					
+				
 						
-						if(argumentaire.trim().length < 3){
-            				
-            				surligne(document.getElementById('argumentaire'),true);
-            				document.getElementById('errorargumentaire').innerHTML = "Argumentaire tient au moins sur 3 positions!!";
-        					return false;
-            				
-            			}
-    					
-						
-    					return true;
-     
-        			
-        			
-        	}	
-        		
-     	
-        	
+    	
+       
         	function envoyerform(){  
         		
         	    if (confirm ('Voulez vous vraiment soumettre cette demande pour instruction ? ')){
