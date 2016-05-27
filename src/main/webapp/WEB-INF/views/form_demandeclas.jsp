@@ -7,8 +7,13 @@
 
 <meta charset="utf-8" />
         <title>Creation demande classique</title>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
-       
+     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
+     
+     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+     
+     <script type="text/javascript" src="<c:url value="resources/javascript/formddeclassique.js"/>" > </script>
+     <script src="<c:url value="resources/javascript/agentaremplacerclassique.js"/>" > </script>
+  	 <script src="<c:url value="resources/javascript/hautdepage.js"/>" > </script>
 
 
     </head>
@@ -29,6 +34,8 @@
 		</div>
 		
 		<div class="content">
+		
+			
 
 				<form method="post" name="form" action="ajoutdemandeclas"   onsubmit="return verifForm(this)"
 				
@@ -176,7 +183,7 @@
 						
 						<p> 
 				       <label for="categorie">Catégorie poste :<span class="requis">*</span> </label>
-				        <select name="categorie" id="categorie"  autofocus onblur="verifCategorie(this)">
+				        <select name="categorie" id="categorie"   onblur="verifCategorie(this)">
 				           <option value="">Choisissez une option </option>
 				           <option value="A">A </option>
 				           <option value="B">B </option>
@@ -220,11 +227,11 @@
 				           <option value="BAC + 8">BAC + 8</option>
 				           
 				       </select>
-				       <span id="errorniveau" class="error">  <c:out value="${errorniveau}"/></span>
+				       <span id="errorniveau" class="error">  <c:out value="${errorniveau}"/> </span>
 				       </p> 
 				       
 				     	<p>
-				       <label for="argumentaire"> Argumentaires :<span class="requis">*</span> </label>
+				       <label for="argumentaire"> Argumentaires :<span class="requis">*</spsan> </label>
 				       
 				       <textarea name="argumentaire" id="argumentaire" cols="50" placeholder="Votre argumentaire!!!" onblur="verifArgumentaire(this)"></textarea>  
 				       <span id="errorargumentaire" class="error">  <c:out value="${errorargumentaire}"/></span>  
@@ -245,11 +252,12 @@
 				   
 				   <input type="reset" value="Annuler" />
 				   
-<!-- 				   <input type="hidden" id="pushedbutton" value="1"/> -->
+
+				   <input type="hidden" value="" id="pushedbutton" name="pushedbutton" />
 				   
-				   <input type="submit" value="Enregistrer" id="action" name="action" />
+				   <input type="submit" value="Enregistrer" id="action" name="action" onclick="document.getElementById('pushedbutton').value='0' "/>
 				   
-				   <input type="submit" value="Envoyer" id="action" name="action" />
+				   <input type="submit" value="Envoyer" id="action" name="action" onclick="document.getElementById('pushedbutton').value='1' "/>
 				   
 				
 				   
@@ -265,327 +273,11 @@
 		<jsp:include page="footer.jsp"></jsp:include>
 		</footer>
 
+		<a href="#" title="Haut de page" class="scrollup"><i class="fa fa-arrow-up"></i></a>
 
+	
 
-	 <%-- Petite fonction jQuery permettant de masquer le bloc "agent a remplacer" en fonction du type de besoin. --%>
-	 
-	 
-	 	<script src="/js/jquery.min.js"></script>
-       
-        
-	   <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
-   
-        <script type="text/javascript">
-	 
-	 
-        	$(document).ready(function(){
-        		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant aux clients existants */
-
-        		/* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le bloc d'éléments correspondant (nouveau ou ancien client) */
-                	
-        		 $("div#agent").hide();
-        		 $("#nature").change(function() {
-                	
-                    
-                    if(($("#nature").val()) != "3" && ($("#nature").val()!="")){
-                    	
-                    	$("div#agent").show("fast");
-                   }
-                    else  $("div#agent").hide();
-                });
-        		 
-            });
-        	
-        	
-        	
-        	
-        	function surligne(champ, erreur)
-        	
-        	{
-        	   if(erreur){
-        		
-        	      champ.style.borderColor = "#c42622";
-        	   	  champ.style.fontWeight= "bold";
-        	   }else{
-        		   
-        		   champ.style.borderColor = "";
-         	   	   champ.style.fontWeight= "";
-        	   }
-        	
-        	}
-        	
-        	
-        	
-        	function verifNomagt(champ)
-        	{
-        		
-        		if(document.getElementById('nature').value!=3 && document.getElementById('nature').value!=""){
-        			
-        		
-		        	   if(champ.value.trim().length < 2 || champ.value.trim().length > 30)
-		        	   {
-		        	      document.getElementById('errornomagt').innerHTML="Le nom doit tenir sur 3 positions, max 30!!";
-		        		  surligne(champ, true);
-		        	      return false;
-		        	   }
-		        	   else
-		        	   {
-		        	      surligne(champ, false);
-		        		  document.getElementById('errornomagt').innerHTML="";
-		        	      return true;
-		        	   }
-        		}
-        	}
-        	
-        	
-        	
-        	function verifPrenomagt(champ)
-        	
-        	{
-        		
-        		if(document.getElementById('nature').value!=3 && document.getElementById('nature').value!=""){
-        		
-	        	   if(champ.value.trim().length < 2 || champ.value.trim().length > 30)
-	        	   {
-	        	      document.getElementById('errorprenomagt').innerHTML="Le prenom doit tenir sur 3 positions, max 30!!";
-	        		  surligne(champ, true);
-	        	      return false;
-	        	   }
-	        	   else
-	        	   {
-	        	      surligne(champ, false);
-	        		  document.getElementById('errorprenomagt').innerHTML="";
-	        	      return true;
-	        	   }
-        		}
-        	
-        	}
-        	
-        	
-        	
-        	function verifDateagt(champ)
-        	{
-        		if(document.getElementById('nature').value!=3 && document.getElementById('nature').value!=""){
-        			
-        		
-			        	   if(champ.value==null|| champ.value== "")
-			        	   {
-			        	      document.getElementById('errordateagt').innerHTML="La date doit être renseignée!!";
-			        		  surligne(champ, true);
-			        	      return false;
-			        	   }
-			        	   else
-			        	   {
-			        	      surligne(champ, false);
-			        		  document.getElementById('errordateagt').innerHTML="";
-			        	      return true;
-			        	   }
-        		}
-        	}
-        	
-        	
-        	
-        	function verifMotif(champ)
-        	{
-        		
-        		if(document.getElementById('nature').value!=3 && document.getElementById('nature').value!=""){
-        			
-        		
-			        	   if(champ.value.trim().length < 6)
-			        	   {
-			        		  document.getElementById('errormotif').innerHTML = "Le motif doit tenir au moins sur 6 positions!";
-			        		  surligne(champ, true);
-			        	      return false;
-			        	   }
-			        	   else
-			        	   {
-			        	      surligne(champ, false);
-			        		  document.getElementById('errormotif').innerHTML="";
-			        	      return true;
-			        	   }
-        		}
-        	}
-        	
-        	
-
-        	function verifQuotite(champ)
-        	{
-        	
-        		
-			        	   if(champ.value=="")
-			        	   {
-			        		  document.getElementById('errorquotite').innerHTML = "Veuillez choisir une option!!";
-			        		  surligne(champ, true);
-			        	      return false;
-			        	   }
-			        	   else
-			        	   {
-			        	      surligne(champ, false);
-			        		  document.getElementById('errorquotite').innerHTML="";
-			        	      return true;
-			        	   }
-        		
-        	}
-        	
-        	
-
-
-        	function verifCategorie(champ)
-        	{
-        	
-        		
-			        	   if(champ.value=="")
-			        	   {
-			        		  document.getElementById('errorcategorie').innerHTML = "Veuillez choisir une option!!";
-			        		  surligne(champ, true);
-			        	      return false;
-			        	   }
-			        	   else
-			        	   {
-			        	      surligne(champ, false);
-			        		  document.getElementById('errorcategorie').innerHTML="";
-			        	      return true;
-			        	   }
-        		
-        	}
-        	
-        	
-        	function verifIntitule(champ)
-        	{
-        	
-        		
-			        	   if(champ.value.trim().length < 6)
-			        	   {
-			        		  document.getElementById('errorintitule').innerHTML = "Intitulé doit tenir au moins sur 6 positions!!";
-			        		  surligne(champ, true);
-			        	      return false;
-			        	   }
-			        	   else
-			        	   {
-			        	      surligne(champ, false);
-			        		  document.getElementById('errorintitule').innerHTML="";
-			        	      return true;
-			        	   }
-        		
-        	}
-        	
-        	
-        	function verifNiveau(champ)
-        	{
-        	
-        		
-			        	   if(champ.value=="")
-			        	   {
-			        		  document.getElementById('errorniveau').innerHTML = "Veuillez choisir une option!!";
-			        		  surligne(champ, true);
-			        	      return false;
-			        	   }
-			        	   else
-			        	   {
-			        	      surligne(champ, false);
-			        		  document.getElementById('errorniveau').innerHTML="";
-			        	      return true;
-			        	   }
-        		
-        	}
-        	
-        	
-        	function verifArgumentaire(champ)
-        	{
-        	
-        		
-			        	   if(champ.value.trim().length < 3)
-			        	   {
-			        		  document.getElementById('errorargumentaire').innerHTML = "Argumentaire tient au moins sur 3 positions!!";
-			        		  surligne(champ, true);
-			        	      return false;
-			        	   }
-			        	   else
-			        	   {
-			        	      surligne(champ, false);
-			        		  document.getElementById('errorargumentaire').innerHTML="";
-			        	      return true;
-			        	   }
-        		
-        	}
-        	
-        	
-        	function verifForm(form)
-        	
-        	{
-
-        			
-        				//if(document.getElementById("pushedbutton").value == 1){return true;}
-        			
-        		
-    					var nature= document.getElementById("nature").value;
-    					
-    					var nomagt = verifNomagt(form.nomagt);
-        				var prenomagt = verifPrenomagt(form.prenomagt);		
-        				var dateagt = verifDateagt(form.dateagt);
-        				var motif = verifMotif(form.motif);
-        				
-        				var quotite = verifQuotite(form.quotite);
-        			
-        				var categorie = verifCatgerorie(form.categorie);
-        				var intitule = verifIntitule(form.intitule);
-        				var niveau = verifNiveau(form.niveau);
-        				var argumentaire = verifArgumentaire(form.argumentaire);
-        				
-        				
-        				
-            			
-            		//	if(nature!=3 && nature!=""){
-            				
-            				
-            				
-            				if(nomagt && prenomagt && dateagt && motif && quotite && categorie && intitule && niveau && argumentaire){
-            					
-            					return true;
-            					
-            				} 
-            				
-            				else{
-            					document.getElementById('errorform').innerHTML= "Le formulaire est mal rempli!!!";
-            					return false;
-            					
-            				}
-            				return false;
-            				
-          		}
-        //}
-    						
-           /*  			} else if (nature==3){
-            				
-
-            				if( quotite && categorie && intitule && niveau && argumentaire){
-            					
-            					return true;
-            					
-            				} 
-            				
-            				else{
-            					document.getElementById('errorform').innerHTML= "Le formulaire est mal remplibbbb!!!";
-            					return false;
-            					
-            				}
-            			}
-        	} */
-            			
-            			
-				
-						
-    	
-       
-        	function envoyerform(){  
-        		
-        	    if (confirm ('Voulez vous vraiment soumettre cette demande pour instruction ? ')){
-        	      document.forms["myForm"].submit();
-        	    }
-        	  }
-        	
-        
-	</script>
+ 
 
 </body>
 

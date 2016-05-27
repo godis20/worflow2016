@@ -209,15 +209,22 @@
    
         <script type="text/javascript">
         
-		        function surligne(champ, erreur)
-		        {
-		           if(erreur){
-		              champ.style.backgroundColor = "#fba";
-		              
-		        }
-		           else
-		              champ.style.backgroundColor = "";
-		        }
+        function surligne(champ, erreur)
+    	
+    	{
+    	   if(erreur){
+    		
+    	      champ.style.borderColor = "#c42622";
+    	   	  champ.style.fontWeight= "bold";
+    	   }else{
+    		   
+    		   champ.style.borderColor = "";
+     	   	   champ.style.fontWeight= "";
+    	   }
+    	
+    	}
+        
+        
 		        
 		        function verifNom(champ)
 		        {
@@ -230,7 +237,8 @@
 		           }
 		           else
 		           {
-		              surligne(champ, false);
+		        	  document.getElementById('erreurnom').innerHTML ="";
+		        	  surligne(champ, false);
 		              return true;
 		           }
 		        }

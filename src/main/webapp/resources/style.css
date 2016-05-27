@@ -333,6 +333,66 @@ tr.impair{
 }
  
  
+/* ---------------Barre de defilement liste demandes ---------------------------*/
+
+ul#pagination{
+	
+	
+	margin-left: 125px;
+}
+
+ul#pagination li {
+list-style: none;
+float: left;
+padding: 0px 5px 0px 5px;
+width: 25px;
+margin: 0px 0px 4px 0px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 25px;
+}
+ 
+ul#pagination li.navigation {
+width: 110px;
+}
+ 
+ul#pagination li a {
+display: block;
+padding: 4px 6px 4px 6px;
+font-size: 12px;
+text-align: center;
+font-weight: bold;
+}
+ 
+ul#pagination li a, ul#pagination li a:visited, ul#pagination li a.actuel, ul#pagination li a:hover {
+background-color: #0072bc;
+color: #FFFFFF;
+text-decoration: none;
+}
+ 
+ 
+ul#pagination li a.actuel, ul#pagination li a:hover {
+background-color: #e7e7e7;
+color: #000000;
+}
+ 
+ul#pagination li.navigation a, ul#pagination li.navigation a:visited, ul#pagination li.navigation a:hover {
+background-color: #FFFFFF;
+color: #000000;
+}
+ 
+ul#pagination li.navigation a:hover {
+text-decoration: underline;
+ 
+}
+ 
+ul#pagination li.navigation a.inactif, ul#pagination li.navigation a.inactif:visited, ul#pagination li.navigation a.inactif:hover {
+text-decoration: none;
+color: #999999;
+}
+
+
+
+
 
 #logoAppli, #logoUniv{
 	 width: 10px;
@@ -367,6 +427,28 @@ tr.impair{
 	
 }
 
+
+.scrollup {
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	display: none;
+	color: white;
+	background: url('haut.jpg') no-repeat;
+	border: 2px solid #004080;
+	font-size: 20px;
+	text-align: center;
+	line-height: 37px;
+	border-radius:5px;
+	
+}
+ 
+.scrollup:hover {
+	color: white;
+	opacity: 0.8;
+}
  
 :/* required
 {

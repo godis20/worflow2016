@@ -8,7 +8,8 @@
 <meta charset="utf-8" />
         <title>Liste demande recherche</title>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
-       
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  	 <script src="<c:url value="resources/javascript/hautdepage.js"/>" > </script>     
 
  </head>
 
@@ -138,6 +139,7 @@
             
 			</table>
 			
+			<jsp:include page="barredefilement.jsp"></jsp:include>
 			
 			<p>
 			<img src="<c:url value="/resources/envoyer.jpg"/>" alt="" />   <label> Demande envoyée/ en attente de validation    </label>
@@ -156,6 +158,7 @@
 	<footer>
 		<jsp:include page="footer.jsp"></jsp:include>
 	</footer>
+	<a href="#" title="Haut de page" class="scrollup"><i class="fa fa-arrow-up"></i></a>
     </body>
 
 </body>
