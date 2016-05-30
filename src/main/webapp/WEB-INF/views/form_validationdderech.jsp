@@ -68,7 +68,7 @@
 				 
 				  
 				 
-				    <fieldset>
+				    <fieldset disabled="disabled" >
 				       <legend>Eléments constitutifs de la demande </legend> <!-- Titre du fieldset --> 
 				       
 						<p> 
@@ -79,12 +79,8 @@
 				       
 				        
 				       <p> 
-				       <label for="dateDeb">Periode : <span class="affichage"><c:out value="Du  ${demande.dateDebSouhaite}  Au   ${demande.dateFinSouhaite} "/></span></label>
+				       <label for="dateDeb">Periode : <span class="affichage"><c:out value="Du  ${demande.dateDebSouhaite}  Au   ${demande.dateFinSouhaite} "/>;</span></label>
 				      
-				       </p>
-				      
-						
-				       <p> 
 				       <label for="qualite">Qualité  :<span class="affichage"> <c:out value="${demande.qualiteChercheur}"/></span> ;</label>
 				        <label for="intitule">INM  :<span class="affichage"> <c:out value="${demande.inmChercheur}"/></span> </label>
 				      
@@ -109,7 +105,7 @@
 					</fieldset>
 					
 			
-			 		<fieldset>
+			 		<fieldset disabled="disabled" >
 				   
 				       <legend>Imputation </legend> <!-- Titre du fieldset -->
 				       
@@ -127,7 +123,7 @@
 				       
 				       <p>
 				       <label for="argumentaires"> Missions : </label>
-				       <textarea name="argumentaires" id="argumentaires" rows="4" cols="60"  disabled="disabled" ><c:out value="${demande.argumentaires}"/>
+				       <textarea name="argumentaires" id="argumentaires" rows="4" cols="60"  ><c:out value="${demande.argumentaires}"/>
 				      
 				       </textarea>       
 				       </p> 
@@ -143,16 +139,16 @@
 						<legend> Validation de la demande </legend>
 						
 						<p>
-						<label for="obsValidation">Remarques :</label>
+						<label for="obsValidation">Remarques :<span class="requis">*</span></label>
 						<textarea name="obsValidation" id="obsValidation" rows="4" cols="60" placeholder="Vos remarques par rapport à la decision prise" required ></textarea>       
 						<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
 						</p>
 					
 						<p>
-						 
-						<input  type="radio" class="avis" name="avis" value="oui" id="oui" checked/> <label for="oui">Oui</label>
-		       			<input  type="radio" class="avis" name="avis" value="non" id="non" /> <label for="non">Non</label>
-						<input  type="radio" class="avis" name="avis" value="non" id="nonmais" /> <label for="non">Non, mais ...</label>
+						<label for="avis">Decision : <span class="requis">*</span></label>
+						<input  type="radio" class="avis" name="avis" value="oui" id="oui" required/> <label for="oui">Oui</label>
+		       			<input  type="radio" class="avis" name="avis" value="non" id="non" required/> <label for="non">Non</label>
+						<input  type="radio" class="avis" name="avis" value="nonmais" id="nonmais" required/> <label for="non">Non, mais ...</label>
 						
 						</p>
 			

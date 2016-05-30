@@ -123,23 +123,30 @@
 				
 				   
 				   
-				    <fieldset>
+				    <fieldset disabled="disabled">
 				       <legend>Eléments constitutifs de la demande </legend> <!-- Titre du fieldset --> 
 				       
 						<p> 
-				       <label for="fonction">Type de fonction,  Branche d'activité  et  Catégorie poste  :<span class="affichage">
-				       			<c:out value="${demande.foncAgentArecrute},  ${demande.branchAgentArecruter} et   ${demande.catAgentArecruter}"/></span> </label>
+				       			<label for="fonction">Type de fonction :<span class="affichage">
+				       			<c:out value="${demande.foncAgentArecrute} "/>; </span> </label>
+				       			
+				     			 <label for="branche"> Branche d'activité :<span class="affichage">
+				       			<c:out value=" ${demande.branchAgentArecruter} "/>; </span> </label>
+				       			
+				       			<label for="categrorie"> Catégorie poste  :<span class="affichage">
+				       			<c:out value=" ${demande.catAgentArecruter}"/></span> </label>
 				      
 				       </p> 
 				      
 						
 				       <p> 
-				       <label for="fiche">Fiche de poste :<span class="affichage"></span> </label>
+				       <label for="fiche">Fiche de poste :<span ></span> </label>
 				      
 					  </p> 
 						 
 						 <p> 
-				       <label for="intitule">Intitule de la fonction et Niveau diplôme:<span class="affichage"> <c:out value="${demande.intfoncAgentArecruter}  et  ${demande.diplomAgentArecruter}"/></span> </label>
+				       		<label for="intitule">Intitule de la fonction :<span class="affichage"> <c:out value="${demande.intfoncAgentArecruter}  "/>;</span> </label>
+				      		<label for="niveau">Niveau diplôme:<span class="affichage"> <c:out value=" ${demande.diplomAgentArecruter}"/></span> </label>
 				      
 				       </p> 
 				       
@@ -147,23 +154,22 @@
 				       
 				      <p>
 				       <label for="argumentaire"> Argumentaires : </label>
-				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50"  disabled="disabled" ><c:out value="${demande.argumentaires }"/>
-				      
-				       </textarea>       
+				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" placeholder="Votre argumentaire!!!"><c:out value="${demande.argumentaires }"/></textarea>       
 				       </p>
 			
 		
 		
 			</fieldset>
-			<fieldset>
+			
+			<fieldset disabled="disabled" >
 				
 				<legend> Instruction de la demande </legend>
 				
-				<label>Demande instruite par : <span class="affichage"> <c:out value="${demande.instructeur.nom} ${demande.instructeur.prenom} "/></span>
+				<label>Demande instruite par : <span class="affichage"> <c:out value="${demande.instructeur.nom} ${demande.instructeur.prenom} "/></span></label>
 				
 				<p>
 				<label for="observation"> Observations :</label>
-				<textarea name="observation" id="observation" rows="6" cols="50" disabled="disabled" ><c:out value="${demande.obsInstruction }"/></textarea>       
+				<textarea name="observation" id="observation" rows="6" cols="50" ><c:out value="${demande.obsInstruction }"/></textarea>       
 				<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
 				</p>
 			
@@ -177,16 +183,16 @@
 				<legend> Validation de la demande </legend>
 				
 				<p>
-				<label for="obsValidation">Remarques :</label>
-				<textarea name="obsValidation" id="obsValidation" rows="6" cols="50" placeholder="Vos remarques par rapport à la decision prise"required ></textarea>       
+				<label for="obsValidation">Remarques : <span class="requis">*</span></label>
+				<textarea name="obsValidation" id="obsValidation" rows="4" cols="50" placeholder="Vos remarques par rapport à la decision prise" required ></textarea>       
 				<input type="hidden" name="iddemande" id="iddemande"  value="<c:out value="${demande.id}"/>" />
 				</p>
 			
 				<p>
 				
-				 <label for="obsValidation">Decision : <span class="requis">*</span></label>
-				<input  type="radio"  name="avis" value="oui" id="avis"  required/> <label for="avis">Oui</label>
-       			<input  type="radio"  name="avis" value="non" id="avis"  required/> <label for="avis">Non</label>
+				 <label for="avis">Decision : <span class="requis">*</span></label>
+				<input  type="radio"  name="avis" value="oui" id="avis" required/> <label for="avis">Oui</label>
+       			<input  type="radio"  name="avis" value="non" id="aviss"  required/> <label for="avis">Non</label>
 				</p>
 				
 				<div id="gestionnaire">

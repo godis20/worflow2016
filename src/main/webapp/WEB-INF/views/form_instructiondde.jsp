@@ -122,12 +122,18 @@
 				
 				   
 				   
-				    <fieldset>
+				    <fieldset disabled="disabled">
 				       <legend>Eléments constitutifs de la demande </legend> <!-- Titre du fieldset --> 
 				       
 						<p> 
-				       <label for="fonction">Type de fonction,  Branche d'activité  et  Catégorie poste  :<span class="affichage">
-				       			<c:out value="${demande.foncAgentArecrute},  ${demande.branchAgentArecruter} et   ${demande.catAgentArecruter}"/></span> </label>
+				       			<label for="fonction">Type de fonction :<span class="affichage">
+				       			<c:out value="${demande.foncAgentArecrute} "/>; </span> </label>
+				       			
+				     			 <label for="branche"> Branche d'activité :<span class="affichage">
+				       			<c:out value=" ${demande.branchAgentArecruter} "/>; </span> </label>
+				       			
+				       			<label for="categrorie"> Catégorie poste  :<span class="affichage">
+				       			<c:out value=" ${demande.catAgentArecruter}"/></span> </label>
 				      
 				       </p> 
 				      
@@ -138,7 +144,8 @@
 					  </p> 
 						 
 						 <p> 
-				       <label for="intitule">Intitule de la fonction et Niveau diplôme:<span class="affichage"> <c:out value="${demande.intfoncAgentArecruter}  et  ${demande.diplomAgentArecruter}"/></span> </label>
+				       		<label for="intitule">Intitule de la fonction :<span class="affichage"> <c:out value="${demande.intfoncAgentArecruter}  "/>;</span> </label>
+				      		<label for="niveau">Niveau diplôme:<span class="affichage"> <c:out value=" ${demande.diplomAgentArecruter}"/></span> </label>
 				      
 				       </p> 
 				       
@@ -146,7 +153,7 @@
 				       
 				      <p>
 				       <label for="argumentaire"> Argumentaires : </label>
-				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50"  disabled="disabled" placeholder="Votre argumentaire!!!"><c:out value="${demande.argumentaires }"/></textarea>       
+				       <textarea name="argumentaire" id="argumentaire" rows="6" cols="50" placeholder="Votre argumentaire!!!"><c:out value="${demande.argumentaires }"/></textarea>       
 				       </p>
 			
 		

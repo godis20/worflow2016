@@ -14,7 +14,9 @@
      <script type="text/javascript" src="<c:url value="resources/javascript/formddeclassique.js"/>" > </script>
      <script src="<c:url value="resources/javascript/agentaremplacerclassique.js"/>" > </script>
   	 <script src="<c:url value="resources/javascript/hautdepage.js"/>" > </script>
-
+		
+		<script src="dependencies/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jquery.elastic.source.js" type="text/javascript" charset="utf-8"></script>
 
     </head>
 

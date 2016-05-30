@@ -5,7 +5,7 @@
 
         		/* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le bloc d'éléments correspondant (nouveau ou ancien client) */
          
-        		
+        	
         		
         		 $("div#agent").hide();
         		 $("#nature").change(function() {

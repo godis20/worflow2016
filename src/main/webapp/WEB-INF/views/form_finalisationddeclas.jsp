@@ -112,7 +112,7 @@
 				       
 						<p> 
 				       <label for="quotite">Quotité de temps de travail :<span class="requis">*</span> </label>
-				        <select name="quotite" id="quotite"    required> 
+				        <select name="quotite" id="quotite"    > 
 				           <option value="<c:out value="${demande.quotite}"/>"><c:out value="${demande.quotite}"/> </option>
 				           <option value="100%">100%</option>
 				           <option value="75%">75%</option>
@@ -198,12 +198,12 @@
 						 
 						 <p> 
 				       <label for="intitule">Intitule de la fonction :<span class="requis">*</span> </label>
-				       <input type="text" name="intitule" id="intitule" value="<c:out value="${demande.intfoncAgentArecruter}"/>"  required/>
+				       <input type="text" name="intitule" id="intitule" value="<c:out value="${demande.intfoncAgentArecruter}"/>"  />
 				       </p> 
 				       
 				       <p> 
 				       <label for="niveau">Niveau diplôme  :<span class="requis">*</span> </label>
-				        <select name="niveau" id="niveau"   required>
+				        <select name="niveau" id="niveau"   >
 				           <option value="<c:out value="${demande.diplomAgentArecruter}"/>"><c:out value="${demande.diplomAgentArecruter}"/> </option>
 				           <option value="BAC">BAC </option>
 				           <option value="BAC + 1">BAC + 1</option>
@@ -220,7 +220,7 @@
 				       
 				      <p>
 				       <label for="argumentaire"> Argumentaires :<span class="requis">*</span> </label>
-				       <textarea name="argumentaire" id="argumentaire" rows="4" cols="50" required> <c:out value="${demande.argumentaires}"/>
+				       <textarea name="argumentaire" id="argumentaire" rows="4" cols="50" > <c:out value="${demande.argumentaires}"/>
 				       </textarea>       
 				       </p>
 				
