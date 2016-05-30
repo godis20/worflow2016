@@ -162,10 +162,10 @@ body section{
 }
 
 
-#myul>li a:hover Lorsque la souris passe sur un des liens    
+#myul>li>a:hover Lorsque la souris passe sur un des liens    
 {
-        color: #96CED2; On passe le texte en noir...
-        background: white; ... et au contraire, le fond en blanc
+        color: #96CED2; /*On passe le texte en noir...*/
+        background: white; /*... et au contraire, le fond en blanc*/
 }
 
 
@@ -279,13 +279,25 @@ input[type=submit], input[type=reset],input[type=button] {
  
  
  a:link {
- color: white;
+ color: #000080;
  text-decoration: underline;
  }
  
 a:visited {
  color: gray;
  }
+ 
+ a:active,focus {
+ color: #000080;
+ }
+ 
+ a:hover {
+ color: #002f5e;
+  text-decoration: none;
+  font-size:16px;
+  font-weight: bold;
+ }
+ 
  
 body header a:hover {
  color: #0489B1;
@@ -304,9 +316,7 @@ body article a:hover {
  text-decoration: none;
 }
 
-a:active, a:focus {
- color: red;
-}
+
 
 
 
@@ -450,200 +460,5 @@ color: #999999;
 	opacity: 0.8;
 }
  
-:/* required
-{
-    background-color: white;
-}
 
 
-
-
- 
-label.inline {
-	
- display:inline;
- margin-right:50px;
- }
- 
-input, select, option {
- background-color:#87CEEB;
- }
- 
- 
-
-
-<!-- mise en forme propre a la page connexion --> 
-
-  fieldset.connexion{
-  	margin-top:100px;
-  	margin-left: 300px;
- 	margin-right: 300px;
- 	padding:50px ;
-	margin-bottom:20px;
- 	border:3px solid #4682B4;
- 
- }
- 
- fieldset.connexion input{
-  	padding:6px;
- 	border:1px solid #F5C5C5;
- 	border-radius:5px;
-    width:300px;
-	box-shadow:4px 1px 2px #C0C0C0 inset;
-	font-size:125%;
-	
- }
- 
-  fieldset.connexion legend{
-	font-size:150%;
- }
- 
- 
-
- 
- article aside #menu, #menu ul Liste     
-{
-        padding : 0; pas de marge intérieure
-        margin : 0; ni extérieure
-        list-style : none; on supprime le style par défaut de la liste
-        line-height : 55px; on définit une hauteur pour chaque élément
-        text-align : center; on centre le texte qui se trouve dans la liste
-        
-        
-}
-
-#menu Ensemble du menu
-{
-        font-weight : bold; on met le texte en gras
-        font-family : Arial; on utilise Arial, c'est plus beau ^^
-        font-size : 18px; hauteur du texte : 20 pixels
-}
-
-#menu a Contenu des listes
-{
-        display : block; on change le type d'élément, les liens deviennent des balises de type block
-        padding : 0; aucune marge intérieure
-        background : #1E90FF; couleur de fond        
-        color : #fff; couleur du texte
-        text-decoration : none; on supprime le style par défaut des liens (la plupart du temps = souligné)
-        width : 250px; largeur
-        border-radius:{10px 10px 0 0;}
-        
-        
-}
-
-#menu > li > a {  Formes arrondis menus
-	border-radius: 1em 1em 0 0;
-	
-}
-
-
-#menu li Éléments des listes      
-{ 
-        float : left; 
-        pour IE qui ne reconnaît pas "transparent"
-        border-right : 1px solid #fff; on met une bordure blanche à droite de chaque élément
-}
-
-IE ne reconnaissant pas le sélecteur ">"
-html>body #menu li
-{
-        border-right: 1px solid transparent ; on met une bordure transparente à droite de chaque élément
-}
-
-#menu li ul Sous-listes
-{ 
-        position: absolute; Position absolue
-        width: 250px; Largeur des sous-listes
-        left: -999em; Hop, on envoie loin du champ de vision
-}
-
-
-#menu li ul li Eléments de sous-listes
-{
-        pour ie qui ne reconnaît pas "transparent" (comme précédemment)
-        border-top : 1px solid #fff; on met une bordure blanche en haut de chaque élément d'une sous-liste
-}
-
-IE ne reconnaissant pas le sélecteur ">"
-html>body #menu li ul li                
-{
-        border-top : 1px solid transparent; on met une bordure transparente en haut de chaque élément
-}
-
-#menu li ul ul 
-{
-        margin    : -22px 0 0 144px ; On décale les sous-sous-listes pour qu'elles ne soient pas au dessus des sous-listes 
-        pour IE qui ne reconnaît pas "transparent" (comme précédemment)
-        border-left     : 1px solid #fff ; Petite bordure à gauche pour ne pas coller ...      
-}
-
-IE ne reconnaissant pas le sélecteur ">" ... je me répète ;-)
-html>body #menu li ul ul                
-{
-        border-left     : 1px solid transparent ; on met une bordure transparente sur la gauche de chaque élément
-}
-
-
-
-#menu li ul li a 
-{
-         background     : #87CEFA;
-         line-height : 50px; on définit une hauteur pour chaque élément
-        
-}
-
-
-#menu ul {
-    position: absolute;
-on cache les sous menus complètement sur la gauche
-    left: -999em;
-    text-align: center;
-    z-index: 1000;
-}
-
-#menu li:hover ul {
-Au survol des li du menu on replace les sous menus
-    left: auto;
-}
-
-
-
-
-  
-
-    
-    
-header img
-
-{  
-	
-  
-     
-}
-
-
-
-#others ul
-{
-    list-style-type: none;
-  
-}
-
-#others li
-{
-    margin-right: 5px;
-}
-
-body header #others a
-{
-   
-    color: #181818;
-    padding-bottom: 1px;
-    text-decoration: none;
-}
-
-
-
-
- */

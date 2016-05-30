@@ -1,6 +1,6 @@
  /*  Script verification champs du formulaire 	 */
 	
-       
+       		
         	function surligne(champ, erreur)
         	
         	{

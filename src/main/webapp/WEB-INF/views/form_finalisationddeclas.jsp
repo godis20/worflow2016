@@ -86,10 +86,10 @@
 				   		<legend>Détermination du besoin</legend> <!-- Titre du fieldset -->
 				       <p> 
 				       <label for="nature">Nature de la demande : <span class="requis">*</span> </label>
-				       <select name="nature" id="nature" value="<c:out value="${demande.besoinDemande.id}"/>" >
+				       <select name="nature" id="nature"  required autofocus>
 				       
 				       	   <option value="<c:out value="${demande.besoinDemande.id}"/>"> <c:out value="${demande.besoinDemande.libelleBesoinDemande}"/> </option>
-				       	   <option value="-1">Choisissez une option </option>
+				       	   <option value="">Choisissez une option </option>
 				           <option value="1">Emploi vacant</option>
 				           <option value="2">Emploi temporaire</option>
 				           <option value="3">Emploi pour renforcement</option>
@@ -123,11 +123,10 @@
 				       </p> 
 				       
 				       
-				       
+				   
 				       
 				       <div id="agent">
 				       
-				     
 				      
 				        <fieldset >
 				        
@@ -160,8 +159,9 @@
 							       
 						</fieldset>
 						
-						</div>
 						
+						</div>
+					
 				  	 </fieldset>
 				  	 
 				  	 
@@ -172,9 +172,25 @@
 				       <label for="fonction">Type de fonction :<span class="requis">*</span> </label>
 				       <input type="text" name="fonction" id="fonction" value="<c:out value="${demande.foncAgentArecrute}"/>" required/>
 				       </p> 
+				       
 				       <p> 
 				       <label for="branche">Branche d'activité :<span class="requis">*</span> </label>
-				       <input type="text" name="branche" id="branche" value="<c:out value="${demande.branchAgentArecruter}"/>" required/>
+				
+						<select name="branche" id="branche" required>
+						
+							<option value="<c:out value="${demande.branchAgentArecruter}"/>"><c:out value="${demande.branchAgentArecruter}"/> </option>
+				          
+				           <option value="BAP A">BAP A</option>
+				           <option value="BAP B">BAP B</option>
+				           <option value="BAP C">BAP C</option>
+				           <option value="BAP D">BAP D</option>
+				           <option value="BAP E">BAP E</option>
+				           <option value="BAP F">BAP F</option>
+				            <option value="BAP G">BAP G</option>
+				           <option value="BAP J">BAP J</option>
+				         
+				       </select>
+						
 						</p> 
 						
 						<p> 
@@ -263,14 +279,18 @@
         		/* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire correspondant aux clients existants */
 //         		$("div#ancienClient").hide();
         		/* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le bloc d'éléments correspondant (nouveau ou ancien client) */
-                
+                if($("#nature").val() =="3"){
+                	
         		 $("div#agent").hide();
+        		 
+        		}else $("div#agent").show("fast");
+        		
         		 $("#nature").change(function() {
                 	
                     
-                    if(($("#nature").val()) != "3" && ($("#nature").val()!="-1")){
+                    if(($("#nature").val()) != "3" && ($("#nature").val()!="")){
                     	
-                    	$("div#agent").show();
+                    	$("div#agent").show("fast");
                    }
                     else  $("div#agent").hide();
                 });

@@ -10,13 +10,12 @@
      <link type="text/css" rel="stylesheet" href="<c:url value="/resources/style.css"/>" />
      
      <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-     
+	
      <script type="text/javascript" src="<c:url value="resources/javascript/formddeclassique.js"/>" > </script>
      <script src="<c:url value="resources/javascript/agentaremplacerclassique.js"/>" > </script>
   	 <script src="<c:url value="resources/javascript/hautdepage.js"/>" > </script>
 		
-		<script src="dependencies/jquery.js" type="text/javascript" charset="utf-8"></script>
-		<script src="jquery.elastic.source.js" type="text/javascript" charset="utf-8"></script>
+		
 
     </head>
 
@@ -94,7 +93,7 @@
 				       <select name="nature" id="nature"  required autofocus >
 				       	   <option value="" >Choisissez une option </option>
 				           <option value="1">Emploi vacant</option>
-				           <option value="2">Emploi temporaire</option>
+				           <option value="2">Emploi temporaire/Suppléance</option>
 				           <option value="3">Emploi pour renforcement</option>
 				           
 				        </select>  
@@ -180,7 +179,22 @@
 				       </p> 
 				       <p> 
 				       <label for="branche">Branche d'activité :<span class="requis">*</span> </label>
-				       <input type="text" name="branche" id="branche" required/>
+				       
+				         <select name="branche" id="branche" required> 
+				           <option value="">Choisissez une option </option>
+				           <option value="BAP A">BAP A</option>
+				           <option value="BAP B">BAP B</option>
+				           <option value="BAP C">BAP C</option>
+				           <option value="BAP D">BAP D</option>
+				           <option value="BAP E">BAP E</option>
+				           <option value="BAP F">BAP F</option>
+				            <option value="BAP G">BAP G</option>
+				           <option value="BAP J">BAP J</option>
+				          
+				          
+				       </select>
+				       <a href="http://referens.univ-poitiers.fr/version/men/dcp.asp" target="_blank">Cliquez ici pour les details</a>
+						
 						</p> 
 						
 						<p> 
@@ -235,7 +249,7 @@
 				     	<p>
 				       <label for="argumentaire"> Argumentaires :<span class="requis">*</spsan> </label>
 				       
-				       <textarea name="argumentaire" id="argumentaire" cols="50" placeholder="Votre argumentaire!!!" onblur="verifArgumentaire(this)"></textarea>  
+				       <textarea name="argumentaire" id="argumentaire"  style="overflow:hidden; " cols="50" placeholder="Votre argumentaire!!!" onblur="verifArgumentaire(this)"></textarea>  
 				       <span id="errorargumentaire" class="error">  <c:out value="${errorargumentaire}"/></span>  
 				       </p>
 				     

@@ -227,6 +227,32 @@ public class DemandeService {
 		
 	}
 	
+	
+
+	/**
+	 * Methode qui retourne une instance de "Ligne statut" à partir de l'ID
+	 *
+	 */
+	@Transactional
+	public LigneStatut getLigneStatutbyId(int id_demande, int id_statut_demande){
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			
+			LigneStatut ligneStatut = (LigneStatut)session.createQuery("select l from Utilisateur l "
+					+ " where l.id_demande = :id_demande and l.id_statut_demande =:id_statut_demande")
+					.setParameter("id_demande", id_demande)
+					.setParameter("id_statut_demande", id_statut_demande).uniqueResult();
+			
+			return ligneStatut;
+			
+		}catch (Exception e){
+			return null;
+		}
+		
+		
+	}
+	
+	
 	/**
 	 * Methode qui recupere toutes les demandes classiques  de la BD
 	 *

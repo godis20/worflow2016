@@ -171,9 +171,7 @@ public class DemandeController {
 		newDde.setQuotite(quotite);
 		
 		//String nometprenomAgent= nomagt +"   "+ prenomagt;
-		newDde.setNomAgentAremplacer(nomagt);
-		newDde.setDateFinService(dateagt);
-		newDde.setMotifDispoPoste(motif);
+	
 		
 		newDde.setFoncAgentArecrute(fonction);
 		newDde.setBranchAgentArecruter(branche);
@@ -213,10 +211,28 @@ public class DemandeController {
 				newDde.setStatutEnvoiDemande(true);
 				newDde.setStatutEnCours(demandeService.getStatutDemandebyId(1));
 				
+				if(nature!=3){
+					
+				newDde.setNomAgentAremplacer(nomagt);
+				newDde.setDateFinService(dateagt);
+				newDde.setMotifDispoPoste(motif);
+				
+				}
+				
+				else
+				{
+					newDde.setNomAgentAremplacer(null);
+					newDde.setDateFinService(null);
+					newDde.setMotifDispoPoste(null);
+				}
+				
 			}
-			else{
+			
+			else
+			{
 				newDde.setStatutEnCours(demandeService.getStatutDemandebyId(5));
 			}
+			
 			BesoinDemande besoinDemande=demandeService.getBesoinDemandebyId(nature);
 			newDde.setBesoinDemande(besoinDemande);
 			newDde.setTypeDemande(besoinDemande.getTypeDemande());
@@ -225,7 +241,8 @@ public class DemandeController {
 			
 			demandeService.ajoutDemande(newDde);
 			
-			if(newDde!=null && newDde.isStatutEnvoiDemande()){
+			if(newDde!=null && newDde.isStatutEnvoiDemande())
+			{
 				
 				modelist.addObject("succes", "demande envoyée pour instruction avec succes");
 				modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
@@ -234,7 +251,8 @@ public class DemandeController {
 			}
 			
 			//Si la demande a été envoyée pour instruction retourner sur la liste des ddes
-			else if(newDde!=null && !newDde.isStatutEnvoiDemande()){
+			else if(newDde!=null && !newDde.isStatutEnvoiDemande())
+			{
 				
 				modelistfinaliser.addObject("succes", "demande enregistrée avec succes");
 				modelistfinaliser.addObject("listddeclasafinaliser", demandeService.getAllDdeclasAfinaliser());
@@ -247,7 +265,8 @@ public class DemandeController {
 			model.addObject("error", "Erreur lors de l'ajout de la demande dans la base de donnée");
 			return model;
 			
-		} catch(Exception e)
+		} 
+		catch(Exception e)
 		
 		{
 			
@@ -765,6 +784,8 @@ public class DemandeController {
 						return model;
 					}
 					
+					String dateInstruction = demandeService.getLigneStatutbyId(demande.getId(), 2).getDate();
+					
 					demande.setValideur(validateur);
 					
 					// met à jour le statut de la demande "validée" qui correspond à 3 dans la BD
@@ -800,6 +821,7 @@ public class DemandeController {
 					//si l'operation de mise à jour s'est bien effectuée
 					if(demande!=null){
 						
+						modelist.addObject("dateInstruction", dateInstruction);
 						modelist.addObject("succes", "Demande validée avec succès");
 						modelist.addObject("listdemandeclas", demandeService.getAllDemandeclas());
 				

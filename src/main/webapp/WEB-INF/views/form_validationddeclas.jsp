@@ -165,8 +165,8 @@
 				
 				<legend> Instruction de la demande </legend>
 				
-				<label>Demande instruite par : <span class="affichage"> <c:out value="${demande.instructeur.nom} ${demande.instructeur.prenom} "/></span></label>
-				
+				<label>Demande instruite par : <span class="affichage"> <c:out value="${demande.instructeur.nom} ${demande.instructeur.prenom} "/>;</span></label>
+				<label>En date du : <span class="affichage"> <c:out value="${dateInstruction} "/></span></label>
 				<p>
 				<label for="observation"> Observations :</label>
 				<textarea name="observation" id="observation" rows="6" cols="50" ><c:out value="${demande.obsInstruction }"/></textarea>       
